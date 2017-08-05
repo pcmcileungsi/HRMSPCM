@@ -1,0 +1,84 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/mfin.master" AutoEventWireup="true" CodeFile="docviewerdetail.aspx.cs" 
+    Inherits="module_document_transaction_docviewerdetail" Title="Untitled Page" %>
+<%@ Register Assembly="MPF23.XUI" Namespace="MPF23.XUI.Control" TagPrefix="cc1" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
+<%@ Register Assembly="RadPdf" Namespace="RadPdf.Web.UI" TagPrefix="radPdf" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="cphhd" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="cphbd" Runat="Server">
+    <div>
+        <table id="tblHeader" cellpadding="3px" cellspacing="0px" class="detail-header-table">
+            <tr>
+                <td colspan="2" style="border-bottom: solid 1px #dedede">
+                    <span class="search-header">Document Viewer Detail</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="btnBack" runat="server" CausesValidation="false" CssClass="back"
+                        Text="Back" OnClick="btnBack_Click" />
+                    <cc1:XUIButton RoleCode="B000047" ID="btnDownload" runat="server" CssClass="dl" Text="Download" OnClick="btnDownload_Click" />
+                </td>
+            </tr>
+        </table>
+        <asp:UpdatePanel ID="pnlBody" runat="server">
+            <ContentTemplate>
+                <table id="tblBody" cellpadding="4px" cellspacing="0px" width="100%" border="0px">
+                    <%--<tr>--%>
+                         <radPdf:PdfWebControl id="PdfWebControl1" runat="server" height="600px" 
+                        width="100%" HideThumbnails="True" HideDownloadButton="True" 
+                        HidePrintButton="True" HideSaveButton="True" HideBookmarks="True" 
+                        HideEditMenu="True" HideFileMenu="True" HideFocusOutline="True" 
+                        HideSideBar="True" HideToggleHighlightsButton="True" 
+                        HideToolsAnnotateTab="True" HideToolsInsertTab="True" HideToolsMenu="True" 
+                        HideToolsTabs="True" HideSelectText="True" />
+                    <%--</tr>--%>
+                </table>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
+    <%--<asp:Panel ID="upnApproveValidate" runat="server" Width="370px" Style="display: block;">
+        <asp:Button Style="display: none" ID="btnApproveValidate" runat="server"></asp:Button>
+        <cc2:ModalPopupExtender ID="mdlPopupApproveValidate" runat="server" BehaviorID="mdlPopupApproveValidate"
+            PopupControlID="upnApproveValidate" TargetControlID="btnApproveValidate"
+            BackgroundCssClass="modalBackground">
+        </cc2:ModalPopupExtender>
+        <cc2:DragPanelExtender ID="DragPanelExtender2" runat="server" TargetControlID="upnApproveValidate"
+            DragHandleID="pnlPopupApproveValidateHeader" />
+        <div class="container" style="width:350px;">
+            <asp:Panel ID="pnlPopupApproveValidateHeader" runat="server" CssClass="header"
+                style="width:350px;">
+                <asp:Label ID="lblHeaderApproveValidate" runat="server" CssClass="msg" Text="Approval" />
+                <asp:LinkButton ID="btnCloseApproveValidate" runat="server" CssClass="close" OnClientClick="$find('mdlPopupApproveValidate').hide(); return false;" />
+            </asp:Panel>
+            <asp:UpdatePanel ID="upnDetailApproveValidate" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="body" style="width:350px;">
+                        <table cellpadding="4px" cellspacing="0px" width="100%" border="0px">
+                            <tr>
+                                <td>
+                                    <span>Password</span>
+                                </td>
+                                <td colspan="2">
+                                    <asp:TextBox ID="txtPassword" runat="server" Enabled="true" 
+                                    MaxLength="20" Width="160px" TextMode="Password"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">
+                                    <asp:Button ID="btnApproval" runat="server" Text="OK" OnClick="btnApproval_Click" CssClass="post"/>
+                                </td>
+                                <td></td>
+                                <td align="right">
+                                    <asp:Button ID="btnVoid" runat="server" Text="Cancel" OnClientClick="$find('mdlPopupApproveValidate').hide(); return false;" CssClass="void"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+    </asp:Panel>--%>
+</asp:Content>
+

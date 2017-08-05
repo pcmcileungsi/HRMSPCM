@@ -1,0 +1,396 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/mfin.master" AutoEventWireup="true" CodeFile="docstoragedetail.aspx.cs"
+    Inherits="module_document_transaction_docstoragedetail" Title="Untitled Page" %>
+<%@ Register Assembly="MPF23.XUI" Namespace="MPF23.XUI.Control" TagPrefix="cc1" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="cphhd" runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="cphbd" runat="Server">
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var $maintab = $("#pages").tabs();
+            $("#subpages-0").tabs();
+            $("#subpages-1").tabs();
+            //jsPopUpDate('ctl00_cphbd_txtTrxDate');
+            //jsPopUpDate('ctl00_cphbd_txtContractdt');
+            //$('#ctl00_cphbd_txtTenor').unbind();
+//            var $num = $('input[style*="text-align:right"]');
+//            //var $num = $('.num');
+//            $num.bind('blur', function(e) {
+//                $(this).val(jsToCurrency($(this).val()));
+//            });
+//            $num.bind('focus', function(e) {
+//                $(this).val(jsToNumber($(this).val()));
+//            });
+        });
+
+//        function onLoadFunction() {
+//            jsPopUpDate('ctl00_cphbd_txtTrxDate');
+//            //jsPopUpDate('ctl00_cphbd_txtContractdt');
+//            //$('#ctl00_cphbd_txtTenor').unbind();
+//        }
+        var allCheckBoxSelector = '#<%=gvwListDetail.ClientID%> input[id*="chbSelectAll"]:checkbox';
+        var checkBoxSelector = '#<%=gvwListDetail.ClientID%> input[id*="chbSelect"]:checkbox';
+
+        function ToggleCheckUncheckAllOptionAsNeeded() {
+            var totalCheckboxes = $(checkBoxSelector),
+                checkedCheckboxes = totalCheckboxes.filter(":checked"),
+                noCheckboxesAreChecked = (checkedCheckboxes.length === 0),
+                allCheckboxesAreChecked = (totalCheckboxes.length === checkedCheckboxes.length);
+
+            $(allCheckBoxSelector).attr('checked', allCheckboxesAreChecked);
+        }
+
+        $(document).ready(function() {
+            $(allCheckBoxSelector).live('click', function() {
+                $(checkBoxSelector).attr('checked', $(this).is(':checked'));
+
+                ToggleCheckUncheckAllOptionAsNeeded();
+            });
+
+            $(checkBoxSelector).live('click', ToggleCheckUncheckAllOptionAsNeeded);
+
+            ToggleCheckUncheckAllOptionAsNeeded();
+        });
+        
+    </script>
+        <table id="tblHeader" cellpadding="3px" cellspacing="0px" class="detail-header-table">
+            <tr>
+                <td colspan="2" style="border-bottom: solid 1px #dedede">
+                    <span class="search-header">Document Storage Detail</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="btnBack" runat="server" CausesValidation="false" CssClass="back"
+                        Text="Back" OnClick="btnBack_Click" />
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+        <div id="pages" style="margin: 5px 3px">
+            <ul style="font-size: smaller">
+                <li><a href="#page-0"><span>Entry</span></a></li>
+                <li><a href="#page-1"><span>Detail</span></a></li>
+            </ul>
+            <div id="page-0" class="ui-corner-bottom" style="padding: 2px 2px; background-color: #eeeeff;
+                color: #000; height: 430px; overflow: auto">
+                <asp:UpdatePanel ID="pnlBody0" runat="server">
+                    <ContentTemplate>
+                        <table id="tblBody0" cellpadding="1px" cellspacing="0px" width="100%" border="0px">
+                            <tr>
+                                <td>
+                                    <cc1:XUIButton RoleCode="B000045" ID="btnSave" runat="server" CssClass="save" Text="Save" OnClick="btnSave_Click" />
+                                </td>
+                            </tr>
+                            <tr style="display: none">
+                                <td width="20%">
+                                    <span>ID</span>
+                                </td>
+                                <td>
+                                    <span>:</span>
+                                </td>
+                                <td width="80%">
+                                    <cc1:XUILabel ID="lblDocStoragehID" runat="server" DataType="Integer" DBColumnName="DOC_STORAGEHID"
+                                        BindType="DBToUIOnly" SPParameterName="p_doc_storagehid" Text="0"></cc1:XUILabel>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span>Agreement No</span>
+                                </td>
+                                <td><span>:</span></td>
+                                <td>
+                                    <asp:UpdatePanel ID="updLsagreeInfo" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                            <cc1:XUILabel ID="txtLsagree" runat="server" DataType="String" DBColumnName="LSAGREE"
+                                                BindType="Both" SPParameterName="p_lsagree"/>
+                                            <asp:ImageButton ID="btnLookUpLsagree" runat="server" ImageUrl="~/img/im4_toolbar_search.png"
+                                                ImageAlign="AbsMiddle" CausesValidation="false" OnClick="btnLookUpLsagree_Click" />
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%">
+                                    <span>Name</span>
+                                </td>
+                                <td>
+                                    <span>:</span>
+                                </td>
+                                <td width="80%">
+                                    <cc1:XUITextBox ID="txtName" runat="server" DataType="String" DBColumnName="NAME"
+                                        BindType="DBToUIOnly" SPParameterName="p_name" Enabled="false" MaxLength="60" Width="494px">
+                                    </cc1:XUITextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%">
+                                    <span>Module</span>
+                                </td>
+                                <td>
+                                    <span>:</span>
+                                </td>
+                                <td width="80%">
+                                    <cc1:XUITextBox ID="txtModule" runat="server" DataType="String" DBColumnName="MODULE"
+                                        BindType="DBToUIOnly" SPParameterName="p_module" Enabled="false" MaxLength="20" Width="200px">
+                                    </cc1:XUITextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%">
+                                    <span>Asset Description</span>
+                                </td>
+                                <td>
+                                    <span>:</span>
+                                </td>
+                                <td width="80%">
+                                    <cc1:XUITextBox ID="txtDescs" runat="server" DataType="String" DBColumnName="DESCS"
+                                        BindType="DBToUIOnly" SPParameterName="p_descs" Enabled="false" MaxLength="60" Width="494px">
+                                    </cc1:XUITextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="20%">
+                                    <span>Amount Lease</span>
+                                </td>
+                                <td>
+                                    <span>:</span>
+                                </td>
+                                <td width="80%">
+                                    <cc1:XUITextBox ID="txtAmtLease" runat="server" DataType="Number" Format="N2" DBColumnName="AMTLEASE"
+                                    BindType="DBToUIOnly" SPParameterName="p_amtlease" Text="0.00" Enabled = "False"></cc1:XUITextBox>
+                                </td>
+                            </tr>
+                        </table>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+            <div id="page-1" class="ui-corner-bottom" style="padding: 2px 2px; background-color: #eeeeff;
+                color: #000; height: 430px; overflow: auto">
+                <table id="tblBody1" runat="server" cellpadding="3" cellspacing="0" class="search-list-table"
+                width="100%">
+                    <tr>
+                        <td>
+                            <cc1:XUIButton RoleCode="B000045" ID="btnAddDetail" runat="server" CssClass="add" Text="Add" OnClick="btnAddDetail_Click" />
+                            <cc1:XUIButton ID="btnDelete" runat="server"  CssClass="void" Text="Delete" OnClick="btnReject_Click" RoleCode="B000046" />
+                            <%--<asp:Button ID="btnDeleteCharges" runat="server" CssClass="void" Text="Delete"
+                                OnClick="btnDeleteCharges_Click" />--%>
+                        </td>
+                        <td align="right">
+                            <asp:Panel ID="pnlSearchDetail" runat="server" DefaultButton="btnSearchDetail">
+                                <asp:TextBox ID="txtSearchDetail" runat="server"></asp:TextBox>
+                                <asp:Button ID="btnSearchDetail" runat="server" CssClass="search" Text="Search"
+                                    OnClick="btnSearchDetail_Click" />
+                            </asp:Panel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <asp:UpdatePanel ID="updMain" UpdateMode="Conditional" runat="server">
+                                <ContentTemplate>
+                                    <asp:GridView ID="gvwListDetail" runat="server" AutoGenerateColumns="False" DataKeyNames="DOC_STORAGEDID"
+                                        OnSelectedIndexChanged="gvwListDetail_SelectedIndexChanged" EmptyDataText="There is no data."
+                                        AllowPaging="true" PageSize="10" OnPageIndexChanging="gvwListDetail_PageIndexChanging"
+                                        OnRowCommand="gvwListDetail_RowCommand"
+                                        OnRowDataBound="gvwListDetail_RowDataBound" 
+                                        OnRowCreated="gvwListDetail_RowCreated" GridLines="None" CssClass="mGrid" PagerStyle-CssClass="pgr"
+                                        AlternatingRowStyle-CssClass="alt">
+                                        <Columns>
+                                            <asp:TemplateField>
+                                                <HeaderTemplate>
+                                                    <span>No</span>
+                                                </HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <%# Container.DataItemIndex + 1 %>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField>
+                                                <HeaderTemplate>
+                                                    <asp:CheckBox ID="chbSelectAll" runat="server" />    
+                                                </HeaderTemplate>
+                                                <ItemTemplate>
+                                                    <asp:CheckBox ID="chbSelect" runat="server" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:BoundField DataField="DOC_NAME" HeaderText="Document Type">
+                                                <ItemStyle Width="20%" HorizontalAlign="Center" />
+                                            </asp:BoundField>
+                                            <asp:BoundField DataField="NAME" HeaderText="Title">
+                                                <ItemStyle Width="40%" HorizontalAlign="Left" />
+                                            </asp:BoundField>
+                                            <asp:BoundField DataField="DESCS" HeaderText="Description">
+                                                <ItemStyle Width="40%" HorizontalAlign="Left" />
+                                            </asp:BoundField>
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="btnEdit" runat="server" CausesValidation="False" CommandName="Edit"
+                                                        ImageUrl="~/img/im4_grid_edit.png" ToolTip="Edit" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="btnSearchDetail" EventName="Click" />
+                                    <asp:AsyncPostBackTrigger ControlID="btnDelete" EventName="Click" />
+                                </Triggers>
+                            </asp:UpdatePanel>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    <asp:Panel ID="pnlPopupGetLsagree" runat="server" Width="600px" Style="display: block;">
+        <asp:Button Style="display: none" ID="btnShowPopupGetLsagree" runat="server"></asp:Button>
+        <cc2:ModalPopupExtender ID="mdlPopupGetLsagree" runat="server" BehaviorID="mdlPopupGetLsagree"
+            PopupControlID="pnlPopupGetLsagree" TargetControlID="btnShowPopupGetLsagree" BackgroundCssClass="modalBackground">
+        </cc2:ModalPopupExtender>
+        <cc2:DragPanelExtender ID="DragPanelExtender2" runat="server" TargetControlID="pnlPopupGetLsagree"
+            DragHandleID="pnlPopupGetLsagreeHeader" />
+        <div class="container">
+            <asp:Panel ID="pnlPopupGetLsagreeHeader" runat="server" CssClass="header">
+                <asp:Label ID="lblHeader" runat="server" CssClass="msg" Text="Lsagree" />
+                <asp:LinkButton ID="btnClose" runat="server" CssClass="close" OnClientClick="$find('mdlPopupGetLsagree').hide(); return false;" />
+            </asp:Panel>
+            <asp:UpdatePanel ID="upnDetailGetLsagree" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="header" align="right">
+                        <asp:Panel ID="pnlSearchLsagree" runat="server" DefaultButton="btnSearchLsagree">
+                            <asp:TextBox ID="txtSearchLsagree" runat="server"></asp:TextBox>
+                            <asp:Button ID="btnSearchLsagree" OnClick="btnSearchLsagree_Click" runat="server" Text="Search"
+                                CssClass="search" CausesValidation="false"></asp:Button>
+                        </asp:Panel>
+                    </div>
+                    <div class="body">
+                        <asp:GridView ID="gvwListLsagree" runat="server" OnSelectedIndexChanged="gvwListLsagree_SelectedIndexChanged"
+                            DataKeyNames="LSAGREE, NAME,MODULE,DESCS,AMTLEASE" AutoGenerateColumns="False" EmptyDataText="There is no data."
+                            OnRowCreated="gvwListLsagree_RowCreated" GridLines="None" AllowPaging="true" PageSize="10"
+                            OnPageIndexChanging="gvwListLsagree_PageIndexChanging" CssClass="mGrid" PagerStyle-CssClass="pgr"
+                            AlternatingRowStyle-CssClass="alt">
+                            <Columns>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
+                                        <span>No</span>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <%# Container.DataItemIndex + 1 %>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:BoundField DataField="LSAGREE" HeaderText="Agreement No.">
+                                    <ItemStyle Width="20%" HorizontalAlign="Center"></ItemStyle>
+                                </asp:BoundField>
+                                <asp:BoundField DataField="NAME" HeaderText="Name">
+                                    <ItemStyle Width="30%" HorizontalAlign="Left"></ItemStyle>
+                                </asp:BoundField>
+                                <asp:BoundField DataField="MODULE" HeaderText="Module">
+                                    <ItemStyle Width="10%" HorizontalAlign="Left"></ItemStyle>
+                                </asp:BoundField>
+                                <asp:BoundField DataField="DESCS" HeaderText="Asset">
+                                    <ItemStyle Width="30%" HorizontalAlign="Left"></ItemStyle>
+                                </asp:BoundField>
+                                <asp:BoundField DataField="AMTLEASE" HeaderText="Amount" DataFormatString="{0:N2}">
+                                    <ItemStyle Width="10%" HorizontalAlign="Right" />
+                                </asp:BoundField>
+                                <asp:CommandField ShowSelectButton="True" SelectText="Choose"></asp:CommandField>
+                            </Columns>
+                        </asp:GridView>
+                    </div>
+                    <div class="footer">
+                        <asp:Button ID="btnCloseLsagree" OnClientClick="$find('mdlPopupGetLsagree').hide(); return false;"
+                            CssClass="void" runat="server" Text="Close" CausesValidation="false"></asp:Button>
+                    </div>
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="btnSearchLsagree" EventName="Click" />
+                </Triggers>
+            </asp:UpdatePanel>
+        </div>
+    </asp:Panel>
+    <%--<asp:Panel ID="upnApproveValidate" runat="server" Width="370px" Style="display: block;">
+        <asp:Button Style="display: none" ID="btnApproveValidate" runat="server"></asp:Button>
+        <cc2:ModalPopupExtender ID="mdlPopupApproveValidate" runat="server" BehaviorID="mdlPopupApproveValidate"
+            PopupControlID="upnApproveValidate" TargetControlID="btnApproveValidate"
+            BackgroundCssClass="modalBackground">
+        </cc2:ModalPopupExtender>
+        <cc2:DragPanelExtender ID="DragPanelExtender1" runat="server" TargetControlID="upnApproveValidate"
+            DragHandleID="pnlPopupApproveValidateHeader" />
+        <div class="container" style="width:350px;">
+            <asp:Panel ID="pnlPopupApproveValidateHeader" runat="server" CssClass="header"
+                style="width:350px;">
+                <asp:Label ID="lblHeaderApproveValidate" runat="server" CssClass="msg" Text="Approval" />
+                <asp:LinkButton ID="btnCloseApproveValidate" runat="server" CssClass="close" OnClientClick="$find('mdlPopupApproveValidate').hide(); return false;" />
+            </asp:Panel>
+            <asp:UpdatePanel ID="upnDetailApproveValidate" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="body" style="width:350px;">
+                        <table cellpadding="4px" cellspacing="0px" width="100%" border="0px">
+                            <tr>
+                                <td>
+                                    <span>Password</span>
+                                </td>
+                                <td colspan="2">
+                                    <asp:TextBox ID="txtPassword" runat="server" Enabled="true" 
+                                    MaxLength="20" Width="160px" TextMode="Password"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">
+                                    <asp:Button ID="btnApproval" runat="server" Text="OK" OnClick="btnApproval_Click" CssClass="post"/>
+                                </td>
+                                <td></td>
+                                <td align="right">
+                                    <asp:Button ID="btnVoid" runat="server" Text="Cancel" OnClientClick="$find('mdlPopupApproveValidate').hide(); return false;" CssClass="void"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+    </asp:Panel>--%>
+    <asp:Panel ID="upnRejectValidate" runat="server" Width="370px" Style="display: block;">
+        <asp:Button Style="display: none" ID="btnRejectValidate" runat="server"></asp:Button>
+        <cc2:ModalPopupExtender ID="mdlPopupRejectValidate" runat="server" BehaviorID="mdlPopupRejectValidate"
+            PopupControlID="upnRejectValidate" TargetControlID="btnRejectValidate"
+            BackgroundCssClass="modalBackground">
+        </cc2:ModalPopupExtender>
+        <cc2:DragPanelExtender ID="DragPanelExtender3" runat="server" TargetControlID="upnRejectValidate"
+            DragHandleID="pnlPopupRejectValidateHeader" />
+        <div class="container" style="width:350px;">
+            <asp:Panel ID="pnlPopupRejectValidateHeader" runat="server" CssClass="header"
+                style="width:350px;">
+                <asp:Label ID="lblHeaderRejectValidate" runat="server" CssClass="msg" Text="Reject" />
+                <asp:LinkButton ID="btnCloseRejectValidate" runat="server" CssClass="close" OnClientClick="$find('mdlPopupRejectValidate').hide(); return false;" />
+            </asp:Panel>
+            <asp:UpdatePanel ID="upnDetailRejectValidate" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="body" style="width:350px;">
+                        <table cellpadding="4px" cellspacing="0px" width="100%" border="0px">
+                            <tr>
+                                <td>
+                                    <span>Password</span>
+                                </td>
+                                <td colspan="2">
+                                    <asp:TextBox ID="txtPasswordReject" runat="server" Enabled="true" 
+                                    MaxLength="20" Width="160px" TextMode="Password"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="right">
+                                    <asp:Button ID="btnRejection" runat="server" Text="OK" OnClick="btnRejection_Click" CssClass="post"/>
+                                </td>
+                                <td></td>
+                                <td align="right">
+                                    <asp:Button ID="btnVoidReject" runat="server" Text="Cancel" OnClientClick="$find('mdlPopupRejectValidate').hide(); return false;" CssClass="void"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+    </asp:Panel>
+</asp:Content>
+

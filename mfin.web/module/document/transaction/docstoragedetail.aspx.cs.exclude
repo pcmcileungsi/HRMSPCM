@@ -1,0 +1,389 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+
+using MFin.DataAccessLayer.Master;
+using MFin.DataAccessLayer.Security;
+
+public partial class module_document_transaction_docstoragedetail : BasePage
+{
+    private static string RoleCode = "P000016";
+    protected string localid;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        LoadInit();
+        //ScriptManager.RegisterStartupScript(this, GetType(), "ss","javascript:onLoadFunction();", true);
+
+        if (!Page.IsPostBack)
+        {
+            CheckRole(RoleCode);
+            lblDocStoragehID.Text = Request.Params["id"];
+
+            if (Request.Params["action"].Equals("edt"))
+            {
+                localid = Request.Params["id"].ToString().Trim();
+                LoadData();
+               
+            }
+            else if (Request.Params["action"].Equals("view"))
+            {
+                localid = Request.Params["id"].ToString().Trim();
+                LoadData();
+                btnSave.Visible = false;
+                btnAddDetail.Visible = false;
+                btnDelete.Visible = false;
+                btnLookUpLsagree.Visible = false;
+                //gvwListDetail.Columns[7].Visible = false; 
+                
+            }
+
+            switch (Request.Params["page"])
+            {
+                case "0":
+                    Response.Redirect("docstoragedetail.aspx?action=edt&id=" + Request.Params["id"] + "#page-0");
+                    break;
+                case "1":
+                    Response.Redirect("docstoragedetail.aspx?action=edt&id=" + Request.Params["id"] + "#page-1");
+                    break;
+            }
+
+            BindGridDetail();
+        }
+    }
+
+    #region header
+    private void LoadData()
+    {
+        DocStorageDAL _dalDocStorage = null;
+        Hashtable _htParameters = new Hashtable();
+        
+        try
+        {
+            _dalDocStorage = new DocStorageDAL();
+            _htParameters["p_doc_storagehid"] = Request.Params["id"].ToString();
+
+            DataTable _dt = _dalDocStorage.GetRow(_htParameters);
+            MPF23.Shared.Mapper.DBToUI.Map(pnlBody0.Controls, _dt.Rows[0]);
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE ,ex,null);
+        }
+    }
+
+    private void SaveData()
+    {
+        DocStorageDAL _dalDocStorage = null;
+        Hashtable _htParameters = new Hashtable();
+        
+        int iNextID = 0;
+
+        //System.Diagnostics.Debugger.Break();
+        try
+        {
+            _dalDocStorage = new DocStorageDAL();
+            _htParameters = new Hashtable();
+            
+            _htParameters["p_c_code"] = Session[SessionKey.CURRENT_ENTITY_SESSION_KEY].ToString().Trim();
+            MPF23.Shared.Mapper.UIToDB.Map(pnlBody0.Controls, _htParameters);
+            //_htParameters["p_provisi"] = Decimal.Parse(txtProvisi.Text.ToString().Trim());
+            Utility.ApplyDefaultProp(_htParameters);
+
+            if (Request.Params["action"] == "add")
+            {
+                _dalDocStorage.Insert(_htParameters, ref iNextID);
+            }
+            else
+            {
+                _htParameters["p_doc_storagehid"] = Int32.Parse(Request.Params["id"].ToString());
+                _dalDocStorage.Update(_htParameters);
+                iNextID = Int32.Parse(Request.Params["id"].ToString());
+            }
+
+            Utility.ShowMessageBox(this, Utility.SAVE_DATA_SUCCESS_MESSAGE, null, "docstoragedetail.aspx?action=edt&id=" + iNextID.ToString());
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, Utility.SAVE_DATA_FAIL_MESSAGE, ex, null);
+        }
+    }
+    #endregion
+
+    #region detail
+    protected void btnAddDetail_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Response.Redirect("docstoragedetaildetail.aspx?action=add"
+                + "&docstoragehid=" + lblDocStoragehID.Text+
+                        "&lsagree="+ txtLsagree.Text +
+                        "&lessee=" + txtName.Text);
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, Utility.SAVE_DATA_FAIL_MESSAGE, ex, null);
+        }
+    }
+    protected void btnSearchDetail_Click(object sender, EventArgs e)
+    {
+        BindGridDetail();
+    }
+
+    private void BindGridDetail()
+    {
+        DocStorageDAL _dalDocStorage = null;
+        Hashtable _htParameters = null;
+
+        try
+        {
+            _dalDocStorage = new DocStorageDAL();
+            _htParameters = new Hashtable();
+
+            _htParameters["p_keywords"] =  txtSearchDetail.Text;
+            _htParameters["p_doc_storagehid"] = lblDocStoragehID.Text;
+            _htParameters["p_lsagree"] = txtLsagree.Text;
+
+            gvwListDetail.DataSource = _dalDocStorage.GetRowsForDetailList(_htParameters);
+            gvwListDetail.DataBind();
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null, null);
+        }
+    }
+    protected void gvwListDetail_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        switch (e.CommandName)
+        {
+            case "Edit":
+                Response.Redirect("docstoragedetaildetail.aspx?action=edt&id=" + e.CommandArgument +
+                          "&docstoragehid=" + lblDocStoragehID.Text +
+                          "&lsagree="+ txtLsagree.Text +
+                          "&lessee=" + txtName.Text);
+                break;
+            //case "Delete":
+            //    DocStorageDAL _dalDocStorage = null;
+            //    Hashtable _htParameters = null;
+            //    try
+            //    {
+            //        _dalDocStorage = new DocStorageDAL();
+            //        _htParameters = new Hashtable();
+
+            //        _htParameters["p_doc_storagedid"] = e.CommandArgument;
+
+            //        //Utility.deleteValidation(this, Utility.DELETE_VALIDATION_MESSAGE, null, null);
+            //        _dalDocStorage.DeleteDetail(_htParameters);
+
+
+            //        Response.Redirect("docstoragedetail.aspx?action=edt&id=" + Request.Params["id"] + "&page=1");
+
+            //        //Response.Redirect("DocStoragedetail.aspx?action=edt&id=" + lblDocStoragehID.Text);
+
+            //        //Response.Redirect("DocStoragedetail.aspx?action=edt&id=" + Request.Params["id"] + "#page-1");
+            //        //Utility.ShowMessageBox(this, Utility.DELETE_VALIDATION_SUCCESS_MESSAGE, null, "lsapplicationdetail.aspx?action=edt&id=" + Request.Params["id"]);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Utility.ShowMessageBox(this, Utility.DELETE_VALIDATION_FAIL_MESSAGE, ex, null);
+            //    }
+            //    break;
+        }
+    }
+    protected void gvwListDetail_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        Response.Redirect("docstoragedetaildetail.aspx?action=edt&id=" + gvwListDetail.SelectedDataKey[0].ToString() +
+                            "&docstoragehid=" + lblDocStoragehID.Text +
+                            "&lsagree=" + txtLsagree.Text +
+                            "&lessee=" + txtName.Text);
+    }
+
+    protected void gvwListDetail_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvwListDetail.PageIndex = e.NewPageIndex;
+        BindGridDetail();
+    }
+
+    protected void gvwListDetail_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+
+            //Enter value of id each row to button's command argument
+            ImageButton _btn = (ImageButton)e.Row.FindControl("btnEdit");
+            _btn.CommandArgument = gvwListDetail.DataKeys[e.Row.RowIndex].Value.ToString();
+            //_btn = (ImageButton)e.Row.FindControl("btnDelete");
+            //_btn.CommandArgument = gvwListDetail.DataKeys[e.Row.RowIndex].Value.ToString();
+
+            e.Row.Attributes.Add("OnMouseOver", "this.style.backgroundColor='#B0C4DE';this.style.cursor='hand'");
+
+            if (e.Row.RowState == DataControlRowState.Alternate)
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#FFFFFF';");
+            else
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#F7F6F3';");
+        }
+    }
+
+    protected void gvwListDetail_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            if (Request.Params["action"].Equals("edt"))
+            {
+                //((ImageButton)e.Row.FindControl("btnEdit")).Visible = false;
+                //((ImageButton)e.Row.FindControl("btnDelete")).Visible = false;
+            }
+            else if (Request.Params["action"].Equals("view"))
+            {
+                ((ImageButton)e.Row.FindControl("btnEdit")).Visible = false;
+                //((ImageButton)e.Row.FindControl("btnDelete")).Visible = false;
+
+            }
+
+            
+
+            //ImageButton EditButton = (ImageButton)e.Row.FindControl("imgEdite");
+            //ImageButton imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+            //EditButton.Visible = User.Identity.IsAuthenticated;
+            //imgDelete.Visible = User.Identity.IsAuthenticated;
+            //BindScoreDetails(division);
+        }
+    }
+    #endregion
+
+    #region toolbar
+    protected void btnBack_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("docstoragelist.aspx");
+    }
+
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        SaveData();
+    }
+
+
+    #endregion
+
+    #region lookup
+    protected void btnSearchLsagree_Click(object sender, EventArgs e)
+    {
+        Shared.BindAgreementAsForDocument(txtSearchLsagree.Text, gvwListLsagree, Session[SessionKey.CURRENT_ENTITY_SESSION_KEY].ToString().Trim());
+    }
+    protected void btnLookUpLsagree_Click(object sender, EventArgs e)
+    {
+        Shared.BindAgreementAsForDocument(txtSearchLsagree.Text, gvwListLsagree, Session[SessionKey.CURRENT_ENTITY_SESSION_KEY].ToString().Trim());
+        upnDetailGetLsagree.Update();
+        mdlPopupGetLsagree.Show();
+    }
+    protected void gvwListLsagree_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //System.Diagnostics.Debugger.Break();
+        txtLsagree.Text = gvwListLsagree.SelectedDataKey[0].ToString().Trim();
+        txtName.Text = gvwListLsagree.SelectedDataKey[1].ToString().Trim();
+        txtModule.Text = gvwListLsagree.SelectedDataKey[2].ToString().Trim();
+        txtDescs.Text = gvwListLsagree.SelectedDataKey[3].ToString().Trim();
+        txtAmtLease.Text = gvwListLsagree.SelectedDataKey[4].ToString().Trim();
+
+        updLsagreeInfo.Update();
+        upnDetailGetLsagree.Update();
+        mdlPopupGetLsagree.Hide();
+    }
+    protected void gvwListLsagree_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            e.Row.Attributes.Add("OnMouseOver", "this.style.backgroundColor='#B0C4DE';this.style.cursor='hand'");
+
+            if (e.Row.RowState == DataControlRowState.Alternate)
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#FFFFFF';");
+            else
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#F7F6F3';");
+
+            //e.Row.Attributes.Add("OnClick", "javascript:__doPostBack('ctl00$ContentPlaceHolder1$gvwListLsagree','Select$" + e.Row.RowIndex.ToString() + "')");
+        }
+    }
+    protected void gvwListLsagree_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvwListLsagree.PageIndex = e.NewPageIndex;
+        Shared.BindAgreementAsForDocument(txtSearchLsagree.Text, gvwListLsagree, Session[SessionKey.CURRENT_ENTITY_SESSION_KEY].ToString().Trim());
+    }
+
+    #endregion
+    #region approval
+    protected int approvemtd(String _pass)
+    {
+        try
+        {
+            MasterUserDAL _dalMasterUser = new MasterUserDAL();
+            Hashtable _htParameters = new Hashtable();
+
+            _htParameters["p_user_id"] = Utility.CurrentUID;
+            _htParameters["p_user_password"] = _pass;
+
+            DataTable _dt = _dalMasterUser.Validate(_htParameters);
+            if (_dt.Rows.Count > 0) return 1;
+            else return 0;
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, "Wrong Password, or unauthorized user", ex, null);
+            return 0;
+        }
+    }
+    #endregion
+
+    #region rejection
+
+    protected void btnReject_Click(object sender, EventArgs e)
+    {
+        mdlPopupRejectValidate.Show();
+    }
+    protected void btnRejection_Click(object sender, EventArgs e)
+    {
+        mdlPopupRejectValidate.Hide();
+        if (approvemtd(txtPasswordReject.Text) == 1)
+        {
+            DocStorageDAL _dalDocStorage = new DocStorageDAL();
+            Hashtable _htParameters = new Hashtable();
+
+            foreach (GridViewRow row in gvwListDetail.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    CheckBox chb = (CheckBox)row.Cells[1].Controls[1];
+                    if (chb.Checked)
+                    {
+                        try
+                        {
+                            _htParameters.Clear();
+
+                            Utility.ApplyDefaultProp(_htParameters);
+                            _htParameters["p_doc_storagedid"] = Int32.Parse(gvwListDetail.DataKeys[row.RowIndex][0].ToString());
+                            _dalDocStorage.DeleteDetail(_htParameters);
+
+                            //BindGridDetail();
+                            //Utility.ShowMessageBox(this, Utility.SAVE_DATA_SUCCESS_MESSAGE, null, "DocStoragelist.aspx");
+                        }
+                        catch (Exception ex)
+                        {
+                            Utility.ShowMessageBox(this, Utility.SAVE_DATA_FAIL_MESSAGE, ex, null);
+                        }
+                    }
+                }
+            }
+
+            BindGridDetail();
+            Response.Redirect("docstoragedetail.aspx?action=edt&id=" + Request.Params["id"] + "&page=1");
+        }
+        else Utility.ShowMessageBox(this, "Wrong Password, or unauthorized user", null, null);
+    }
+    #endregion
+
+}

@@ -1,0 +1,79 @@
+D:\AST\MFin\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+D:\AST\MFin\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+D:\AST\MFin\MFin.DataAccessLayer\obj\Debug\ResolveAssemblyReference.cache
+D:\AST\MFin\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+D:\AST\MFin\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+D:\MFin\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+D:\MFin\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+D:\MFin\MFin.DataAccessLayer\obj\Debug\ResolveAssemblyReference.cache
+D:\MFin\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+D:\MFin\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+E:\ASTPROGRAM\TIFA\MFin\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+E:\ASTPROGRAM\TIFA\MFin\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+E:\ASTPROGRAM\TIFA\MFin\MFin.DataAccessLayer\obj\Debug\ResolveAssemblyReference.cache
+E:\ASTPROGRAM\TIFA\MFin\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+E:\ASTPROGRAM\TIFA\MFin\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+D:\MFIN  SANDBOX\MFin\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+D:\MFIN  SANDBOX\MFin\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+D:\MFIN  SANDBOX\MFin\MFin.DataAccessLayer\obj\Debug\ResolveAssemblyReference.cache
+D:\MFIN  SANDBOX\MFin\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+D:\MFIN  SANDBOX\MFin\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+D:\MFIN_TIFA\MFIN\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+D:\MFIN_TIFA\MFIN\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+D:\MFIN_TIFA\MFIN\MFin.DataAccessLayer\obj\Debug\ResolveAssemblyReference.cache
+D:\MFIN_TIFA\MFIN\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+D:\MFIN_TIFA\MFIN\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+D:\Source TFIS\MFIN\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+D:\Source TFIS\MFIN\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+D:\Source TFIS\MFIN\MFin.DataAccessLayer\obj\Debug\ResolveAssemblyReference.cache
+D:\Source TFIS\MFIN\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+D:\Source TFIS\MFIN\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+D:\Source_TFIS\MFIN\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+D:\Source_TFIS\MFIN\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+D:\Source_TFIS\MFIN\MFin.DataAccessLayer\obj\Debug\ResolveAssemblyReference.cache
+D:\Source_TFIS\MFIN\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+D:\Source_TFIS\MFIN\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+D:\tifa\Source_TFIS\MFIN\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+D:\tifa\Source_TFIS\MFIN\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+D:\tifa\Source_TFIS\MFIN\MFin.DataAccessLayer\obj\Debug\ResolveAssemblyReference.cache
+D:\tifa\Source_TFIS\MFIN\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+D:\tifa\Source_TFIS\MFIN\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+E:\Source_TFIS\MFIN\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+E:\Source_TFIS\MFIN\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+E:\Source_TFIS\MFIN\MFin.DataAccessLayer\obj\Debug\ResolveAssemblyReference.cache
+E:\Source_TFIS\MFIN\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+E:\Source_TFIS\MFIN\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+E:\Source_TFIS\TOSSA\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+E:\Source_TFIS\TOSSA\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+E:\Source_TFIS\TOSSA\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+E:\Source_TFIS\TOSSA\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+E:\tifa\Source_TFIS\TOSSA\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+E:\tifa\Source_TFIS\TOSSA\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+E:\tifa\Source_TFIS\TOSSA\MFin.DataAccessLayer\obj\Debug\ResolveAssemblyReference.cache
+E:\tifa\Source_TFIS\TOSSA\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+E:\tifa\Source_TFIS\TOSSA\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+E:\Source_TFIS\TOSSA\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.csprojResolveAssemblyReference.cache
+D:\Serah Terima\Source Code\Source_TFIS\MHRMS\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+D:\Serah Terima\Source Code\Source_TFIS\MHRMS\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+D:\Serah Terima\Source Code\Source_TFIS\MHRMS\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.csprojResolveAssemblyReference.cache
+D:\Serah Terima\Source Code\Source_TFIS\MHRMS\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+D:\Serah Terima\Source Code\Source_TFIS\MHRMS\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+E:\AppTifa\MHRMS\MHRMS\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+E:\AppTifa\MHRMS\MHRMS\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+E:\AppTifa\MHRMS\MHRMS\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.csprojResolveAssemblyReference.cache
+E:\AppTifa\MHRMS\MHRMS\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+E:\AppTifa\MHRMS\MHRMS\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+D:\Serah_Terima\Source_Code\MHRMS\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+D:\Serah_Terima\Source_Code\MHRMS\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+D:\Serah_Terima\Source_Code\MHRMS\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+D:\Serah_Terima\Source_Code\MHRMS\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+E:\AppAnas\HRMSPCM\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+E:\AppAnas\HRMSPCM\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+E:\AppAnas\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.csprojResolveAssemblyReference.cache
+E:\AppAnas\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+E:\AppAnas\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+D:\STTM\Project\HRMSPCM\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+D:\STTM\Project\HRMSPCM\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+D:\STTM\Project\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.csprojResolveAssemblyReference.cache
+D:\STTM\Project\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+D:\STTM\Project\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb

@@ -1,0 +1,114 @@
+﻿<%@ master language="C#" autoeventwireup="true" inherits="mfin, App_Web_cuexosyb" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link href="css/mfin.css" rel="stylesheet" type="text/css" />
+    <link href="css/ui-darkness/jquery-ui-1.8.10.custom.css" rel="stylesheet" type="text/css" />
+
+    <script language="javascript" src='<%=ResolveClientUrl("~/js/jquery-1.4.4.min.js")%>'
+        type="text/javascript"></script>
+
+    <script language="javascript" src='<%=ResolveClientUrl("~/js/jquery-ui-1.8.10.custom.min.js")%>'
+        type="text/javascript"></script>
+
+    <script language="javascript" src='<%=ResolveClientUrl("~/js/mfin.js")%>' type="text/javascript"></script>
+    
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function() {
+            $('input').addClass('cls');
+            $('textarea').addClass('cls');
+            $('select').addClass('cls');
+
+            $('input:text:first').focus();
+            var $inp = $('.cls');
+            $inp.bind('keydown', function(e) {
+
+                var key = e.which;
+                if (key == 13) {
+                    e.preventDefault();
+                    var nxtIdx = $inp.index(this) + 1;
+                    $(".cls:eq(" + nxtIdx + ")").focus();
+                }
+            });
+        });
+
+        function formatCurrency() {
+            //$('input[style*="text-align:right"]').addClass('num');
+            var $num = $('input[style*="text-align:right"]');
+            //var $num = $('.num');
+            $num.bind('blur', function(e) {
+                $(this).val(jsToCurrency($(this).val()));
+            });
+            $num.bind('focus', function(e) {
+                $(this).val(jsToNumber($(this).val()));
+            });
+        }
+    </script>
+
+    <title></title>
+    <asp:ContentPlaceHolder ID="cphhd" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body style="min-height:650px;">
+    <form id="form1" runat="server" style="min-height:650px;">
+    <asp:ScriptManager ID="sm" runat="server" AsyncPostBackTimeout="3600">
+    </asp:ScriptManager>
+    <div style="min-height:650px;" >
+        <asp:ContentPlaceHolder ID="cphbd" runat="server">
+        </asp:ContentPlaceHolder>
+        <asp:Panel ID="pnlPopupLoading" runat="server" Style="display: block;background-color:#ffffff;">
+            <asp:Button Style="display: none" ID="btnShowPopupLoading" runat="server"></asp:Button>
+            <cc2:ModalPopupExtender ID="mdlPopupLoadingword" runat="server" BehaviorID="mdlPopupLoadingword"
+                PopupControlID="pnlPopupLoading" TargetControlID="btnShowPopupLoading" BackgroundCssClass="modalBackground">
+            </cc2:ModalPopupExtender>
+            <div class="container" style="background-color:#ffffff;">
+                <asp:UpdatePanel ID="upnLoading" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div class="body">
+                            <div style="text-align: center;background-color:#ffffff;">
+                                <asp:ImageButton ID="btnLoad" runat="server" ImageUrl="~/img/loading.gif" /><br />
+                                <span>Please Wait... <b style="font-size: x-large"></b></span>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+        </asp:Panel>
+    </div>
+    </form>
+</body>
+
+<script type="text/javascript">
+
+    // Get the instance of PageRequestManager.
+    var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+    // Add initializeRequest and endRequest
+    prm.add_beginRequest(prm_InitializeRequest);
+    prm.add_endRequest(prm_EndRequest);
+    // Called when async postback begins
+    function prm_InitializeRequest(sender, args) {
+
+
+
+        try {
+            // Disable button that caused a postback
+            $find('mdlPopupLoadingword').show();
+        }
+        catch (e) {
+        }
+    }
+
+    // Called when async postback ends
+    function prm_EndRequest(sender, args) {
+        try {
+            // Enable button that caused a postback
+            setTimeout($find('mdlPopupLoadingword').hide(), 1250);
+        }
+        catch (e) {
+        }
+    }
+</script>
+
+</html>

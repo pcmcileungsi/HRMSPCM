@@ -1,0 +1,260 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+
+using MFin.DataAccessLayer.Master;
+using MFin.DataAccessLayer.Security;
+
+
+public partial class module_document_transaction_docstoragelist : BasePage
+{
+    private static string RoleCode = "P000016";
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        LoadInit();
+
+        if (!Page.IsPostBack)
+        {
+            CheckRole(RoleCode);
+            if (Request.Params["page"] != null)
+                Response.Redirect("docstoragelist.aspx#page-" + Request.Params["page"]);
+
+            bindGridEntry();
+            bindGridRejected();
+        }
+    }
+
+    #region databind
+    protected void bindGridEntry()
+    {
+        DocStorageDAL _dalDocStorage = null;
+        Hashtable _htParameters = null ;
+        
+        try
+        {
+            _dalDocStorage = new DocStorageDAL();
+            _htParameters = new Hashtable();
+
+            _htParameters["p_c_code"] = Session[SessionKey.CURRENT_ENTITY_SESSION_KEY];
+            _htParameters["p_keywords"] = txtSearchEntry.Text;
+
+            gvwlistEntry.DataSource = _dalDocStorage.GetRows(_htParameters);
+            gvwlistEntry.DataBind();
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null, null);
+        }
+    }
+
+    protected void bindGridRejected()
+    {
+        DocStorageDAL _dalDocStorage = null;
+        Hashtable _htParameters = null;
+
+        try
+        {
+            _dalDocStorage = new DocStorageDAL();
+            _htParameters = new Hashtable();
+            _htParameters["p_c_code"] = Session[SessionKey.CURRENT_ENTITY_SESSION_KEY];
+            _htParameters["p_keywords"] = txtSearchRejected.Text;
+
+            gvwListRejected.DataSource = _dalDocStorage.GetRowsAsForRejectList(_htParameters);
+            gvwListRejected.DataBind();
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null, null);
+        }
+    }
+    #endregion
+
+    #region toolbar
+    public void btnAdd_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("docstoragedetail.aspx?action=add");
+    }
+
+    public void btnSearchEntry_Click(object sender, EventArgs e)
+    {
+        bindGridEntry();
+    }
+
+    public void btnSearchRejected_Click(object sender, EventArgs e)
+    {
+        bindGridRejected();
+    }
+
+    #endregion
+
+    #region gridview
+    //contract
+    protected void gvwlistEntry_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        Response.Redirect("docstoragedetail.aspx?action=edt&id=" + gvwlistEntry.SelectedDataKey[0].ToString().Trim());
+    }
+    protected void gvwlistEntry_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            e.Row.Attributes.Add("OnMouseOver", "this.style.backgroundColor='#B0C4DE';this.style.cursor='hand'");
+
+            if (e.Row.RowState == DataControlRowState.Alternate)
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#FFFFFF';");
+            else
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#F7F6F3';");
+        }
+    }
+    protected void gvwlistEntry_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvwlistEntry.PageIndex = e.NewPageIndex;
+        bindGridEntry();
+    }
+
+    //Rejected
+    protected void gvwListRejected_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        Response.Redirect("docstoragedetail.aspx?action=view&id=" + gvwListRejected.SelectedDataKey[0].ToString().Trim());
+    }
+    protected void gvwListRejected_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            e.Row.Attributes.Add("OnMouseOver", "this.style.backgroundColor='#B0C4DE';this.style.cursor='hand'");
+
+            if (e.Row.RowState == DataControlRowState.Alternate)
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#FFFFFF';");
+            else
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#F7F6F3';");
+        }
+    }
+    protected void gvwListRejected_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvwListRejected.PageIndex = e.NewPageIndex;
+        bindGridRejected();
+    }
+    #endregion
+
+    #region approval
+    protected int approvemtd(String _pass)
+    {
+        try
+        {
+            MasterUserDAL _dalMasterUser = new MasterUserDAL();
+            Hashtable _htParameters = new Hashtable();
+
+            _htParameters["p_user_id"] = Utility.CurrentUID;
+            _htParameters["p_user_password"] = _pass;
+
+            DataTable _dt = _dalMasterUser.Validate(_htParameters);
+            if (_dt.Rows.Count > 0) return 1;
+            else return 0;
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, "Wrong Password, or unauthorized user", ex, null);
+            return 0;
+        }
+    }
+
+    protected void btnApproval_Click(object sender, EventArgs e)
+    {
+        //System.Diagnostics.Debugger.Break();
+        mdlPopupApproveValidate.Hide();
+        if (approvemtd(txtPassword.Text) == 1)
+        {
+            DocStorageDAL _dalDocStorage = new DocStorageDAL();
+            Hashtable _htParameters = new Hashtable();
+
+            foreach (GridViewRow row in gvwlistEntry.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    CheckBox chb = (CheckBox)row.Cells[1].Controls[1];
+                    if (chb.Checked)
+                    {
+                        try
+                        {
+                            _htParameters.Clear();
+                            _htParameters["p_doc_storagehid"] = Int32.Parse(gvwlistEntry.DataKeys[row.RowIndex][0].ToString());
+                            //_htParameters["p_user_id"] = Utility.CurrentUID;
+                            Utility.ApplyDefaultProp(_htParameters);
+                            _dalDocStorage.Approve(_htParameters);
+
+                            //Utility.ShowMessageBox(this, Utility.SAVE_DATA_SUCCESS_MESSAGE, null, "DocStoragelist.aspx");
+                        }
+                        catch (Exception ex)
+                        {
+                            Utility.ShowMessageBox(this, Utility.SAVE_DATA_FAIL_MESSAGE, ex, null);
+                        }
+                    }
+                }
+            }
+            bindGridEntry();
+            bindGridRejected();
+        }
+        else Utility.ShowMessageBox(this, "Wrong Password, or unauthorized user", null, null);
+    }
+    protected void btnApprove_Click(object sender, EventArgs e)
+    {
+        //System.Diagnostics.Debugger.Break();
+        mdlPopupApproveValidate.Show();
+    }
+
+    #endregion
+
+    #region rejection
+
+    protected void btnReject_Click(object sender, EventArgs e)
+    {
+        mdlPopupRejectValidate.Show();
+    }
+    protected void btnRejection_Click(object sender, EventArgs e)
+    {
+        mdlPopupRejectValidate.Hide();
+        if (approvemtd(txtPasswordReject.Text) == 1)
+        {
+            DocStorageDAL _dalDocStorage = new DocStorageDAL();
+            Hashtable _htParameters = new Hashtable();
+
+            foreach (GridViewRow row in gvwlistEntry.Rows)
+            {
+                if (row.RowType == DataControlRowType.DataRow)
+                {
+                    CheckBox chb = (CheckBox)row.Cells[1].Controls[1];
+                    if (chb.Checked)
+                    {
+                        try
+                        {
+                            _htParameters.Clear();
+
+                            Utility.ApplyDefaultProp(_htParameters);
+                            _htParameters["p_doc_storagehid"] = Int32.Parse(gvwlistEntry.DataKeys[row.RowIndex][0].ToString());
+                            _dalDocStorage.Reject(_htParameters);
+
+                            //Utility.ShowMessageBox(this, Utility.SAVE_DATA_SUCCESS_MESSAGE, null, "DocStoragelist.aspx");
+                        }
+                        catch (Exception ex)
+                        {
+                            Utility.ShowMessageBox(this, Utility.SAVE_DATA_FAIL_MESSAGE, ex, null);
+                        }
+                    }
+                }
+            }
+            bindGridEntry();
+            bindGridRejected();
+        }
+        else Utility.ShowMessageBox(this, "Wrong Password, or unauthorized user", null, null);
+    }
+    #endregion
+
+    #region print
+    #endregion
+}

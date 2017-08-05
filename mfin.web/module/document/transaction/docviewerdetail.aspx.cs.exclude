@@ -1,0 +1,112 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+
+using MFin.DataAccessLayer.Master;
+using MFin.DataAccessLayer.Security;
+
+using System.IO;
+
+public partial class module_document_transaction_docviewerdetail : BasePage
+{
+    private static string _RoleCode = "P000019";
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        LoadInit();
+
+        if (!Page.IsPostBack)
+        {
+            CheckRole(_RoleCode);
+
+            string sFilename = Request.Params["savename"];
+            //ScriptManager.RegisterStartupScript(this, GetType(), "REPORT", "window.open('../../../temp/upload/" + sFilename + "', '" + "REPORT" + "', 'fullscreen=0,menubar=0,status=0,scrollbars=0,resizable=1,toolbar=0,width=600,height=400');", true);
+
+            //byte[] pdfData = System.IO.File.ReadAllBytes(Server.MapPath(@"\pdfs\RadPdfSampleForm.pdf"));
+            byte[] pdfData = System.IO.File.ReadAllBytes(Server.MapPath(@"../../../temp/upload/") + sFilename); ;
+
+            //FileUpload.SaveAs(Server.MapPath(@"../../../temp/upload/") + saveAsFileName);
+
+
+            //Load PDF byte array into RAD PDF
+            this.PdfWebControl1.CreateDocument("Document Name", pdfData);
+        }
+    }
+
+    #region Toolbar
+    protected void btnBack_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("docviewerlist.aspx");
+                           
+    }
+    #endregion
+
+    #region approval
+    //protected int approvemtd(String _pass)
+    //{
+    //    try
+    //    {
+    //        MasterUserDAL _dalMasterUser = new MasterUserDAL();
+    //        Hashtable _htParameters = new Hashtable();
+
+    //        _htParameters["p_user_id"] = Utility.CurrentUID;
+    //        _htParameters["p_user_password"] = _pass;
+
+    //        DataTable _dt = _dalMasterUser.Validate(_htParameters);
+    //        if (_dt.Rows.Count > 0) return 1;
+    //        else return 0;
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Utility.ShowMessageBox(this, "Wrong Password, or unauthorized user", ex, null);
+    //        return 0;
+    //    }
+    //}
+
+    protected void btnDownload_Click(object sender, EventArgs e)
+    {
+        //System.Diagnostics.Debugger.Break();
+        //mdlPopupApproveValidate.Hide();
+        //if (approvemtd(txtPassword.Text) == 1)
+        //{
+            DocViewerDAL _dalDocViewerDAL = new DocViewerDAL();
+            Hashtable _htParameters = new Hashtable();
+
+            try
+            {
+                string sFilename = Request.Params["savename"];
+
+                _htParameters.Clear();
+                //_htParameters["p_user_id"] = Utility.CurrentUID;
+                //_htParameters["p_savename"] = sFilename;
+                _htParameters["p_doc_storagedid"] = Request.Params["id"];
+                Utility.ApplyDefaultProp(_htParameters);
+                _dalDocViewerDAL.InsertLog(_htParameters);
+                
+                ScriptManager.RegisterStartupScript(this, GetType(), "REPORT", "window.open('../../../temp/upload/" + sFilename + "', '" + "REPORT" + "', 'fullscreen=0,menubar=0,status=0,scrollbars=0,resizable=1,toolbar=0,width=600,height=400');", true);
+
+                //Utility.ShowMessageBox(this, Utility.SAVE_DATA_SUCCESS_MESSAGE, null, "AccPdcReturnlist.aspx");
+            }
+            catch (Exception ex)
+            {
+                Utility.ShowMessageBox(this, Utility.SAVE_DATA_FAIL_MESSAGE, ex, null);
+            }
+            
+
+        //}
+        //else Utility.ShowMessageBox(this, "Wrong Password, or unauthorized user", null, null);
+    }
+    //protected void btnDownload_Click(object sender, EventArgs e)
+    //{
+    //    //System.Diagnostics.Debugger.Break();
+    //    mdlPopupApproveValidate.Show();
+    //}
+
+    #endregion
+}

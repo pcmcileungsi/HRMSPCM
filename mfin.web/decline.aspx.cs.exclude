@@ -1,0 +1,144 @@
+﻿using System;
+using System.Configuration;
+using System.Data;
+using System.Collections;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+
+using MFin.DataAccessLayer.Security;
+using MFin.DataAccessLayer.Master;
+
+public partial class decline : System.Web.UI.Page 
+{
+    //protected string localid;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!Page.IsPostBack) 
+        { 
+            //Shared.BindDDLCompany(ddlCompany); 
+
+            //ProcessDeclineCA();
+        }
+    }
+
+    #region Decline
+    private void ProcessDeclineCA()
+    {
+        LSchangeaoDAL _dalLSchangeao = null;
+        Hashtable _htParameters = new Hashtable();
+
+        try
+        {
+            _dalLSchangeao = new LSchangeaoDAL();
+            _htParameters["p_sys_emailprocessid"] = Request.Params["id"].ToString();
+            _htParameters["p_descs"] = txtDescs.Text;
+            //Utility.ApplyDefaultProp(_htParameters);
+
+           _dalLSchangeao.DeclineViaMail(_htParameters);
+
+            lblDescs.Text = "Success Decline";
+        }
+        catch (Exception ex)
+        {
+            lblDescs.Text = "Failed Decline";
+
+            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null);
+        }
+    }
+
+    private void ProcessDeclineSIDR()
+    {
+        SIDRequestDAL _dalSIDRequestDAL = null;
+        Hashtable _htParameters = new Hashtable();
+
+        try
+        {
+            _dalSIDRequestDAL = new SIDRequestDAL();
+            _htParameters["p_sys_emailprocessid"] = Request.Params["id"].ToString();
+            _htParameters["p_descs"] = txtDescs.Text;
+            //Utility.ApplyDefaultProp(_htParameters);
+
+            _dalSIDRequestDAL.DeclineViaMail(_htParameters);
+
+            lblDescs.Text = "Success Decline";
+        }
+        catch (Exception ex)
+        {
+            lblDescs.Text = "Failed Decline";
+
+            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null);
+        }
+    }
+
+    private void ProcessDeclineSIDC()
+    {
+        SIDSupervisorDAL _dalSIDSupervisorDAL = null;
+        Hashtable _htParameters = new Hashtable();
+
+        try
+        {
+            _dalSIDSupervisorDAL = new SIDSupervisorDAL();
+            _htParameters["p_sys_emailprocessid"] = Request.Params["id"].ToString();
+            _htParameters["p_descs"] = txtDescs.Text;
+            //Utility.ApplyDefaultProp(_htParameters);
+
+            _dalSIDSupervisorDAL.DeclineViaMail(_htParameters);
+
+            lblDescs.Text = "Success Decline";
+        }
+        catch (Exception ex)
+        {
+            lblDescs.Text = "Failed Decline";
+
+            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null);
+        }
+    }
+
+    #endregion
+
+    #region toolbar
+
+    protected void btnDecline_Click(object sender, EventArgs e)
+    {
+        SysEmailProcessDAL _dalSysEmailProcessDAL = null;
+        Hashtable _htParameters = new Hashtable();
+
+        try
+        {
+            _dalSysEmailProcessDAL = new SysEmailProcessDAL();
+            _htParameters["p_sys_emailprocessid"] = Request.Params["id"].ToString();
+
+            DataTable _dt = _dalSysEmailProcessDAL.GetRow(_htParameters);
+            DataRow _dr = _dt.Rows[0];
+
+            string module = _dr["MODULE"].ToString().Trim();
+
+            if (module.Equals("CA"))
+            {
+                ProcessDeclineCA();
+            }
+            else if (module.Equals("SIDR"))
+            {
+                ProcessDeclineSIDR();
+            }
+            else if (module.Equals("SIDC"))
+            {
+                ProcessDeclineSIDC();
+            }
+        }
+        catch (Exception ex)
+        {
+            lblDescs.Text = "Failed Approve";
+
+            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null);
+        }
+        
+
+    }
+    #endregion
+}

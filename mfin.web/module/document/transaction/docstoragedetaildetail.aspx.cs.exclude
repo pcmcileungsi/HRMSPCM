@@ -1,0 +1,188 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+
+using MFin.DataAccessLayer.Master;
+using MFin.DataAccessLayer.Security;
+
+using System.IO;
+
+public partial class module_document_transaction_docstoragedetaildetail : BasePage
+{
+    private static string _RoleCode = "P000016";
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        LoadInit();
+
+        if (!Page.IsPostBack)
+        {
+            CheckRole(_RoleCode);
+            if (Request.Params["action"].Equals("edt"))
+            {
+                LoadData();
+            }
+
+            txtLsagree.Text = Request.Params["lsagree"];
+            txtLessee.Text = Request.Params["lessee"];
+        }
+    }
+
+    private void LoadData()
+    {
+        DocStorageDAL _dalDocStorage = null;
+        Hashtable _htParameters = new Hashtable();
+
+        try
+        {
+            _dalDocStorage = new DocStorageDAL();
+            _htParameters["p_doc_storagedid"] = Request.Params["id"].ToString();
+
+            DataTable _dt = _dalDocStorage.GetRowDetail(_htParameters);
+            MPF23.Shared.Mapper.DBToUI.Map(pnlBody.Controls, _dt.Rows[0]);
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null);
+        }
+    }
+
+    private void SaveData()
+    {
+        if (FileUpload.HasFile)
+        {
+            string filename, saveAsFileName, branchcode,userid ;
+            string extension;
+            int ctr;
+            int iNextID = 0;
+            filename = FileUpload.FileName.ToString();
+            string[] s = filename.Split('.');
+            extension = s[s.Length - 1];
+            branchcode =  Session[SessionKey.CURRENT_ENTITY_SESSION_KEY].ToString().Trim();
+            userid = Utility.CurrentUID.Trim();
+            saveAsFileName = "File" + branchcode + userid + DateTime.Now.ToString("yyyyMMddhhmmss") + "." + extension;
+
+            string contenttype = FileUpload.PostedFile.ContentType.ToString();
+            int filesize = FileUpload.PostedFile.ContentLength;
+            try
+            {
+
+                if (extension.ToLower() == "pdf" || extension.ToLower() == "jpg" || extension.ToLower() == "png"
+                    || extension.ToLower() == "jpeg" || extension.ToLower() == "bmp"
+                    || extension.ToLower() == "tif" || extension.ToLower() == "tiff" )
+                {
+
+                    FileUpload.SaveAs(Server.MapPath(@"../../../temp/upload/") + saveAsFileName);
+
+                    DocStorageDAL _dalDocStorage = null;
+                    Hashtable _htParameters = new Hashtable();
+
+                    //System.Diagnostics.Debugger.Break();
+                    
+                    _dalDocStorage = new DocStorageDAL();
+                    _htParameters = new Hashtable();
+
+                    _htParameters["p_lsagree"] = txtLsagree.Text;
+                    _htParameters["p_c_code"] = Session[SessionKey.CURRENT_ENTITY_SESSION_KEY].ToString().Trim();
+
+                    _htParameters["p_name"] = filename;
+                    _htParameters["p_content_type"] = contenttype;
+                    _htParameters["p_size"] = filesize;
+                    _htParameters["p_savename"] = saveAsFileName;
+                    //_htParameters["p_url"] = myData;
+
+                    MPF23.Shared.Mapper.UIToDB.Map(pnlBody.Controls, _htParameters);
+                    //_htParameters["p_provisi"] = Decimal.Parse(txtProvisi.Text.ToString().Trim());
+                    Utility.ApplyDefaultProp(_htParameters);
+
+                    if (Request.Params["action"] == "add")
+                    {
+                        _dalDocStorage.InsertDetail(_htParameters, ref iNextID);
+                    }
+                    else
+                    {
+                        _htParameters["p_doc_storagedid"] = Int32.Parse(Request.Params["id"].ToString());
+                        _dalDocStorage.UpdateDetail(_htParameters);
+                        iNextID = Int32.Parse(Request.Params["id"].ToString());
+                    }
+
+                    Utility.ShowMessageBox(this, Utility.SAVE_DATA_SUCCESS_MESSAGE, null, "docstoragedetaildetail.aspx?action=edt&id=" + iNextID.ToString() +
+                                  "&docstoragehid=" + Request.Params["docstoragehid"] +
+                                  "&lsagree=" + txtLsagree.Text +
+                                  "&lessee=" + txtLessee.Text);
+                
+                }
+                else
+                {
+                    throw new Exception("Error PDF Format. Format must be PDF (.pdf, .jpeg, .jpg, .png, .bmp, .tif, .tiff).");
+                }
+            }
+            catch (Exception ex)
+            {
+                Utility.ShowMessageBox(this, Utility.SAVE_DATA_FAIL_MESSAGE, ex, null);
+            }
+        }
+    }
+
+    #region Toolbar
+    protected void btnBack_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("docstoragedetail.aspx?action=edt&id=" + Request.Params["docstoragehid"] +
+                           "&page=1");
+                           
+    }
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        SaveData();
+    }
+    #endregion
+
+    #region lookup
+    protected void btnSearchDocType_Click(object sender, EventArgs e)
+    {
+        Shared.BindDocType(txtSearchDocType.Text, gvwListDocType);
+    }
+    protected void btnLookUpDocType_Click(object sender, EventArgs e)
+    {
+        Shared.BindDocType(txtSearchDocType.Text, gvwListDocType);
+        upnDetailGetDocType.Update();
+        mdlPopupGetDocType.Show();
+    }
+    protected void gvwListDocType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //System.Diagnostics.Debugger.Break();
+        txtDocType.Text = gvwListDocType.SelectedDataKey[0].ToString().Trim();
+        txtDocDescs.Text = gvwListDocType.SelectedDataKey[1].ToString().Trim();
+
+        updDocTypeInfo.Update();
+        upnDetailGetDocType.Update();
+        mdlPopupGetDocType.Hide();
+    }
+    protected void gvwListDocType_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            e.Row.Attributes.Add("OnMouseOver", "this.style.backgroundColor='#B0C4DE';this.style.cursor='hand'");
+
+            if (e.Row.RowState == DataControlRowState.Alternate)
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#FFFFFF';");
+            else
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#F7F6F3';");
+
+            //e.Row.Attributes.Add("OnClick", "javascript:__doPostBack('ctl00$ContentPlaceHolder1$gvwListLessee','Select$" + e.Row.RowIndex.ToString() + "')");
+        }
+    }
+    protected void gvwListDocType_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvwListDocType.PageIndex = e.NewPageIndex;
+        Shared.BindDocType(txtSearchDocType.Text, gvwListDocType);
+    }
+
+    #endregion
+}

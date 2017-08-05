@@ -1,0 +1,201 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/mfin.master" AutoEventWireup="true" CodeFile="docstoragedetaildetail.aspx.cs" 
+    Inherits="module_document_transaction_docstoragedetaildetail" Title="Untitled Page" %>
+<%@ Register Assembly="MPF23.XUI" Namespace="MPF23.XUI.Control" TagPrefix="cc1" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc2" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="cphhd" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="cphbd" Runat="Server">
+    <div>
+        <table id="tblHeader" cellpadding="3px" cellspacing="0px" class="detail-header-table">
+            <tr>
+                <td colspan="2" style="border-bottom: solid 1px #dedede">
+                    <span class="search-header">Detail Document</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Button ID="btnBack" runat="server" CausesValidation="false" CssClass="back"
+                        Text="Back" OnClick="btnBack_Click" />
+                    <cc1:XUIButton RoleCode="B000045" ID="btnSave" runat="server" CssClass="save" Text="Save" OnClick="btnSave_Click" />
+                </td>
+            </tr>
+        </table>
+        <asp:UpdatePanel ID="pnlBody" runat="server">
+            <ContentTemplate>
+                <table id="tblBody" cellpadding="4px" cellspacing="0px" width="100%" border="0px">
+                    <tr style="display: none">
+                        <td width="20%">
+                            <span>ID</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">
+                            <cc1:XUILabel ID="lblDocStoragedid" runat="server" DataType="Integer" DBColumnName="DOC_STORAGEDID"
+                                BindType="Both" SPParameterName="p_doc_storagedid" Text="0"></cc1:XUILabel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                            <span>Agreement No.</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">
+                            <asp:TextBox ID="txtLsagree" runat="server" Enabled="false" Width="160px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                            <span>Lessee</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">
+                            <asp:TextBox ID="txtLessee" runat="server" Enabled="false" Width="160px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>Document Type</span>
+                        </td>
+                        <td><span>:</span></td>
+                        <td>
+                            <asp:UpdatePanel ID="updDocTypeInfo" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <cc1:XUILabel ID="txtDocType" runat="server" DataType="String" DBColumnName="DOC_TYPE"
+                                        BindType="Both" SPParameterName="p_doc_type"/>
+                                    <asp:ImageButton ID="btnLookUpDocType" runat="server" ImageUrl="~/img/im4_toolbar_search.png"
+                                        ImageAlign="AbsMiddle" CausesValidation="false" OnClick="btnLookUpDocType_Click" />
+                                    <cc1:XUITextBox ID="txtDocDescs" runat="server" DataType="String" BindType="DBToUIOnly"
+                                        DBColumnName="DOC_DESCS" SPParameterName="p_doc_descs" Enabled="False" MaxLength="30" Width="294px">
+                                    </cc1:XUITextBox>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align:text-top;">
+                            <span>Description</span>
+                        </td>
+                        <td style="vertical-align:text-top;"><span>:</span></td>
+                        <td>
+                            <cc1:XUITextBox ID="txtDescs" runat="server" DataType="String" BindType="Both"
+                                DBColumnName="DESCS" SPParameterName="p_descs" TextMode="MultiLine" Rows="5" Width="320px"
+                                MaxLength="100"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>File Upload</span>
+                        </td>
+                        <td><span>:</span></td>
+                        <td>
+                            <asp:FileUpload ID="FileUpload" runat="server" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                            <span>File Name</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">
+                            <cc1:XUITextBox ID="txtName" runat="server" DataType="String" DBColumnName="NAME"
+                                BindType="DBToUIOnly" SPParameterName="p_name" Enabled="false" TextMode="MultiLine" Rows="5" Width="320px" 
+                                MaxLength="200">
+                            </cc1:XUITextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                            <span>Content Type</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">
+                            <cc1:XUITextBox ID="txtContentType" runat="server" DataType="String" DBColumnName="CONTENT_TYPE"
+                                BindType="DBToUIOnly" SPParameterName="p_content_type" Enabled="false" MaxLength="50" Width="294px">
+                            </cc1:XUITextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                            <span>Size</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">
+                            <cc1:XUITextBox ID="txtSize" runat="server" DataType="Number" Format="N0" DBColumnName="SIZE"
+                            BindType="DBToUIOnly" SPParameterName="p_size" Text="0" Enabled = "False"></cc1:XUITextBox>
+                        </td>
+                    </tr>
+                </table>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
+    <asp:Panel ID="pnlPopupGetDocType" runat="server" Width="600px" Style="display: block;">
+        <asp:Button Style="display: none" ID="btnShowPopupGetDocType" runat="server"></asp:Button>
+        <cc2:ModalPopupExtender ID="mdlPopupGetDocType" runat="server" BehaviorID="mdlPopupGetDocType"
+            PopupControlID="pnlPopupGetDocType" TargetControlID="btnShowPopupGetDocType" BackgroundCssClass="modalBackground">
+        </cc2:ModalPopupExtender>
+        <cc2:DragPanelExtender ID="DragPanelExtender2" runat="server" TargetControlID="pnlPopupGetDocType"
+            DragHandleID="pnlPopupGetDocTypeHeader" />
+            <div class="container">
+                <asp:Panel ID="pnlPopupGetDocTypeHeader" runat="server" CssClass="header">
+                    <asp:Label ID="lblHeader" runat="server" CssClass="msg" Text="DocType" />
+                    <asp:LinkButton ID="btnClose" runat="server" CssClass="close" OnClientClick="$find('mdlPopupGetDocType').hide(); return false;" />
+                </asp:Panel>
+                <asp:UpdatePanel ID="upnDetailGetDocType" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <div class="header" align="right">
+                            <asp:Panel ID="pnlSearchDocType" runat="server" DefaultButton="btnSearchDocType">
+                                <asp:TextBox ID="txtSearchDocType" runat="server"></asp:TextBox>
+                                <asp:Button ID="btnSearchDocType" OnClick="btnSearchDocType_Click" runat="server" Text="Search"
+                                    CssClass="search" CausesValidation="false"></asp:Button>
+                            </asp:Panel>
+                        </div>
+                        <div class="body">
+                            <asp:GridView ID="gvwListDocType" runat="server" OnSelectedIndexChanged="gvwListDocType_SelectedIndexChanged"
+                                DataKeyNames="CODE,DESCS" AutoGenerateColumns="False" EmptyDataText="There is no data."
+                                OnRowCreated="gvwListDocType_RowCreated" GridLines="None" AllowPaging="true" PageSize="10"
+                                OnPageIndexChanging="gvwListDocType_PageIndexChanging" CssClass="mGrid" PagerStyle-CssClass="pgr"
+                                AlternatingRowStyle-CssClass="alt">
+                                <Columns>
+                                    <asp:TemplateField>
+                                        <HeaderTemplate>
+                                            <span>No</span>
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <%# Container.DataItemIndex + 1 %>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="CODE" HeaderText="Document Type">
+                                        <ItemStyle Width="20%" HorizontalAlign="Center"/>
+                                    </asp:BoundField>
+					                <asp:BoundField DataField="DESCS" HeaderText="Document Description">
+                                 	    <ItemStyle Width="80%" HorizontalAlign="Center" />
+                                    </asp:BoundField>
+                                    <asp:CommandField ShowSelectButton="True" SelectText="Choose"></asp:CommandField>
+                                </Columns>
+                            </asp:GridView>
+                        </div>
+                    <div class="footer">
+                        <asp:Button ID="btnCloseDocType" OnClientClick="$find('mdlPopupGetDocType').hide(); return false;"
+                            CssClass="void" runat="server" Text="Close" CausesValidation="false"></asp:Button>
+                    </div>
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="btnSearchDocType" EventName="Click" />
+                </Triggers>
+            </asp:UpdatePanel>
+        </div>
+    </asp:Panel>
+</asp:Content>
+

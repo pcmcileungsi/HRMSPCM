@@ -1,0 +1,5 @@
+E:\Source_TFIS\TOSSA\MFin.DataAccessLayer\bin\Release\MFin.DataAccessLayer.dll
+E:\Source_TFIS\TOSSA\MFin.DataAccessLayer\bin\Release\MFin.DataAccessLayer.pdb
+E:\Source_TFIS\TOSSA\MFin.DataAccessLayer\obj\Release\MFin.DataAccessLayer.csprojResolveAssemblyReference.cache
+E:\Source_TFIS\TOSSA\MFin.DataAccessLayer\obj\Release\MFin.DataAccessLayer.dll
+E:\Source_TFIS\TOSSA\MFin.DataAccessLayer\obj\Release\MFin.DataAccessLayer.pdb
