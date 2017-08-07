@@ -22,6 +22,7 @@ public partial class module_sysadmin_master_ukerlist : BasePage
         {
             CheckRole(_RoleCode);
             BindGrid();
+            BindMajelis();
         }
     }
 
@@ -39,23 +40,46 @@ public partial class module_sysadmin_master_ukerlist : BasePage
 
     private void BindGrid()
     {
-        LStblBranchDAL _dalLStblBranchDAL = null;
+        MST_UNIT_KERJA_DAL _dalMST_UNIT_KERJA_DAL = null;
         Hashtable _htParameters = null;
 
         try
         {
-            _dalLStblBranchDAL = new LStblBranchDAL();
+            _dalMST_UNIT_KERJA_DAL = new MST_UNIT_KERJA_DAL();
             _htParameters = new Hashtable();
 
-            _htParameters["p_keywords"] = txtSearch.Text;
+            _htParameters["p_keywords"] = ddlMajelis.SelectedValue;
 
-            gvwList.DataSource = _dalLStblBranchDAL.GetRows(_htParameters);
+            gvwList.DataSource = _dalMST_UNIT_KERJA_DAL.GetRows(_htParameters);
             gvwList.DataBind();
         }
         catch (Exception ex)
         {
             Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null, null);
         }
+    }
+
+    private void BindMajelis()
+    {
+        MST_UNIT_KERJA_DAL _dalMST_UNIT_KERJA_DAL = null;
+        Hashtable _htParameters = null;  
+       
+        try
+        {
+            _dalMST_UNIT_KERJA_DAL = new MST_UNIT_KERJA_DAL();
+            _htParameters = new Hashtable();
+
+            _htParameters["p_keywords"] = "";
+
+            ddlMajelis.DataSource = _dalMST_UNIT_KERJA_DAL.GetRows(_htParameters);
+            ddlMajelis.DataValueField = "KODE";
+            ddlMajelis.DataTextField = "NAMA";
+            ddlMajelis.DataBind();
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null);
+        }     
     }
 
     #region GridView
@@ -68,17 +92,17 @@ public partial class module_sysadmin_master_ukerlist : BasePage
                 Response.Redirect("ukerdtl.aspx?action=edt&id=" + e.CommandArgument);
                 break;
             case "Delete":
-                LStblBranchDAL _dalLStblBranchDAL = null;
+                MST_UNIT_KERJA_DAL _dalMST_UNIT_KERJA_DAL = null;
                 Hashtable _htParameters = null;
 
                 try
                 {
-                    _dalLStblBranchDAL = new LStblBranchDAL();
+                    _dalMST_UNIT_KERJA_DAL = new MST_UNIT_KERJA_DAL();
                     _htParameters = new Hashtable();
 
-                    _htParameters["p_ls_tblbranchid"] = e.CommandArgument.ToString();
+                    _htParameters["p_ID"] = e.CommandArgument.ToString();
 
-                    _dalLStblBranchDAL.Delete(_htParameters);
+                    _dalMST_UNIT_KERJA_DAL.Delete(_htParameters);
                     this.BindGrid();
                     Response.Redirect("ukerlist.aspx");
 

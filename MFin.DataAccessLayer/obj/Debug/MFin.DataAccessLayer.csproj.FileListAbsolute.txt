@@ -72,8 +72,8 @@ E:\AppAnas\HRMSPCM\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
 E:\AppAnas\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.csprojResolveAssemblyReference.cache
 E:\AppAnas\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
 E:\AppAnas\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
-D:\STTM\Project\HRMSPCM\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
-D:\STTM\Project\HRMSPCM\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
-D:\STTM\Project\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.csprojResolveAssemblyReference.cache
-D:\STTM\Project\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
-D:\STTM\Project\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+D:\STTM\New folder\HRMSPCM\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+D:\STTM\New folder\HRMSPCM\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+D:\STTM\New folder\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.csprojResolveAssemblyReference.cache
+D:\STTM\New folder\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+D:\STTM\New folder\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb

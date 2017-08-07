@@ -31,8 +31,8 @@
                             <span>:</span>
                         </td>
                         <td width="80%">
-                            <cc1:XUILabel ID="lblBRANCH" runat="server" DataType="Integer" DBColumnName="LS_TBLBRANCHID"
-                                BindType="Both" SPParameterName="p_ls_tblbranchid" Text="0"></cc1:XUILabel>
+                            <cc1:XUILabel ID="lblID" runat="server" DataType="String" DBColumnName="ID"
+                                BindType="Both" SPParameterName="p_ID" Text="0"></cc1:XUILabel>
                         </td>
                     </tr>
                     <tr>
@@ -43,9 +43,9 @@
                             <span>:</span>
                         </td>
                         <td width="80%">
-                            <cc1:XUITextBox ID="txtCcode" runat="server" DataType="String" DBColumnName="BranchCode"
-                                BindType="Both" SPParameterName="p_branch_code" MaxLength="5" Width="50px"></cc1:XUITextBox>
-                            <asp:RequiredFieldValidator ID="ReqCcode" runat="server" ControlToValidate="txtCcode"
+                            <cc1:XUITextBox ID="txtCKode" runat="server" DataType="String" DBColumnName="KODE"
+                                BindType="Both" SPParameterName="p_KODE" MaxLength="5" Width="50px"></cc1:XUITextBox>
+                            <asp:RequiredFieldValidator ID="ReqCKode" runat="server" ControlToValidate="txtCKode"
                                 ErrorMessage="* Harus Diisi" />
                         </td>
                     </tr>
@@ -57,9 +57,9 @@
                             <span>:</span>
                         </td>
                         <td width="80%">
-                            <cc1:XUITextBox ID="txtCname" runat="server" DataType="String" DBColumnName="BranchName"
-                                BindType="Both" SPParameterName="p_branch_name" MaxLength="50" Width="120px"></cc1:XUITextBox>
-                             <asp:RequiredFieldValidator ID="ReqtxtCname" runat="server" ControlToValidate="txtCname"
+                            <cc1:XUITextBox ID="txtCNama" runat="server" DataType="String" DBColumnName="NAMA"
+                                BindType="Both" SPParameterName="p_NAMA" MaxLength="100" Width="120px"></cc1:XUITextBox>
+                             <asp:RequiredFieldValidator ID="ReqtxtCNama" runat="server" ControlToValidate="txtCNama"
                                 ErrorMessage="* Harus Diisi" />
                         </td>
                     </tr>
@@ -71,8 +71,8 @@
                             <span>:</span>
                         </td>
                         <td width="80%">
-                            <cc1:XUITextBox ID="txtCaddress" runat="server" DataType="String" DBColumnName="BranchAddress"
-                                BindType="Both" SPParameterName="p_branch_address" MaxLength="200" Width="400px"></cc1:XUITextBox>
+                            <cc1:XUITextBox ID="txtCAlamat" runat="server" DataType="String" DBColumnName="ALAMAT"
+                                BindType="Both" SPParameterName="p_ALAMAT" MaxLength="200" Width="400px"></cc1:XUITextBox>
                         </td>
                     </tr>
                     <tr>
@@ -83,8 +83,8 @@
                             <span>:</span>
                         </td>
                         <td width="80%">
-                            <cc1:XUITextBox ID="txtCphone" runat="server" DataType="String" DBColumnName="BranchPhone"
-                                BindType="Both" SPParameterName="p_branch_phone" MaxLength="30" Width="100px"></cc1:XUITextBox>
+                            <cc1:XUITextBox ID="txtCTelp" runat="server" DataType="String" DBColumnName="TELP"
+                                BindType="Both" SPParameterName="p_TELP" MaxLength="20" Width="100px"></cc1:XUITextBox>
                         </td>
                     </tr>
                     <tr>
@@ -95,8 +95,56 @@
                             <span>:</span>
                         </td>
                         <td width="80%">
-                            <cc1:XUITextBox ID="txtCfax" runat="server" DataType="String" DBColumnName="BranchFax"
-                                BindType="Both" SPParameterName="p_branch_fax" MaxLength="30" Width="100px"></cc1:XUITextBox>
+                            <cc1:XUITextBox ID="txtCFax" runat="server" DataType="String" DBColumnName="FAX"
+                                BindType="Both" SPParameterName="p_FAX" MaxLength="20" Width="100px"></cc1:XUITextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                            <span>Email</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">
+                            <cc1:XUITextBox ID="txtCEmail" runat="server" DataType="String" DBColumnName="EMAIL"
+                                BindType="Both" SPParameterName="p_EMAIL" MaxLength="100" Width="100px"></cc1:XUITextBox>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td width="20%">
+                            <span>KA Unit</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">
+                            <cc1:XUITextBox ID="txtCKaUnit" runat="server" DataType="String" DBColumnName="KA_UNIT"
+                                BindType="Both" SPParameterName="p_KA_UNIT" MaxLength="30" Width="100px"></cc1:XUITextBox>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td width="20%">
+                            <span>Group</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">
+                            <cc1:XUITextBox ID="txtCGroup" runat="server" DataType="String" DBColumnName="GROUP"
+                                BindType="Both" SPParameterName="p_GROUP" MaxLength="1" Width="100px"></cc1:XUITextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                            <span>Kode Majelis</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">
+                            <cc1:XUITextBox ID="txtCKodeMajelis" runat="server" DataType="String" DBColumnName="KODE_MAJELIS"
+                                BindType="Both" SPParameterName="p_KODE_MAJELIS" MaxLength="5" Width="100px"></cc1:XUITextBox>
                         </td>
                     </tr>
                 </table>

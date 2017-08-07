@@ -28,18 +28,18 @@ public partial class module_sysadmin_master_ukerdtl : BasePage
 
     private void LoadData()
     {
-        LStblBranchDAL _dalLSTblBranch = null;
+        MST_UNIT_KERJA_DAL _dalMST_UNIT_KERJA_DAL = null;
         Hashtable _htParameters = null;
 
         try
         {
             //System.Diagnostics.Debugger.Break();
 
-            _dalLSTblBranch = new LStblBranchDAL();
+            _dalMST_UNIT_KERJA_DAL = new MST_UNIT_KERJA_DAL();
             _htParameters = new Hashtable();
 
-            _htParameters["p_ls_tblbranchid"] = Request.Params["id"];
-            DataTable _dt = _dalLSTblBranch.GetRow(_htParameters);
+            _htParameters["p_ID"] = Request.Params["id"];
+            DataTable _dt = _dalMST_UNIT_KERJA_DAL.GetRow(_htParameters);
             MPF23.Shared.Mapper.DBToUI.Map(pnlBody.Controls, _dt.Rows[0]);
         }
         catch (Exception ex)
@@ -50,13 +50,13 @@ public partial class module_sysadmin_master_ukerdtl : BasePage
 
     private void SaveData()
     {
-        LStblBranchDAL _dalLSTblBranch = null;
+        MST_UNIT_KERJA_DAL _dalMST_UNIT_KERJA_DAL = null;
         Hashtable _htParameters = null;
         int iNextID = 0;
 
         try
         {
-            _dalLSTblBranch = new LStblBranchDAL();
+            _dalMST_UNIT_KERJA_DAL = new MST_UNIT_KERJA_DAL();
             _htParameters = new Hashtable();
 
             MPF23.Shared.Mapper.UIToDB.Map(pnlBody.Controls, _htParameters);
@@ -64,12 +64,12 @@ public partial class module_sysadmin_master_ukerdtl : BasePage
 
             if (Request.Params["action"] == "add")
             {
-                _dalLSTblBranch.Insert(_htParameters, ref iNextID);
+                _dalMST_UNIT_KERJA_DAL.Insert(_htParameters, ref iNextID);
             }
             else
             {
-                _dalLSTblBranch.Update(_htParameters);
-                iNextID = Int32.Parse(lblBRANCH.Text);
+                _dalMST_UNIT_KERJA_DAL.Update(_htParameters);
+                iNextID = Int32.Parse(lblID.Text);
             }
 
             Utility.ShowMessageBox(this, Utility.SAVE_DATA_SUCCESS_MESSAGE, null, "ukerdtl.aspx?action=edt&id=" + iNextID.ToString());

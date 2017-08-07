@@ -6,15 +6,15 @@ using MFin.DataAccessLayer.Utility;
 
 namespace MFin.DataAccessLayer.Master
 {
-    public class PcClasDAL
+    public class MST_UNIT_KERJA_DAL
     {
         public void Insert(Hashtable parameters, ref int iNextID)
         {
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
             dbw.ConnectionString = Shared.ConnectionString;
-            if (!dbw.ExecuteSP("sp_pc_clas_insert", parameters, ref iNextID))
+            if (!dbw.ExecuteSP("SP_MST_UNIT_KERJA_INSERT", parameters, ref iNextID))
             {
-                throw new Exception("Fail to execute sp_pc_clas_insert", new Exception(dbw.DBErrorMessage));
+                throw new Exception("Fail to execute SP_MST_UNIT_KERJA_INSERT", new Exception(dbw.DBErrorMessage));
             }
         }
 
@@ -22,9 +22,9 @@ namespace MFin.DataAccessLayer.Master
         {
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
             dbw.ConnectionString = Shared.ConnectionString;
-            if (!dbw.ExecuteSP("sp_pc_clas_update", parameters))
+            if (!dbw.ExecuteSP("SP_MST_UNIT_KERJA_UPDATE", parameters))
             {
-                throw new Exception("Fail to execute sp_pc_clas_update", new Exception(dbw.DBErrorMessage));
+                throw new Exception("Fail to execute SP_MST_UNIT_KERJA_UPDATE", new Exception(dbw.DBErrorMessage));
             }
         }
 
@@ -32,9 +32,9 @@ namespace MFin.DataAccessLayer.Master
         {
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
             dbw.ConnectionString = Shared.ConnectionString;
-            if (!dbw.ExecuteSP("sp_pc_clas_delete", parameters))
+            if (!dbw.ExecuteSP("SP_MST_UNIT_KERJA_DELETE", parameters))
             {
-                throw new Exception("Fail to execute sp_pc_clas_delete", new Exception(dbw.DBErrorMessage));
+                throw new Exception("Fail to execute SP_MST_UNIT_KERJA_DELETE", new Exception(dbw.DBErrorMessage));
             }
         }
 
@@ -43,14 +43,14 @@ namespace MFin.DataAccessLayer.Master
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
             DataSet ds = new DataSet();
             dbw.ConnectionString = Shared.ConnectionString;
-            if (!dbw.ExecuteSP("sp_pc_clas_getrows", parameters, ds))
+            if (!dbw.ExecuteSP("SP_MST_UNIT_KERJA_GETROWS", parameters, ds))
             {
-                throw new Exception("Fail to execute sp_pc_clas_getrows", new Exception(dbw.DBErrorMessage));
+                throw new Exception("Fail to execute SP_MST_UNIT_KERJA_GETROWS", new Exception(dbw.DBErrorMessage));
             }
             else
             {
                 if (ds.Tables.Count <= 0)
-                    throw new Exception("Fail to sp_pc_clas_getrows. No row found.");
+                    throw new Exception("Fail to SP_MST_UNIT_KERJA_GETROWS. No row found.");
                 else
                     return ds.Tables[0];
             }
@@ -61,14 +61,14 @@ namespace MFin.DataAccessLayer.Master
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
             DataSet ds = new DataSet();
             dbw.ConnectionString = Shared.ConnectionString;
-            if (!dbw.ExecuteSP("sp_pc_clas_getrow", parameters, ds))
+            if (!dbw.ExecuteSP("SP_MST_UNIT_KERJA_GETROW", parameters, ds))
             {
-                throw new Exception("Fail to execute sp_pc_clas_getrow", new Exception(dbw.DBErrorMessage));
+                throw new Exception("Fail to execute sp_ls_tblbranch_getrow", new Exception(dbw.DBErrorMessage));
             }
             else
             {
                 if (ds.Tables.Count <= 0)
-                    throw new Exception("Fail to sp_pc_clas_getrow. No row found.");
+                    throw new Exception("Fail to SP_MST_UNIT_KERJA_GETROW. No row found.");
                 else
                     return ds.Tables[0];
             }

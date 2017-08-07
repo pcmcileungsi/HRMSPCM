@@ -1,1 +1,0 @@
-select * from MASTER_ROLE where DESCRIPTION like '%pendidi%'

@@ -16,19 +16,30 @@
                 <cc2:XUIButton ID="btnAdd" runat="server" CssClass="add" Text="Add" OnClick="btnAdd_Click" RoleCode="B100074" />
             </td>
             <td align="right">
-                <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btnSearch">
-                    <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
+                <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btnSearch">              
                     <asp:Button ID="btnSearch" runat="server" CssClass="search" Text="Search" OnClick="btnSearch_Click" />
                 </asp:Panel>
             </td>
         </tr>
     </table>
-    <table id="tblBody" cellpadding="3px" cellspacing="0px" class="search-list-table">
+     <table id="tblBody" cellpadding="3px" cellspacing="0px" class="search-list-table">  
+         <tr>
+                        <td width="20%">
+                            <span>Majelis</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">
+                             <asp:DropDownList ID="ddlMajelis" runat="server" CssClass="DropDownList" Width="20%" AutoPostBack="True">
+                     </asp:DropDownList>
+                        </td>
+                    </tr>     
         <tr>
-            <td>
+            <td colspan="3">
                 <asp:UpdatePanel ID="updMain" UpdateMode="Conditional" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="gvwList" runat="server" AutoGenerateColumns="False" DataKeyNames="LS_TBLBRANCHID"
+                        <asp:GridView ID="gvwList" runat="server" AutoGenerateColumns="False" DataKeyNames="ID"
                             OnSelectedIndexChanged="gvwList_SelectedIndexChanged" EmptyDataText="There is no data."
                             AllowPaging="true" PageSize="10" OnPageIndexChanging="gvwList_PageIndexChanging"
                             OnRowCreated="gvwList_RowCreated" OnRowCommand="gvwList_RowCommand" GridLines="None" CssClass="mGrid" PagerStyle-CssClass="pgr"
@@ -42,21 +53,12 @@
                                         <%# Container.DataItemIndex + 1 %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="BranchCode" HeaderText="Kode">
-                                    <ItemStyle Width="10%" HorizontalAlign="Center" />
+                                <asp:BoundField DataField="KODE" HeaderText="KODE">
+                                    <ItemStyle Width="20%" HorizontalAlign="Center" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="BranchName" HeaderText="Nama">
-                                    <ItemStyle Width="20%" HorizontalAlign="Left" />
-                                </asp:BoundField>
-                                 <asp:BoundField DataField="BranchAddress" HeaderText="Alamat">
-                                    <ItemStyle Width="40%" HorizontalAlign="Left" />
-                                </asp:BoundField>
-                                 <asp:BoundField DataField="BranchPhone" HeaderText="No.Telepon">
-                                    <ItemStyle Width="20%" HorizontalAlign="Left" />
-                                </asp:BoundField>
-                                 <asp:BoundField DataField="BranchFax" HeaderText="No.Fax">
-                                    <ItemStyle Width="20%" HorizontalAlign="Left" />
-                                </asp:BoundField>
+                                <asp:BoundField DataField="NAMA" HeaderText="UNIT KERJA">
+                                    <ItemStyle Width="80%" HorizontalAlign="Left" />
+                                </asp:BoundField>                                
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <asp:ImageButton ID="btnEdit" runat="server" CausesValidation="False" CommandName="Edit"
