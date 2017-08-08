@@ -77,3 +77,8 @@ D:\STTM\New folder\HRMSPCM\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.p
 D:\STTM\New folder\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.csprojResolveAssemblyReference.cache
 D:\STTM\New folder\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
 D:\STTM\New folder\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb
+D:\STTM\HRMSPCM\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.dll
+D:\STTM\HRMSPCM\MFin.DataAccessLayer\bin\Debug\MFin.DataAccessLayer.pdb
+D:\STTM\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.csprojResolveAssemblyReference.cache
+D:\STTM\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.dll
+D:\STTM\HRMSPCM\MFin.DataAccessLayer\obj\Debug\MFin.DataAccessLayer.pdb

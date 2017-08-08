@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Untitled Page" Language="C#" MasterPageFile="~/mfin.master" AutoEventWireup="true" CodeFile="ukerlist.aspx.cs" Inherits="module_sysadmin_master_ukerlist" %>
+﻿<%@ Page Title="Untitled Page" Language="C#" MasterPageFile="~/mfin.master" AutoEventWireup="true" CodeFile="majelislist.aspx.cs" Inherits="module_sysadmin_master_majelislist" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="MPF23.XUI" Namespace="MPF23.XUI.Control" TagPrefix="cc2" %>
 
@@ -8,39 +8,28 @@
     <table id="tblHeader" cellpadding="3px" cellspacing="0px" class="search-header-table">
         <tr>
             <td colspan="2" style="border-bottom: solid 1px #dedede">
-                <span class="search-header">List Unit Kerja</span>
+                <span class="search-header">List Majelis</span>
             </td>
         </tr>
         <tr>
             <td>
-                <cc2:XUIButton ID="btnAdd" runat="server" CssClass="add" Text="Add" OnClick="btnAdd_Click" RoleCode="B100080" />
+                <cc2:XUIButton ID="btnAdd" runat="server" CssClass="add" Text="Add" OnClick="btnAdd_Click" RoleCode="B100074" />
             </td>
             <td align="right">
-                <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btnSearch">              
+                <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btnSearch">    
+                     <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>          
                     <asp:Button ID="btnSearch" runat="server" CssClass="search" Text="Search" OnClick="btnSearch_Click" />
                 </asp:Panel>
             </td>
         </tr>
     </table>
      <table id="tblBody" cellpadding="3px" cellspacing="0px" class="search-list-table">  
-         <tr>
-                        <td width="20%">
-                            <span>Majelis</span>
-                        </td>
-                        <td>
-                            <span>:</span>
-                        </td>
-                        <td width="80%">
-                             <asp:DropDownList ID="ddlMajelis" runat="server" CssClass="DropDownList" Width="20%" AutoPostBack="True">
-                     </asp:DropDownList>
-                        </td>
-                    </tr>     
-        <tr>
-            <td colspan="3">
+       <tr>
+            <td>
                 <asp:UpdatePanel ID="updMain" UpdateMode="Conditional" runat="server">
                     <ContentTemplate>
                         <asp:GridView ID="gvwList" runat="server" AutoGenerateColumns="False" DataKeyNames="ID"
-                            OnSelectedIndexChanged="gvwList_SelectedIndexChanged" EmptyDataText="There is no data."
+                             EmptyDataText="There is no data."
                             AllowPaging="true" PageSize="10" OnPageIndexChanging="gvwList_PageIndexChanging"
                             OnRowCreated="gvwList_RowCreated" OnRowCommand="gvwList_RowCommand" GridLines="None" CssClass="mGrid" PagerStyle-CssClass="pgr"
                             AlternatingRowStyle-CssClass="alt">
@@ -56,7 +45,7 @@
                                 <asp:BoundField DataField="KODE" HeaderText="KODE">
                                     <ItemStyle Width="20%" HorizontalAlign="Center" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="NAMA" HeaderText="UNIT KERJA">
+                                <asp:BoundField DataField="NAMA" HeaderText="MAJELIS">
                                     <ItemStyle Width="80%" HorizontalAlign="Left" />
                                 </asp:BoundField>                                
                                 <asp:TemplateField>

@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <td>
-                <cc2:XUIButton ID="btnAdd" runat="server" CssClass="add" Text="Add" OnClick="btnAdd_Click" RoleCode="B100062" />
+                <cc2:XUIButton ID="btnAdd" runat="server" CssClass="add" Text="Add" OnClick="btnAdd_Click" RoleCode="B100068" />
             </td>
             <td align="right">
                 <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
@@ -42,14 +42,14 @@
                                         <%# Container.DataItemIndex + 1 %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="C_CODE" HeaderText="Kode">
-                                    <ItemStyle Width="15%" HorizontalAlign="center" />
+                                <asp:BoundField DataField="C_CODE" HeaderText="KODE">
+                                    <ItemStyle Width="10%" HorizontalAlign="center" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="C_NAME" HeaderText="Nama Instansi">
+                                <asp:BoundField DataField="C_NAME" HeaderText="INSTANSI">
                                     <ItemStyle Width="50%" HorizontalAlign="Left" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="C_NPWP" HeaderText="NPWP">
-                                    <ItemStyle Width="35%" HorizontalAlign="Center" />
+                                <asp:BoundField DataField="C_ADDRESS1" HeaderText="ALAMAT">
+                                    <ItemStyle Width="40%" HorizontalAlign="Center" />
                                 </asp:BoundField>
                                 <asp:TemplateField>
                                     <ItemTemplate>

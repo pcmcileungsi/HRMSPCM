@@ -11,10 +11,9 @@ using System.Web.UI.WebControls.WebParts;
 
 using MFin.DataAccessLayer.Master;
 
-public partial class module_sysadmin_master_ukerlist : BasePage
+public partial class module_sysadmin_master_majelislist : BasePage
 {
-    //tes
-    private static string _RoleCode = "B100079";
+    private static string _RoleCode = "B100073";
     protected void Page_Load(object sender, EventArgs e)
     {
         LoadInit();
@@ -22,8 +21,7 @@ public partial class module_sysadmin_master_ukerlist : BasePage
         if (!Page.IsPostBack)
         {
             CheckRole(_RoleCode);
-            BindGrid();
-            BindMajelis();
+            BindGrid();           
         }
     }
 
@@ -31,7 +29,7 @@ public partial class module_sysadmin_master_ukerlist : BasePage
     #region Toolbar
     protected void btnAdd_Click(object sender, EventArgs e)
     {
-        Response.Redirect("ukerdtl.aspx?action=add");
+        Response.Redirect("majelisdtl.aspx?action=add");
     }
     protected void btnSearch_Click(object sender, EventArgs e)
     {
@@ -41,47 +39,24 @@ public partial class module_sysadmin_master_ukerlist : BasePage
 
     private void BindGrid()
     {
-        MST_UNIT_KERJA_DAL _dalMST_UNIT_KERJA_DAL = null;
+        MST_MAJELIS_DAL _dalMST_MAJELIS = null;
         Hashtable _htParameters = null;
 
         try
         {
-            _dalMST_UNIT_KERJA_DAL = new MST_UNIT_KERJA_DAL();
+            _dalMST_MAJELIS = new MST_MAJELIS_DAL();
             _htParameters = new Hashtable();
 
-            _htParameters["p_keywords"] = ddlMajelis.SelectedValue;
+            _htParameters["p_keywords"] = txtSearch.Text;
 
-            gvwList.DataSource = _dalMST_UNIT_KERJA_DAL.GetRows(_htParameters);
+            gvwList.DataSource = _dalMST_MAJELIS.GetRows(_htParameters);
             gvwList.DataBind();
         }
         catch (Exception ex)
         {
             Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null, null);
         }
-    }
-
-    private void BindMajelis()
-    {
-        MST_MAJELIS_DAL _dalMST_MAJELIS = null;
-        Hashtable _htParameters = null;  
-       
-        try
-        {
-            _dalMST_MAJELIS = new MST_MAJELIS_DAL();
-            _htParameters = new Hashtable();
-
-            _htParameters["p_keywords"] = "";
-
-            ddlMajelis.DataSource = _dalMST_MAJELIS.GetRows(_htParameters);
-            ddlMajelis.DataValueField = "KODE";
-            ddlMajelis.DataTextField = "NAMA";
-            ddlMajelis.DataBind();
-        }
-        catch (Exception ex)
-        {
-            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null);
-        }     
-    }
+    }    
 
     #region GridView
 
@@ -90,22 +65,22 @@ public partial class module_sysadmin_master_ukerlist : BasePage
         switch (e.CommandName)
         {
             case "Edit":
-                Response.Redirect("ukerdtl.aspx?action=edt&id=" + e.CommandArgument);
+                Response.Redirect("majelisdtl.aspx?action=edt&id=" + e.CommandArgument);
                 break;
             case "Delete":
-                MST_UNIT_KERJA_DAL _dalMST_UNIT_KERJA_DAL = null;
+                MST_MAJELIS_DAL _dalMST_MAJELIS = null;
                 Hashtable _htParameters = null;
 
                 try
                 {
-                    _dalMST_UNIT_KERJA_DAL = new MST_UNIT_KERJA_DAL();
+                    _dalMST_MAJELIS = new MST_MAJELIS_DAL();
                     _htParameters = new Hashtable();
 
                     _htParameters["p_ID"] = e.CommandArgument.ToString();
 
-                    _dalMST_UNIT_KERJA_DAL.Delete(_htParameters);
+                    _dalMST_MAJELIS.Delete(_htParameters);
                     this.BindGrid();
-                    Response.Redirect("ukerlist.aspx");
+                    Response.Redirect("majelislist.aspx");
 
                 }
                 catch (Exception ex)
@@ -115,11 +90,7 @@ public partial class module_sysadmin_master_ukerlist : BasePage
                 break;
         }
     }
-    protected void gvwList_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        //Response.Redirect("lstblroundingdetail.aspx?action=edt&id=" + gvwList.SelectedDataKey[0].ToString());
-    }
-
+  
     protected void gvwList_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         gvwList.PageIndex = e.NewPageIndex;

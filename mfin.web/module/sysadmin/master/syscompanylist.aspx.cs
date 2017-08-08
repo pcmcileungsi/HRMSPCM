@@ -13,7 +13,7 @@ using MFin.DataAccessLayer.Master;
 
 public partial class module_sysadmin_master_syscompanylist : BasePage
 {
-    private static string _RoleCode = "B100061";
+    private static string _RoleCode = "B100067";
     protected void Page_Load(object sender, EventArgs e)
     {
         LoadInit();
@@ -38,12 +38,12 @@ public partial class module_sysadmin_master_syscompanylist : BasePage
 
     private void BindGrid()
     {
-        SysCompanyDAL _dalSysCompany = null;
+        SYS_COMPANY_DAL _dalSysCompany = null;
         Hashtable _htParameters = null;
 
         try
         {
-            _dalSysCompany = new SysCompanyDAL();
+            _dalSysCompany = new SYS_COMPANY_DAL();
             _htParameters = new Hashtable();
 
             _htParameters["p_keywords"] = txtSearch.Text;
@@ -67,12 +67,12 @@ public partial class module_sysadmin_master_syscompanylist : BasePage
                 Response.Redirect("syscompanydetail.aspx?action=edt&id=" + e.CommandArgument);
                 break;
             case "Delete":
-                SysCompanyDAL _dalSysCompany = null;
+                SYS_COMPANY_DAL _dalSysCompany = null;
                 Hashtable _htParameters = null;
 
                 try
                 {
-                    _dalSysCompany = new SysCompanyDAL();
+                    _dalSysCompany = new SYS_COMPANY_DAL();
                     _htParameters = new Hashtable();
 
                     _htParameters["p_sys_companyid"] = e.CommandArgument;

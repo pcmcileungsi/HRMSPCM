@@ -13,7 +13,7 @@ using MFin.DataAccessLayer.Master;
 
 public partial class module_sysadmin_master_ukerdtl : BasePage
 {
-    private static string _RoleCode = "B100073";
+    private static string _RoleCode = "B100079";
     protected void Page_Load(object sender, EventArgs e)
     {
         LoadInit();
@@ -89,5 +89,66 @@ public partial class module_sysadmin_master_ukerdtl : BasePage
     {
         SaveData();
     }
+    #endregion
+
+    #region PopUpMajelis
+    //-------------------------- -------------------------------------------
+    private void BindGridPopUpMajelis()
+    {
+        MST_MAJELIS_DAL _dalMST_MAJELIS = null;
+        Hashtable _htParameters = null;
+
+        try
+        {
+            _dalMST_MAJELIS = new MST_MAJELIS_DAL();
+            _htParameters = new Hashtable();
+
+            _htParameters["p_keywords"] = txtSearchMajelis.Text;          
+           
+            gvwListMajelis.DataSource = _dalMST_MAJELIS.GetRows(_htParameters);
+            gvwListMajelis.DataBind();
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null, null);
+        }
+    }
+
+    protected void btnSearchMajelis_Click(object sender, EventArgs e)
+    {
+        BindGridPopUpMajelis();
+    }
+    protected void BtnLookUpMajelis_Click(object sender, EventArgs e)
+    {
+        BindGridPopUpMajelis();
+        upnDetailGetMajelis.Update();
+        mdlPopupGetMajelis.Show();
+    }
+    protected void gvwListMajelis_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        txtCKodeMajelis.Text = gvwListMajelis.SelectedDataKey[0].ToString();
+        txtMajelis_Name.Text = gvwListMajelis.SelectedDataKey[1].ToString();
+
+        upnDetailGetMajelis.Update();
+        mdlPopupGetMajelis.Hide();
+    }
+    protected void gvwListMajelis_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            e.Row.Attributes.Add("OnMouseOver", "this.style.backgroundColor='#B0C4DE';this.style.cursor='hand'");
+
+            if (e.Row.RowState == DataControlRowState.Alternate)
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#FFFFFF';");
+            else
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#F7F6F3';");
+        }
+    }
+    protected void gvwListMajelis_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvwListMajelis.PageIndex = e.NewPageIndex;
+        BindGridPopUpMajelis();
+    }
+    //------------------------- end Direksi ---------------------------------------------------------
     #endregion
 }

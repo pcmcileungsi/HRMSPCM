@@ -13,8 +13,7 @@ using MFin.DataAccessLayer.Master;
 
 public partial class module_sysadmin_master_syscompanydetail : BasePage
 {
-    //private static string _RoleCode = "P000472";
-    private static string _RoleCode = "B100019";
+   private static string _RoleCode = "B100067";
     protected void Page_Load(object sender, EventArgs e)
     {
         LoadInit();
@@ -29,12 +28,12 @@ public partial class module_sysadmin_master_syscompanydetail : BasePage
     
     private void LoadData()
     {
-        SysCompanyDAL _dalSysCompany = null;
+        SYS_COMPANY_DAL _dalSysCompany = null;
         Hashtable _htParameters = null;
 
         try
         {
-            _dalSysCompany = new SysCompanyDAL();
+            _dalSysCompany = new SYS_COMPANY_DAL();
             _htParameters = new Hashtable();
 
             _htParameters["p_sys_companyid"] = Request.Params["id"];
@@ -50,13 +49,13 @@ public partial class module_sysadmin_master_syscompanydetail : BasePage
 
     private void SaveData()
     {
-        SysCompanyDAL _dalSysCompany = null;
+        SYS_COMPANY_DAL _dalSysCompany = null;
         Hashtable _htParameters = null;
         int iNextID = 0;
 
         try
         {
-            _dalSysCompany = new SysCompanyDAL();
+            _dalSysCompany = new SYS_COMPANY_DAL();
             _htParameters = new Hashtable();
 
             MPF23.Shared.Mapper.UIToDB.Map(pnlBody.Controls, _htParameters);

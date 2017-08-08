@@ -25,7 +25,7 @@
                 <td>
                     <asp:Button ID="btnBack" runat="server" CausesValidation="false" CssClass="back"
                         Text="Back" OnClick="btnBack_Click" />
-                    <cc1:XUIButton ID="btnSave" runat="server" CssClass="save" Text="Save" OnClick="btnSave_Click" RoleCode="B100063" />
+                    <cc1:XUIButton ID="btnSave" runat="server" CssClass="save" Text="Save" OnClick="btnSave_Click" RoleCode="B100069" />
                 </td>
             </tr>
         </table>
@@ -562,7 +562,7 @@
                                 <asp:BoundField DataField="DeptName" HeaderText="Departemen" SortExpression="DeptName" />
                                 <asp:BoundField DataField="GRADEName" HeaderText="Grade" SortExpression="GRADEName" />
                                 <asp:BoundField DataField="Employee_Hp" HeaderText="Hp" SortExpression="Employee_Hp" />
-                                <asp:CommandField ShowSelectButton="True" SelectText="Choose"></asp:CommandField>
+                                <asp:CommandField ShowSelectButton="True" SelectText="Choose" ControlStyle-ForeColor="RED" ControlStyle-BorderColor="RED"></asp:CommandField>
                             </Columns>
                         </asp:GridView>
                     </div>
@@ -619,7 +619,7 @@
                                 <asp:BoundField DataField="DeptName" HeaderText="Departemen" SortExpression="DeptName" />
                                 <asp:BoundField DataField="GRADEName" HeaderText="Grade" SortExpression="GRADEName" />
                                 <asp:BoundField DataField="Employee_Hp" HeaderText="Hp" SortExpression="Employee_Hp" />
-                                <asp:CommandField ShowSelectButton="True" SelectText="Choose"></asp:CommandField>
+                                <asp:CommandField ShowSelectButton="True" SelectText="Choose" ControlStyle-ForeColor="RED" ControlStyle-BorderColor="RED"></asp:CommandField>
                             </Columns>
                         </asp:GridView>
                     </div>
