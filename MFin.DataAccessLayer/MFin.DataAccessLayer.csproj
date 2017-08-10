@@ -59,9 +59,12 @@
   <ItemGroup>
     <Compile Include="BaseDAL.cs" />
     <Compile Include="GenericDAL.cs" />
+    <Compile Include="Master\MST_CUTI_DAL.cs" />
     <Compile Include="Master\MST_GAPOK_DAL.cs" />
     <Compile Include="Master\MST_JABATAN_DAL.cs" />
     <Compile Include="Master\MST_MAJELIS_DAL.cs" />
+    <Compile Include="Master\MST_TUNJANGAN_DAL.cs" />
+    <Compile Include="Master\MST_TUNJANGAN_JABATAN_DAL.cs" />
     <Compile Include="Master\SYS_COMPANY_DAL.cs" />
     <Compile Include="Master\MST_UNIT_KERJA_DAL.cs" />
     <Compile Include="Master\EmpExclaimDetailDAL.cs" />
