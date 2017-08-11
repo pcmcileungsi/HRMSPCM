@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Untitled Page" Language="C#" MasterPageFile="~/mfin.master" AutoEventWireup="true" CodeFile="jenpendtl.aspx.cs" Inherits="module_data_jenpendtl" %>
+﻿<%@ Page Title="Untitled Page" Language="C#" MasterPageFile="~/mfin.master" AutoEventWireup="true" CodeFile="jenpekerjaandtl.aspx.cs" Inherits="module_data_jenpekerjaandtl" %>
 <%@ Register Assembly="MPF23.XUI" Namespace="MPF23.XUI.Control" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphhd" Runat="Server">
@@ -8,7 +8,7 @@
         <table id="tblHeader" cellpadding="3px" cellspacing="0px" class="detail-header-table">
             <tr>
                 <td colspan="2" style="border-bottom: solid 1px #dedede">
-                    <span class="search-header">Data Jenjang Pendidikan</span>
+                    <span class="search-header">Data Jenis Pekerjaan</span>
                 </td>
             </tr>
             <tr>
@@ -37,7 +37,7 @@
                     </tr>                    
                     <tr>
                         <td width="20%">
-                            <span>Kode</span>
+                            <span>Kode Pekerjaan</span>
                         </td>
                         <td>
                             <span>:</span>
@@ -51,7 +51,7 @@
                     </tr>
                     <tr>
                         <td width="20%">
-                            <span>Nama Jenjang</span>
+                            <span>Jenis Pekerjaan</span>
                         </td>
                         <td>
                             <span>:</span>

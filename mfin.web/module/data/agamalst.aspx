@@ -28,7 +28,7 @@
             <td>
                 <asp:UpdatePanel ID="updMain" UpdateMode="Conditional" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="gvwList" runat="server" AutoGenerateColumns="False" DataKeyNames="LS_TBLRELIGIONID"
+                        <asp:GridView ID="gvwList" runat="server" AutoGenerateColumns="False" DataKeyNames="id"
                             OnSelectedIndexChanged="gvwList_SelectedIndexChanged" EmptyDataText="There is no data."
                             AllowPaging="true" PageSize="10" OnPageIndexChanging="gvwList_PageIndexChanging"
                             OnRowCreated="gvwList_RowCreated" OnRowCommand="gvwList_RowCommand" GridLines="None" CssClass="mGrid" PagerStyle-CssClass="pgr"
@@ -42,10 +42,10 @@
                                         <%# Container.DataItemIndex + 1 %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="ReligionCode" HeaderText="Kode Agama">
+                                <asp:BoundField DataField="kode" HeaderText="Kode Agama">
                                     <ItemStyle Width="20%" HorizontalAlign="Center" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="ReligionName" HeaderText="Nama Agama">
+                                <asp:BoundField DataField="deskripsi" HeaderText="Nama Agama">
                                     <ItemStyle Width="80%" HorizontalAlign="Left" />
                                 </asp:BoundField>
                                 <asp:TemplateField>

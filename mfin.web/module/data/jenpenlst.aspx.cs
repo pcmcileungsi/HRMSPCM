@@ -39,17 +39,17 @@ public partial class module_data_jenpenlst : BasePage
 
     private void BindGrid()
     {
-        hr_jenjang_pendidikanDAL _dalhr_jenjang_pendidikanDAL = null;
+        reff_jenjang_pendidikanDAL _dalreff_jenjang_pendidikanDAL = null;
         Hashtable _htParameters = null;
 
         try
         {
-            _dalhr_jenjang_pendidikanDAL = new hr_jenjang_pendidikanDAL();
+            _dalreff_jenjang_pendidikanDAL = new reff_jenjang_pendidikanDAL();
             _htParameters = new Hashtable();
 
             _htParameters["p_keywords"] = txtSearch.Text;
 
-            gvwList.DataSource = _dalhr_jenjang_pendidikanDAL.GetRows(_htParameters);
+            gvwList.DataSource = _dalreff_jenjang_pendidikanDAL.GetRows(_htParameters);
             gvwList.DataBind();
         }
         catch (Exception ex)
@@ -69,17 +69,17 @@ public partial class module_data_jenpenlst : BasePage
                 Response.Redirect("jenpendtl.aspx?action=edt&id=" + e.CommandArgument);
                 break;
             case "Delete":
-                hr_jenjang_pendidikanDAL _dalhr_jenjang_pendidikanDAL = null;
+                reff_jenjang_pendidikanDAL _dalreff_jenjang_pendidikanDAL = null;
                 Hashtable _htParameters = null;
 
                 try
                 {
-                    _dalhr_jenjang_pendidikanDAL = new hr_jenjang_pendidikanDAL();
+                    _dalreff_jenjang_pendidikanDAL = new reff_jenjang_pendidikanDAL();
                     _htParameters = new Hashtable();
 
                     _htParameters["p_id"] = e.CommandArgument.ToString();
 
-                    _dalhr_jenjang_pendidikanDAL.Delete(_htParameters);
+                    _dalreff_jenjang_pendidikanDAL.Delete(_htParameters);
                     this.BindGrid();
                     Response.Redirect("jenpenlst.aspx");
 

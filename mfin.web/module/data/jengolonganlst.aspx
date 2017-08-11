@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Untitled Page" Language="C#" MasterPageFile="~/mfin.master" AutoEventWireup="true" CodeFile="hubkellst.aspx.cs" Inherits="module_data_hubkellst" %>
+﻿<%@ Page Title="Untitled Page" Language="C#" MasterPageFile="~/mfin.master" AutoEventWireup="true" CodeFile="jengolonganlst.aspx.cs" Inherits="module_data_jengolonganlst" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Assembly="MPF23.XUI" Namespace="MPF23.XUI.Control" TagPrefix="cc2" %>
 
@@ -8,12 +8,12 @@
     <table id="tblHeader" cellpadding="3px" cellspacing="0px" class="search-header-table">
         <tr>
             <td colspan="2" style="border-bottom: solid 1px #dedede">
-                <span class="search-header">List Hubungan Keluarga</span>
+                <span class="search-header">List Jenis Golongan</span>
             </td>
         </tr>
         <tr>
             <td>
-                <cc2:XUIButton ID="btnAdd" runat="server" CssClass="add" Text="Add" OnClick="btnAdd_Click" RoleCode="B100026" />
+                <cc2:XUIButton ID="btnAdd" runat="server" CssClass="add" Text="Add" OnClick="btnAdd_Click" RoleCode="B100056" />
             </td>
             <td align="right">
                 <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btnSearch">
@@ -45,7 +45,7 @@
                                 <asp:BoundField DataField="kode" HeaderText="Kode">
                                     <ItemStyle Width="20%" HorizontalAlign="Center" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="deskripsi" HeaderText="Deskripsi">
+                                <asp:BoundField DataField="Deskripsi" HeaderText="Jenis Golongan">
                                     <ItemStyle Width="80%" HorizontalAlign="Left" />
                                 </asp:BoundField>
                                 <asp:TemplateField>

@@ -31,8 +31,8 @@
                             <span>:</span>
                         </td>
                         <td width="80%">
-                            <cc1:XUILabel ID="lblRELIGION" runat="server" DataType="Integer" DBColumnName="LS_TBLRELIGIONID"
-                                BindType="Both" SPParameterName="p_ls_tblreligionid" Text="0"></cc1:XUILabel>
+                            <cc1:XUILabel ID="lblRELIGION" runat="server" DataType="Integer" DBColumnName="id"
+                                BindType="Both" SPParameterName="p_id" Text="0"></cc1:XUILabel>
                         </td>
                     </tr>
                     <tr>
@@ -43,9 +43,9 @@
                             <span>:</span>
                         </td>
                         <td width="80%">
-                            <cc1:XUITextBox ID="txtRcode" runat="server" DataType="String" DBColumnName="ReligionCode"
-                                BindType="Both" SPParameterName="p_religion_code" MaxLength="5" Width="50px"></cc1:XUITextBox>
-                            <asp:RequiredFieldValidator ID="ReqRcode" runat="server" ControlToValidate="txtRcode"
+                            <cc1:XUITextBox ID="txtkode" runat="server" DataType="String" DBColumnName="kode"
+                                BindType="Both" SPParameterName="p_kode" MaxLength="5" Width="50px"></cc1:XUITextBox>
+                            <asp:RequiredFieldValidator ID="Reqtxtkode" runat="server" ControlToValidate="txtkode"
                                 ErrorMessage="* Harus Diisi" />
                         </td>
                     </tr>
@@ -57,8 +57,8 @@
                             <span>:</span>
                         </td>
                         <td width="80%">
-                            <cc1:XUITextBox ID="txtRname" runat="server" DataType="String" DBColumnName="ReligionName"
-                                BindType="Both" SPParameterName="p_religion_name" MaxLength="50" Width="200px"></cc1:XUITextBox>
+                            <cc1:XUITextBox ID="txtRname" runat="server" DataType="String" DBColumnName="deskripsi"
+                                BindType="Both" SPParameterName="p_deskripsi" MaxLength="50" Width="200px"></cc1:XUITextBox>
                              <asp:RequiredFieldValidator ID="ReqtxtRname" runat="server" ControlToValidate="txtRname"
                                 ErrorMessage="* Harus Diisi" />
                         </td>

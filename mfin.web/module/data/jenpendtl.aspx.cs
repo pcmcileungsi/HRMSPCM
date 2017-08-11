@@ -28,18 +28,18 @@ public partial class module_data_jenpendtl : BasePage
 
     private void LoadData()
     {
-        hr_jenjang_pendidikanDAL _dalhr_jenjang_pendidikanDAL = null;
+        reff_jenjang_pendidikanDAL _dalreff_jenjang_pendidikanDAL = null;
         Hashtable _htParameters = null;
 
         try
         {
             //System.Diagnostics.Debugger.Break();
 
-            _dalhr_jenjang_pendidikanDAL = new hr_jenjang_pendidikanDAL();
+            _dalreff_jenjang_pendidikanDAL = new reff_jenjang_pendidikanDAL();
             _htParameters = new Hashtable();
 
             _htParameters["p_id"] = Request.Params["id"];
-            DataTable _dt = _dalhr_jenjang_pendidikanDAL.GetRow(_htParameters);
+            DataTable _dt = _dalreff_jenjang_pendidikanDAL.GetRow(_htParameters);
             MPF23.Shared.Mapper.DBToUI.Map(pnlBody.Controls, _dt.Rows[0]);
         }
         catch (Exception ex)
@@ -50,13 +50,13 @@ public partial class module_data_jenpendtl : BasePage
 
     private void SaveData()
     {
-        hr_jenjang_pendidikanDAL _dalhr_jenjang_pendidikanDAL = null;
+        reff_jenjang_pendidikanDAL _dalreff_jenjang_pendidikanDAL = null;
         Hashtable _htParameters = null;
         int iNextID = 0;
 
         try
         {
-            _dalhr_jenjang_pendidikanDAL = new hr_jenjang_pendidikanDAL();
+            _dalreff_jenjang_pendidikanDAL = new reff_jenjang_pendidikanDAL();
             _htParameters = new Hashtable();
 
             MPF23.Shared.Mapper.UIToDB.Map(pnlBody.Controls, _htParameters);
@@ -64,11 +64,11 @@ public partial class module_data_jenpendtl : BasePage
 
             if (Request.Params["action"] == "add")
             {
-                _dalhr_jenjang_pendidikanDAL.Insert(_htParameters, ref iNextID);
+                _dalreff_jenjang_pendidikanDAL.Insert(_htParameters, ref iNextID);
             }
             else
             {
-                _dalhr_jenjang_pendidikanDAL.Update(_htParameters);
+                _dalreff_jenjang_pendidikanDAL.Update(_htParameters);
                 iNextID = Int32.Parse(lblid.Text);
             }
 

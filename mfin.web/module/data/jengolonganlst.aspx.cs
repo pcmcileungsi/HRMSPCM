@@ -11,9 +11,9 @@ using System.Web.UI.WebControls.WebParts;
 
 using MFin.DataAccessLayer.Master;
 
-public partial class module_data_agamalst : BasePage
+public partial class module_data_jengolonganlst : BasePage
 {
-    private static string _RoleCode = "B100019";
+    private static string _RoleCode = "B100055";
     protected void Page_Load(object sender, EventArgs e)
     {
         LoadInit();
@@ -29,7 +29,7 @@ public partial class module_data_agamalst : BasePage
     #region Toolbar
     protected void btnAdd_Click(object sender, EventArgs e)
     {
-        Response.Redirect("agamadtl.aspx?action=add");
+        Response.Redirect("jengolongandtl.aspx?action=add");
     }
     protected void btnSearch_Click(object sender, EventArgs e)
     {
@@ -39,17 +39,17 @@ public partial class module_data_agamalst : BasePage
 
     private void BindGrid()
     {
-        reff_agamaDAL _dalreff_agama = null;
+        reff_jenis_golonganDAL _dalreff_jenis_golonganDAL = null;
         Hashtable _htParameters = null;
 
         try
         {
-            _dalreff_agama = new reff_agamaDAL();
+            _dalreff_jenis_golonganDAL = new reff_jenis_golonganDAL();
             _htParameters = new Hashtable();
 
             _htParameters["p_keywords"] = txtSearch.Text;
 
-            gvwList.DataSource = _dalreff_agama.GetRows(_htParameters);
+            gvwList.DataSource = _dalreff_jenis_golonganDAL.GetRows(_htParameters);
             gvwList.DataBind();
         }
         catch (Exception ex)
@@ -66,22 +66,22 @@ public partial class module_data_agamalst : BasePage
         switch (e.CommandName)
         {
             case "Edit":
-                Response.Redirect("agamadtl.aspx?action=edt&id=" + e.CommandArgument);
+                Response.Redirect("jengolongandtl.aspx?action=edt&id=" + e.CommandArgument);
                 break;
             case "Delete":
-                reff_agamaDAL _dalreff_agama = null;
+                reff_jenis_golonganDAL _dalreff_jenis_usahaDAL = null;
                 Hashtable _htParameters = null;
 
                 try
                 {
-                    _dalreff_agama = new reff_agamaDAL();
+                    _dalreff_jenis_usahaDAL = new reff_jenis_golonganDAL();
                     _htParameters = new Hashtable();
 
-                    _htParameters["id"] = e.CommandArgument.ToString();
+                    _htParameters["p_id"] = e.CommandArgument.ToString();
 
-                    _dalreff_agama.Delete(_htParameters);
+                    _dalreff_jenis_usahaDAL.Delete(_htParameters);
                     this.BindGrid();
-                    Response.Redirect("agamalst.aspx");
+                    Response.Redirect("jenusahalst.aspx");
 
                 }
                 catch (Exception ex)

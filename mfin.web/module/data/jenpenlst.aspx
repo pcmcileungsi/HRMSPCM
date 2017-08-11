@@ -42,7 +42,7 @@
                                         <%# Container.DataItemIndex + 1 %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="id" HeaderText="Kode">
+                                <asp:BoundField DataField="kode" HeaderText="Kode">
                                     <ItemStyle Width="20%" HorizontalAlign="Center" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Deskripsi" HeaderText="Jenjang Pendidikan">

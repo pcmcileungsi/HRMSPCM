@@ -1,21 +1,23 @@
-﻿<%@ Page Title="Untitled Page" Language="C#" MasterPageFile="~/mfin.master" AutoEventWireup="true" CodeFile="jenpendtl.aspx.cs" Inherits="module_data_jenpendtl" %>
-<%@ Register Assembly="MPF23.XUI" Namespace="MPF23.XUI.Control" TagPrefix="cc1" %>
+﻿<%@ Page Title="Untitled Page" Language="C#" MasterPageFile="~/mfin.master" AutoEventWireup="true"
+    CodeFile="hubkeldtl.aspx.cs" Inherits="module_data_hubkeldtl" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="cphhd" Runat="Server">
+<%@ Register Assembly="MPF23.XUI" Namespace="MPF23.XUI.Control" TagPrefix="cc1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="cphhd" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="cphbd" Runat="Server">
-     <div>
+<asp:Content ID="Content2" ContentPlaceHolderID="cphbd" runat="Server">
+    <div>
         <table id="tblHeader" cellpadding="3px" cellspacing="0px" class="detail-header-table">
             <tr>
                 <td colspan="2" style="border-bottom: solid 1px #dedede">
-                    <span class="search-header">Data Jenjang Pendidikan</span>
+                    <span class="search-header">Data Jenis Usaha</span>
                 </td>
             </tr>
             <tr>
                 <td>
                     <asp:Button ID="btnBack" runat="server" CausesValidation="false" CssClass="back"
                         Text="Back" OnClick="btnBack_Click" />
-                    <cc1:XUIButton ID="btnSave" runat="server" CssClass="save" Text="Save" OnClick="btnSave_Click" RoleCode="B100033" />
+                    <cc1:XUIButton ID="btnSave" runat="server" CssClass="save" Text="Save" OnClick="btnSave_Click"
+                        RoleCode="B100039" />
                 </td>
             </tr>
         </table>
@@ -31,27 +33,27 @@
                             <span>:</span>
                         </td>
                         <td width="80%">
-                            <cc1:XUILabel ID="lblid" runat="server" DataType="String" DBColumnName="id"
-                                BindType="Both" SPParameterName="p_id" Text="0"></cc1:XUILabel>
+                            <cc1:XUILabel ID="lblid" runat="server" DataType="String" DBColumnName="id" BindType="Both"
+                                SPParameterName="p_id" Text="0"></cc1:XUILabel>
                         </td>
-                    </tr>                    
+                    </tr>
                     <tr>
                         <td width="20%">
-                            <span>Kode</span>
+                            <span>Kode Hubungan Keluarga</span>
                         </td>
                         <td>
                             <span>:</span>
                         </td>
                         <td width="80%">
-                            <cc1:XUITextBox ID="txtkode" runat="server" DataType="String" DBColumnName="kode"
+                            <cc1:XUITextBox ID="txtKode" runat="server" DataType="String" DBColumnName="kode"
                                 BindType="Both" SPParameterName="p_kode" MaxLength="50" Width="200px"></cc1:XUITextBox>
-                             <asp:RequiredFieldValidator ID="reqtxtkode" runat="server" ControlToValidate="txtkode"
+                            <asp:RequiredFieldValidator ID="ReqtxtKode" runat="server" ControlToValidate="txtKode"
                                 ErrorMessage="* Harus Diisi" />
                         </td>
                     </tr>
                     <tr>
                         <td width="20%">
-                            <span>Nama Jenjang</span>
+                            <span>Hubungan Keluarga</span>
                         </td>
                         <td>
                             <span>:</span>
@@ -59,7 +61,7 @@
                         <td width="80%">
                             <cc1:XUITextBox ID="txtdeskripsi" runat="server" DataType="String" DBColumnName="deskripsi"
                                 BindType="Both" SPParameterName="p_deskripsi" MaxLength="50" Width="200px"></cc1:XUITextBox>
-                             <asp:RequiredFieldValidator ID="Reqtxtdeskripsi" runat="server" ControlToValidate="txtdeskripsi"
+                            <asp:RequiredFieldValidator ID="Reqtxtdeskripsi" runat="server" ControlToValidate="txtdeskripsi"
                                 ErrorMessage="* Harus Diisi" />
                         </td>
                     </tr>
@@ -68,4 +70,3 @@
         </asp:UpdatePanel>
     </div>
 </asp:Content>
-

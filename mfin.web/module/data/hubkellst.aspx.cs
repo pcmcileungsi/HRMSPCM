@@ -29,7 +29,7 @@ public partial class module_data_hubkellst : BasePage
     #region Toolbar
     protected void btnAdd_Click(object sender, EventArgs e)
     {
-        Response.Redirect("agamadtl.aspx?action=add");
+        Response.Redirect("hubkeldtl.aspx?action=add");
     }
     protected void btnSearch_Click(object sender, EventArgs e)
     {
@@ -39,17 +39,17 @@ public partial class module_data_hubkellst : BasePage
 
     private void BindGrid()
     {
-        LStblReligionDAL _dalLSTblReligion = null;
+        reff_hubungan_keluargaDAL _reff_hubungan_keluargaDAL = null;
         Hashtable _htParameters = null;
 
         try
         {
-            _dalLSTblReligion = new LStblReligionDAL();
+            _reff_hubungan_keluargaDAL = new reff_hubungan_keluargaDAL();
             _htParameters = new Hashtable();
 
             _htParameters["p_keywords"] = txtSearch.Text;
 
-            gvwList.DataSource = _dalLSTblReligion.GetRows(_htParameters);
+            gvwList.DataSource = _reff_hubungan_keluargaDAL.GetRows(_htParameters);
             gvwList.DataBind();
         }
         catch (Exception ex)
@@ -66,22 +66,22 @@ public partial class module_data_hubkellst : BasePage
         switch (e.CommandName)
         {
             case "Edit":
-                Response.Redirect("agamadtl.aspx?action=edt&id=" + e.CommandArgument);
+                Response.Redirect("hubkeldtl.aspx?action=edt&id=" + e.CommandArgument);
                 break;
             case "Delete":
-                LStblReligionDAL _dalLSTblReligion = null;
+                reff_hubungan_keluargaDAL _reff_hubungan_keluargaDAL = null;
                 Hashtable _htParameters = null;
 
                 try
                 {
-                    _dalLSTblReligion = new LStblReligionDAL();
+                    _reff_hubungan_keluargaDAL = new reff_hubungan_keluargaDAL();
                     _htParameters = new Hashtable();
 
-                    _htParameters["p_ls_tblreligionid"] = e.CommandArgument.ToString();
+                    _htParameters["id"] = e.CommandArgument.ToString();
 
-                    _dalLSTblReligion.Delete(_htParameters);
+                    _reff_hubungan_keluargaDAL.Delete(_htParameters);
                     this.BindGrid();
-                    Response.Redirect("agamalst.aspx");
+                    Response.Redirect("hubkellst.aspx");
 
                 }
                 catch (Exception ex)
