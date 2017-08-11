@@ -13,7 +13,7 @@ using MFin.DataAccessLayer.Master;
 
 public partial class module_data_agamadtl : BasePage
 {
-    //tes aja
+    
     private static string _RoleCode = "B100019";
     protected void Page_Load(object sender, EventArgs e)
     {
