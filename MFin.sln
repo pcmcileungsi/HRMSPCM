@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MFin.DataAccessLayer", "MFin.DataAccessLayer\MFin.DataAccessLayer.csproj", "{A0B04423-C19D-467B-8EB4-2628BC05B9B4}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "mfin.web(2)", "mfin.web\", "{A8DADCDA-AE76-4548-B739-6E10E15952ED}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "mfin.web", "mfin.web\", "{A8DADCDA-AE76-4548-B739-6E10E15952ED}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv3.5"
 		ProjectReferences = "{A0B04423-C19D-467B-8EB4-2628BC05B9B4}|MFin.DataAccessLayer.dll;"
@@ -23,8 +21,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "mfin.web(2)", "mfin.web\", 
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "50521"
-		SlnRelativePath = "mfin.web\"
+		VWDPort = "23166"
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
