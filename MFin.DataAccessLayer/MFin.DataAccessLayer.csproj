@@ -59,12 +59,22 @@
   <ItemGroup>
     <Compile Include="BaseDAL.cs" />
     <Compile Include="GenericDAL.cs" />
+    <Compile Include="Master\HR_PEGAWAI_DAL.cs" />
+    <Compile Include="Master\HR_PELAMAR_DAL.cs" />
     <Compile Include="Master\MST_CUTI_DAL.cs" />
     <Compile Include="Master\MST_GAPOK_DAL.cs" />
     <Compile Include="Master\MST_JABATAN_DAL.cs" />
     <Compile Include="Master\MST_MAJELIS_DAL.cs" />
     <Compile Include="Master\MST_TUNJANGAN_DAL.cs" />
     <Compile Include="Master\MST_TUNJANGAN_JABATAN_DAL.cs" />
+    <Compile Include="Master\REFF_AGAMA_DAL.cs" />
+    <Compile Include="Master\REFF_HUBUNGAN_KELUARGA_DAL.cs" />
+    <Compile Include="Master\REFF_JENIS_GOLONGAN_DAL.cs" />
+    <Compile Include="Master\REFF_JENIS_JABATAN_DAL.cs" />
+    <Compile Include="Master\REFF_JENIS_PEKERJAAN_DAL.cs" />
+    <Compile Include="Master\REFF_JENIS_TUNJANGAN_DAL.cs" />
+    <Compile Include="Master\REFF_JENIS_USAHA_DAL.cs" />
+    <Compile Include="Master\REFF_JENJANG_PENDIDIKAN_DAL.cs" />
     <Compile Include="Master\SYS_COMPANY_DAL.cs" />
     <Compile Include="Master\MST_UNIT_KERJA_DAL.cs" />
     <Compile Include="Master\EmpExclaimDetailDAL.cs" />

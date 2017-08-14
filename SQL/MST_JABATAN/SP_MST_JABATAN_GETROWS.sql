@@ -5,15 +5,18 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[SP_MST_JABATAN_GETROWS]
+create procedure [dbo].[SP_MST_JABATAN_GETROWS]
 	(
 	  @p_keywords	nvarchar(5)
 	) 
 	as
 	begin
-		select	ID,
-				KODE										
-		from	MST_JABATAN
-		where	[KODE]	 like '%' + @p_keywords + '%'			
-		ORDER BY [ID]
+		select	a.ID,
+				a.KODE,
+				b.DESKRIPSI	as JABATAN									
+		from	MST_JABATAN a
+		inner join REFF_JENIS_jabatan b on a.kode_jabatan = b.kode
+		inner join MST_unit_kerja c on a.kode_unit_kerja = c.kode
+		where	c.KODE	= @p_keywords 			
+		ORDER BY a.ID
 	end

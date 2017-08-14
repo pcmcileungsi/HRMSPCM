@@ -11,7 +11,9 @@ create procedure [dbo].[SP_MST_GAPOK_GETROW]
 	) 
 	as
 	begin
-		select	a.*,b.DESKRIPSI as DESKRIPSI_PENDIDIKAN,c.DESKRIPSI as DESKRIPSI_GOLONGAN
+		select	a.*,		        
+		        b.DESKRIPSI as DESKRIPSI_PENDIDIKAN,
+		        c.DESKRIPSI as DESKRIPSI_GOLONGAN
 		from	MST_GAPOK a
 		inner join REFF_JENJANG_PENDIDIKAN b on a.kode_jenjang_pendidikan = b.kode
 		inner join REFF_JENIS_GOLONGAN c on a.kode_jenis_golongan = c.kode

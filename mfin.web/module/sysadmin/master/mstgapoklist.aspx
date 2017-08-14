@@ -16,16 +16,29 @@
                 <cc2:XUIButton ID="btnAdd" runat="server" CssClass="add" Text="Add" OnClick="btnAdd_Click" RoleCode="B100086" />
             </td>
             <td align="right">
-                <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btnSearch">    
+                <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btnSearch">  
+                    Golongan  
                      <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>          
                     <asp:Button ID="btnSearch" runat="server" CssClass="search" Text="Search" OnClick="btnSearch_Click" />
                 </asp:Panel>
             </td>
         </tr>
     </table>
-     <table id="tblBody" cellpadding="3px" cellspacing="0px" class="search-list-table">  
+     <table id="tblBody" cellpadding="3px" cellspacing="0px" class="search-list-table">
+          <tr>
+                        <td width="20%">
+                            <span>Tahun</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">
+                             <asp:DropDownList ID="ddlTahun" runat="server" CssClass="DropDownList" Width="20%" AutoPostBack="True" OnSelectedIndexChanged="ddlTahun_SelectedIndexChanged">
+                     </asp:DropDownList>
+                        </td>
+                    </tr>      
        <tr>
-            <td>
+            <td colspan="3">
                 <asp:UpdatePanel ID="updMain" UpdateMode="Conditional" runat="server">
                     <ContentTemplate>
                         <asp:GridView ID="gvwList" runat="server" AutoGenerateColumns="False" DataKeyNames="ID"
@@ -43,10 +56,16 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="KODE" HeaderText="KODE">
-                                    <ItemStyle Width="20%" HorizontalAlign="Center" />
+                                    <ItemStyle Width="10%" HorizontalAlign="Center" />
                                 </asp:BoundField>
+                                 <asp:BoundField DataField="DESKRIPSI_PENDIDIKAN" HeaderText="PENDIDIKAN">
+                                    <ItemStyle Width="30%" HorizontalAlign="Center" />
+                                </asp:BoundField>
+                                 <asp:BoundField DataField="DESKRIPSI_GOLONGAN" HeaderText="GOLONGAN">
+                                    <ItemStyle Width="30%" HorizontalAlign="Center" />
+                                </asp:BoundField> 
                                 <asp:BoundField DataField="NOMINAL" HeaderText="GAPOK" DataFormatString="{0:#,###}">
-                                    <ItemStyle Width="80%" HorizontalAlign="Right" />
+                                    <ItemStyle Width="30%" HorizontalAlign="Right" />
                                 </asp:BoundField>                                
                                 <asp:TemplateField>
                                     <ItemTemplate>

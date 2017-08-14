@@ -59,7 +59,7 @@
                         </td>
                         <td width="80%">
                             <cc1:XUITextBox ID="txtCNama" runat="server" DataType="String" DBColumnName="NAMA"
-                                BindType="Both" SPParameterName="p_NAMA" MaxLength="100" Width="120px"></cc1:XUITextBox>
+                                BindType="Both" SPParameterName="p_NAMA" MaxLength="100" Width="280px"></cc1:XUITextBox>
                              <asp:RequiredFieldValidator ID="ReqtxtCNama" runat="server" ControlToValidate="txtCNama"
                                 ErrorMessage="* Harus Diisi" />
                         </td>
@@ -109,7 +109,7 @@
                         </td>
                         <td width="80%">
                             <cc1:XUITextBox ID="txtCEmail" runat="server" DataType="String" DBColumnName="EMAIL"
-                                BindType="Both" SPParameterName="p_EMAIL" MaxLength="100" Width="100px"></cc1:XUITextBox>
+                                BindType="Both" SPParameterName="p_EMAIL" MaxLength="100" Width="280px"></cc1:XUITextBox>
                         </td>
                     </tr>
                      <tr>
@@ -133,7 +133,7 @@
                         </td>
                         <td width="80%">
                             <cc1:XUITextBox ID="txtCGroup" runat="server" DataType="String" DBColumnName="GROUP"
-                                BindType="Both" SPParameterName="p_GROUP" MaxLength="1" Width="100px"></cc1:XUITextBox>
+                                BindType="Both" SPParameterName="p_GROUP" MaxLength="1" Width="50px"></cc1:XUITextBox>
                         </td>
                     </tr>
                     <tr>
@@ -154,7 +154,7 @@
                                     <asp:ImageButton ID="imgBtnLookUpEmployee" runat="server" ImageUrl="~/img/im4_toolbar_search.png"
                                         ImageAlign="AbsMiddle" CausesValidation="false" OnClick="BtnLookUpMajelis_Click" />
                                     <cc1:XUITextBox ID="txtMajelis_Name" runat="server" DataType="String" DBColumnName="nama_majelis"
-                                        BindType="DBToUIOnly" MaxLength="100" Width="330px" ReadOnly="true"></cc1:XUITextBox>
+                                        BindType="DBToUIOnly" MaxLength="100" Width="200px" ReadOnly="true"></cc1:XUITextBox>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </td>

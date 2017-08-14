@@ -22,8 +22,8 @@ public partial class module_sysadmin_master_ukerlist : BasePage
         if (!Page.IsPostBack)
         {
             CheckRole(_RoleCode);
-            BindGrid();
             BindMajelis();
+            BindGrid();           
         }
     }
 
@@ -34,6 +34,11 @@ public partial class module_sysadmin_master_ukerlist : BasePage
         Response.Redirect("ukerdtl.aspx?action=add");
     }
     protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        BindGrid();
+    }
+
+    protected void ddlMajelis_SelectedIndexChanged(object sender, EventArgs e)
     {
         BindGrid();
     }
@@ -49,7 +54,9 @@ public partial class module_sysadmin_master_ukerlist : BasePage
             _dalMST_UNIT_KERJA_DAL = new MST_UNIT_KERJA_DAL();
             _htParameters = new Hashtable();
 
-            _htParameters["p_keywords"] = ddlMajelis.SelectedValue;
+            _htParameters["p_keywords"] = txtSearch.Text;
+            _htParameters["p_majelis"] = ddlMajelis.SelectedValue;
+
 
             gvwList.DataSource = _dalMST_UNIT_KERJA_DAL.GetRows(_htParameters);
             gvwList.DataBind();
@@ -146,4 +153,5 @@ public partial class module_sysadmin_master_ukerlist : BasePage
         }
     }
     #endregion
+   
 }

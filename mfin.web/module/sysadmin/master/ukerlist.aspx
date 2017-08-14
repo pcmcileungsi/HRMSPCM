@@ -16,7 +16,8 @@
                 <cc2:XUIButton ID="btnAdd" runat="server" CssClass="add" Text="Add" OnClick="btnAdd_Click" RoleCode="B100080" />
             </td>
             <td align="right">
-                <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btnSearch">              
+                <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btnSearch">   
+                     <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>               
                     <asp:Button ID="btnSearch" runat="server" CssClass="search" Text="Search" OnClick="btnSearch_Click" />
                 </asp:Panel>
             </td>
@@ -31,7 +32,7 @@
                             <span>:</span>
                         </td>
                         <td width="80%">
-                             <asp:DropDownList ID="ddlMajelis" runat="server" CssClass="DropDownList" Width="20%" AutoPostBack="True">
+                             <asp:DropDownList ID="ddlMajelis" runat="server" CssClass="DropDownList" Width="20%" AutoPostBack="True" OnSelectedIndexChanged="ddlMajelis_SelectedIndexChanged">
                      </asp:DropDownList>
                         </td>
                     </tr>     

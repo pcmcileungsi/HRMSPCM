@@ -20,7 +20,7 @@
         <table id="tblHeader" cellpadding="3px" cellspacing="0px" class="detail-header-table">
             <tr>
                 <td colspan="2" style="border-bottom: solid 1px #dedede">
-                    <span class="search-header">Data Master Gapok</span>
+                    <span class="search-header">Data Master Jabatan</span>
                 </td>
             </tr>
             <tr>
@@ -151,7 +151,7 @@
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="KODE" HeaderText="Kode" SortExpression="Kode" />
-                                <asp:BoundField DataField="NAMA" HeaderText="Pendidikan" SortExpression="NAMA" />                                                            
+                                <asp:BoundField DataField="NAMA" HeaderText="NAMA" SortExpression="NAMA" />                                                            
                                 <asp:CommandField ShowSelectButton="True" SelectText="Choose" ItemStyle-HorizontalAlign="Center" ControlStyle-ForeColor="RED" ControlStyle-BorderColor="RED"></asp:CommandField>
                             </Columns>
                         </asp:GridView>
@@ -206,7 +206,7 @@
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="KODE" HeaderText="Kode" SortExpression="Kode" />
                                 <asp:BoundField DataField="DESKRIPSI" HeaderText="Jabatan" SortExpression="DESKRIPSI" />                                                            
-                                <asp:CommandField ShowSelectButton="True" SelectText="Choose" ControlStyle-ForeColor="RED" ControlStyle-BorderColor="RED"></asp:CommandField>
+                                <asp:CommandField ShowSelectButton="True" SelectText="Choose" ItemStyle-HorizontalAlign="Center" ControlStyle-ForeColor="RED" ControlStyle-BorderColor="RED"></asp:CommandField>
                             </Columns>
                         </asp:GridView>
                     </div>

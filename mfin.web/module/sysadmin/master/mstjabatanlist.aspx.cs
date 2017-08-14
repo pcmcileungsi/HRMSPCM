@@ -70,6 +70,7 @@ public partial class module_sysadmin_master_mstjabatanlist : BasePage
             _htParameters = new Hashtable();
 
             _htParameters["p_keywords"] = "";
+            _htParameters["p_majelis"] = "";
 
             ddlUnitKerja.DataSource = _dalMST_UNIT_KERJA_DAL.GetRows(_htParameters);
             ddlUnitKerja.DataValueField = "KODE";

@@ -8,7 +8,7 @@
     <table id="tblHeader" cellpadding="3px" cellspacing="0px" class="search-header-table">
         <tr>
             <td colspan="2" style="border-bottom: solid 1px #dedede">
-                <span class="search-header">List Unit Kerja</span>
+                <span class="search-header">List Master Jabatan</span>
             </td>
         </tr>
         <tr>
@@ -56,7 +56,7 @@
                                 <asp:BoundField DataField="KODE" HeaderText="KODE">
                                     <ItemStyle Width="20%" HorizontalAlign="Center" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="NAMA" HeaderText="JABATAN">
+                                <asp:BoundField DataField="JABATAN" HeaderText="JABATAN">
                                     <ItemStyle Width="80%" HorizontalAlign="Left" />
                                 </asp:BoundField>                                
                                 <asp:TemplateField>

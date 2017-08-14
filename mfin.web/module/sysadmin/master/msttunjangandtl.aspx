@@ -105,7 +105,7 @@
                         </td>
                         <td width="80%">
                             <cc1:XUITextBox ID="txtTahun" runat="server" DataType="String" DBColumnName="TAHUN" onkeypress="return isNumber(event)"
-                                BindType="Both" SPParameterName="p_TAHUN" MaxLength="4" Width="100px"></cc1:XUITextBox>
+                                BindType="Both" SPParameterName="p_TAHUN" MaxLength="4" Width="50px"></cc1:XUITextBox>
                         </td>
                     </tr> 
                      <tr>
@@ -139,13 +139,13 @@
             DragHandleID="pnlPopupGetTunjanganHeader" />
         <div class="container">
             <asp:Panel ID="pnlPopupGetTunjanganHeader" runat="server" CssClass="header">
-                <asp:Label ID="Label15" runat="server" CssClass="msg" Text="Majelis" />
+                <asp:Label ID="Label15" runat="server" CssClass="msg" Text="Tunjangan" />
                 <asp:LinkButton ID="LinkButton15" runat="server" CssClass="close" OnClientClick="$find('pnlPopUpGetTunjangan').hide(); return false;" CausesValidation="false" />
             </asp:Panel>
             <asp:UpdatePanel ID="upnDetailGetTunjangan" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <div class="header" align="right">
-                        <asp:Panel ID="pnlSearchTunjangan" runat="server" DefaultButton="btnSearchMajelis">
+                        <asp:Panel ID="pnlSearchTunjangan" runat="server" DefaultButton="btnSearchTunjangan">
                             <asp:TextBox ID="txtSearchTunjangan" runat="server"></asp:TextBox>
                             <asp:Button ID="btnSearchTunjangan" OnClick="btnSearchTunjangan_Click" runat="server"
                                 Text="Search" CssClass="search" CausesValidation="false"></asp:Button>

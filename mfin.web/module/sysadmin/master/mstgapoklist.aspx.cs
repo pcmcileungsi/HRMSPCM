@@ -21,6 +21,7 @@ public partial class module_sysadmin_master_mstgapoklist : BasePage
         if (!Page.IsPostBack)
         {
             CheckRole(_RoleCode);
+            BindTahun();
             BindGrid();
         }
     }
@@ -31,11 +32,40 @@ public partial class module_sysadmin_master_mstgapoklist : BasePage
     {
         Response.Redirect("mstgapokdtl.aspx?action=add");
     }
+
     protected void btnSearch_Click(object sender, EventArgs e)
     {
         BindGrid();
     }
+
+    protected void ddlTahun_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        BindGrid();
+    }
     #endregion
+
+    private void BindTahun()
+    {
+        MST_GAPOK_DAL _dalMST_GAPOK_DAL = null;
+        Hashtable _htParameters = null;
+
+        try
+        {
+            _dalMST_GAPOK_DAL = new MST_GAPOK_DAL();
+            _htParameters = new Hashtable();
+
+            _htParameters["p_keywords"] = "";
+
+            ddlTahun.DataSource = _dalMST_GAPOK_DAL.GetRowsTahun(_htParameters);
+            ddlTahun.DataValueField = "TAHUN";
+            ddlTahun.DataTextField = "TAHUN";
+            ddlTahun.DataBind();
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null);
+        }
+    }
 
     private void BindGrid()
     {
@@ -48,6 +78,7 @@ public partial class module_sysadmin_master_mstgapoklist : BasePage
             _htParameters = new Hashtable();
 
             _htParameters["p_keywords"] = txtSearch.Text;
+            _htParameters["p_tahun"] = ddlTahun.SelectedValue;
 
             gvwList.DataSource = _dalMST_GAPOK_DAL.GetRows(_htParameters);
             gvwList.DataBind();
@@ -117,4 +148,5 @@ public partial class module_sysadmin_master_mstgapoklist : BasePage
         }
     }
     #endregion
+    
 }

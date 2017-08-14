@@ -22,8 +22,8 @@ public partial class module_sysadmin_master_msttunjanganlist : BasePage
         if (!Page.IsPostBack)
         {
             CheckRole(_RoleCode);
-            BindGrid();
             BindTahun();
+            BindGrid();            
         }
     }
 
@@ -34,6 +34,11 @@ public partial class module_sysadmin_master_msttunjanganlist : BasePage
         Response.Redirect("msttunjangandtl.aspx?action=add");
     }
     protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        BindGrid();
+    }
+
+    protected void ddlTahun_SelectedIndexChanged(object sender, EventArgs e)
     {
         BindGrid();
     }
@@ -49,7 +54,8 @@ public partial class module_sysadmin_master_msttunjanganlist : BasePage
             _dalMST_TUNJANGAN_DAL = new MST_TUNJANGAN_DAL();
             _htParameters = new Hashtable();
 
-            _htParameters["p_keywords"] = ddlTahun.SelectedValue;
+            _htParameters["p_keywords"] = txtSearch.Text;
+            _htParameters["p_tahun"] = ddlTahun.SelectedValue;
 
             gvwList.DataSource = _dalMST_TUNJANGAN_DAL.GetRows(_htParameters);
             gvwList.DataBind();

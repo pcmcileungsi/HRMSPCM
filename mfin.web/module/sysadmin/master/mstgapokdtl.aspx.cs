@@ -93,17 +93,17 @@ public partial class module_sysadmin_master_mstgapokdtl : BasePage
     //-------------------------- -------------------------------------------
     private void BindGridPopUpPendidikan()
     {
-        hr_jenjang_pendidikanDAL _dalhr_jenjang_pendidikanDAL = null;
+        reff_jenjang_pendidikanDAL _dalreff_jenjang_pendidikanDAL = null;
         Hashtable _htParameters = null;
 
         try
         {
-            _dalhr_jenjang_pendidikanDAL = new hr_jenjang_pendidikanDAL();
+            _dalreff_jenjang_pendidikanDAL = new reff_jenjang_pendidikanDAL();
             _htParameters = new Hashtable();
 
             _htParameters["p_keywords"] = txtSearchPendidikan.Text;
 
-            gvwListPendidikan.DataSource = _dalhr_jenjang_pendidikanDAL.GetRows(_htParameters);
+            gvwListPendidikan.DataSource = _dalreff_jenjang_pendidikanDAL.GetRows(_htParameters);
             gvwListPendidikan.DataBind();
         }
         catch (Exception ex)
@@ -154,17 +154,17 @@ public partial class module_sysadmin_master_mstgapokdtl : BasePage
     //-------------------------- -------------------------------------------
     private void BindGridPopUpGolongan()
     {
-        hr_jenjang_pendidikanDAL _dalhr_jenjang_pendidikanDAL = null;
+        reff_jenis_golonganDAL _dalreff_jenis_golonganDAL = null;
         Hashtable _htParameters = null;
 
         try
         {
-            _dalhr_jenjang_pendidikanDAL = new hr_jenjang_pendidikanDAL();
+            _dalreff_jenis_golonganDAL = new reff_jenis_golonganDAL();
             _htParameters = new Hashtable();
 
             _htParameters["p_keywords"] = txtSearchGolongan.Text;
 
-            gvwListGolongan.DataSource = _dalhr_jenjang_pendidikanDAL.GetRows(_htParameters);
+            gvwListGolongan.DataSource = _dalreff_jenis_golonganDAL.GetRows(_htParameters);
             gvwListGolongan.DataBind();
         }
         catch (Exception ex)

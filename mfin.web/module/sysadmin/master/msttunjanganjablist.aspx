@@ -8,7 +8,7 @@
     <table id="tblHeader" cellpadding="3px" cellspacing="0px" class="search-header-table">
         <tr>
             <td colspan="2" style="border-bottom: solid 1px #dedede">
-                <span class="search-header">List Unit Kerja</span>
+                <span class="search-header">List Tunjangan Jabatan</span>
             </td>
         </tr>
         <tr>
@@ -16,7 +16,9 @@
                 <cc2:XUIButton ID="btnAdd" runat="server" CssClass="add" Text="Add" OnClick="btnAdd_Click" RoleCode="B100104" />
             </td>
             <td align="right">
-                <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btnSearch">              
+                <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btnSearch">   
+                     Tunjangan Jabatan  
+                    <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>            
                     <asp:Button ID="btnSearch" runat="server" CssClass="search" Text="Search" OnClick="btnSearch_Click" />
                 </asp:Panel>
             </td>
@@ -31,7 +33,7 @@
                             <span>:</span>
                         </td>
                         <td width="80%">
-                             <asp:DropDownList ID="ddlTahun" runat="server" CssClass="DropDownList" Width="20%" AutoPostBack="True">
+                             <asp:DropDownList ID="ddlTahun" runat="server" CssClass="DropDownList" Width="20%" AutoPostBack="True" OnSelectedIndexChanged="ddlTahun_SelectedIndexChanged">
                      </asp:DropDownList>
                         </td>
                     </tr>     
@@ -63,7 +65,7 @@
                                     <ItemStyle Width="30%" HorizontalAlign="Right" />
                                 </asp:BoundField>	
                                 <asp:BoundField DataField="STATUS" HeaderText="STATUS">
-                                    <ItemStyle Width="30%" HorizontalAlign="Left" />
+                                    <ItemStyle Width="30%" HorizontalAlign="Center" />
                                 </asp:BoundField>									
                                 <asp:TemplateField>
                                     <ItemTemplate>

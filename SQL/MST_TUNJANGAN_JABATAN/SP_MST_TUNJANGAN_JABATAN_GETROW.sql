@@ -5,7 +5,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create procedure [dbo].[SP_MST_TUNJANGAN_JABATAN_GETROW]
+CREATE procedure [dbo].[SP_MST_TUNJANGAN_JABATAN_GETROW]
 	(
 	  @p_ID		int
 	) 
@@ -18,6 +18,7 @@ create procedure [dbo].[SP_MST_TUNJANGAN_JABATAN_GETROW]
 				b.DESKRIPSI AS DESKRIPSI_TUNJANGAN,
 				D.DESKRIPSI AS DESKRIPSI_JABATAN,
                 a.NOMINAL,
+                a.TAHUN,
                 a.STATUS               			
 		from	MST_TUNJANGAN_JABATAN a
 		INNER JOIN REFF_JENIS_TUNJANGAN b on a.KODE_JENIS_TUNJANGAN = b.KODE

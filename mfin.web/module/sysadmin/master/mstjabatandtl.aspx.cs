@@ -28,16 +28,16 @@ public partial class module_sysadmin_master_mstjabatandtl : BasePage
 
     private void LoadData()
     {
-        MST_UNIT_KERJA_DAL _dalMST_UNIT_KERJA_DAL = null;
+        MST_JABATAN_DAL _dalMST_JABATAN_DAL = null;
         Hashtable _htParameters = null;
 
         try
         {
-            _dalMST_UNIT_KERJA_DAL = new MST_UNIT_KERJA_DAL();
+            _dalMST_JABATAN_DAL = new MST_JABATAN_DAL();
             _htParameters = new Hashtable();
 
             _htParameters["p_ID"] = Request.Params["id"];
-            DataTable _dt = _dalMST_UNIT_KERJA_DAL.GetRow(_htParameters);
+            DataTable _dt = _dalMST_JABATAN_DAL.GetRow(_htParameters);
             MPF23.Shared.Mapper.DBToUI.Map(pnlBody.Controls, _dt.Rows[0]);
         }
         catch (Exception ex)
@@ -48,13 +48,13 @@ public partial class module_sysadmin_master_mstjabatandtl : BasePage
 
     private void SaveData()
     {
-        MST_UNIT_KERJA_DAL _dalMST_UNIT_KERJA_DAL = null;
+        MST_JABATAN_DAL _dalMST_JABATAN_DAL = null;
         Hashtable _htParameters = null;
         int iNextID = 0;
 
         try
         {
-            _dalMST_UNIT_KERJA_DAL = new MST_UNIT_KERJA_DAL();
+            _dalMST_JABATAN_DAL = new MST_JABATAN_DAL();
             _htParameters = new Hashtable();
 
             MPF23.Shared.Mapper.UIToDB.Map(pnlBody.Controls, _htParameters);
@@ -62,11 +62,11 @@ public partial class module_sysadmin_master_mstjabatandtl : BasePage
 
             if (Request.Params["action"] == "add")
             {
-                _dalMST_UNIT_KERJA_DAL.Insert(_htParameters, ref iNextID);
+                _dalMST_JABATAN_DAL.Insert(_htParameters, ref iNextID);
             }
             else
             {
-                _dalMST_UNIT_KERJA_DAL.Update(_htParameters);
+                _dalMST_JABATAN_DAL.Update(_htParameters);
                 iNextID = Int32.Parse(lblID.Text);
             }
 
@@ -102,6 +102,7 @@ public partial class module_sysadmin_master_mstjabatandtl : BasePage
             _htParameters = new Hashtable();
 
             _htParameters["p_keywords"] = txtSearchUnitKerja.Text;
+            _htParameters["p_majelis"] = "";
 
             gvwListUnitKerja.DataSource = _dalMST_UNIT_KERJA_DAL.GetRows(_htParameters);
             gvwListUnitKerja.DataBind();
@@ -154,17 +155,17 @@ public partial class module_sysadmin_master_mstjabatandtl : BasePage
     //-------------------------- -------------------------------------------
     private void BindGridPopUpJabatan()
     {
-        MST_JABATAN_DAL _dalMST_JABATAN_DAL = null;
+        reff_jenis_jabatanDAL _dalreff_jenis_jabatanDAL = null;
         Hashtable _htParameters = null;
 
         try
         {
-            _dalMST_JABATAN_DAL = new MST_JABATAN_DAL();
+            _dalreff_jenis_jabatanDAL = new reff_jenis_jabatanDAL();
             _htParameters = new Hashtable();
 
             _htParameters["p_keywords"] = txtSearchJabatan.Text;
 
-            gvwListJabatan.DataSource = _dalMST_JABATAN_DAL.GetRows(_htParameters);
+            gvwListJabatan.DataSource = _dalreff_jenis_jabatanDAL.GetRows(_htParameters);
             gvwListJabatan.DataBind();
         }
         catch (Exception ex)

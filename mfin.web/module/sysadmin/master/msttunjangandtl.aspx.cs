@@ -95,17 +95,17 @@ public partial class module_sysadmin_master_msttunjangandtl : BasePage
     //-------------------------- -------------------------------------------
     private void BindGridPopUpTunjangan()
     {
-        MST_MAJELIS_DAL _dalMST_MAJELIS = null;
+        reff_jenis_tunjanganDAL _dalreff_jenis_tunjanganDAL = null;
         Hashtable _htParameters = null;
 
         try
         {
-            _dalMST_MAJELIS = new MST_MAJELIS_DAL();
+            _dalreff_jenis_tunjanganDAL = new reff_jenis_tunjanganDAL();
             _htParameters = new Hashtable();
 
-            _htParameters["p_keywords"] = txtSearchTunjangan.Text;          
-           
-            gvwListTunjangan.DataSource = _dalMST_MAJELIS.GetRows(_htParameters);
+            _htParameters["p_keywords"] = txtSearchTunjangan.Text;
+
+            gvwListTunjangan.DataSource = _dalreff_jenis_tunjanganDAL.GetRows(_htParameters);
             gvwListTunjangan.DataBind();
         }
         catch (Exception ex)

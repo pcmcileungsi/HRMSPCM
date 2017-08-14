@@ -77,7 +77,7 @@
                                     <asp:ImageButton ID="imgBtnLookUpPendidikan" runat="server" ImageUrl="~/img/im4_toolbar_search.png"
                                         ImageAlign="AbsMiddle" CausesValidation="false" OnClick="BtnLookUpPendidikan_Click" />
                                     <cc1:XUITextBox ID="txtPendidikan_Name" runat="server" DataType="String" DBColumnName="DESKRIPSI_PENDIDIKAN"
-                                        BindType="DBToUIOnly" MaxLength="100" Width="330px" ReadOnly="true"></cc1:XUITextBox>
+                                        BindType="DBToUIOnly" MaxLength="100" Width="100px" ReadOnly="true"></cc1:XUITextBox>
 									<asp:RequiredFieldValidator ID="ReqPendidikan_Name" runat="server" ControlToValidate="txtPendidikan_Name"
                                          ErrorMessage="* Harus Diisi" />
                                 </ContentTemplate>
@@ -100,7 +100,7 @@
                                     <asp:ImageButton ID="imgBtnLookUpGolongan" runat="server" ImageUrl="~/img/im4_toolbar_search.png"
                                         ImageAlign="AbsMiddle" CausesValidation="false" OnClick="BtnLookUpGolongan_Click" />
                                     <cc1:XUITextBox ID="txtGolongan_Name" runat="server" DataType="String" DBColumnName="DESKRIPSI_GOLONGAN"
-                                        BindType="DBToUIOnly" MaxLength="100" Width="330px" ReadOnly="true"></cc1:XUITextBox>
+                                        BindType="DBToUIOnly" MaxLength="100" Width="100px" ReadOnly="true"></cc1:XUITextBox>
 									<asp:RequiredFieldValidator ID="ReqGolongan_Name" runat="server" ControlToValidate="txtGolongan_Name"
                                          ErrorMessage="* Harus Diisi" />
                                 </ContentTemplate>
@@ -139,8 +139,13 @@
                             <span>:</span>
                         </td>
                         <td width="80%">
-                            <cc1:XUITextBox ID="txtStatus" runat="server" DataType="String" DBColumnName="STATUS"
-                                BindType="Both" SPParameterName="p_STATUS" MaxLength="1" Width="50px"></cc1:XUITextBox>
+                            <%--<cc1:XUITextBox ID="txtStatus" runat="server" DataType="String" DBColumnName="STATUS"
+                                BindType="Both" SPParameterName="p_STATUS" MaxLength="1" Width="50px"></cc1:XUITextBox>--%>
+                            <cc1:XUIRadioButtonList ID="rbStatus" runat="server" DataType="String" DBColumnName="STATUS"
+                                BindType="Both" SPParameterName="p_STATUS" RepeatDirection="Horizontal" RepeatLayout="Flow">                                
+                                <asp:ListItem Value="1" Selected="True">Aktif</asp:ListItem>
+                                <asp:ListItem Value="0">Tidak Aktif</asp:ListItem>
+                            </cc1:XUIRadioButtonList>
                         </td>
                     </tr>           
                 </table>

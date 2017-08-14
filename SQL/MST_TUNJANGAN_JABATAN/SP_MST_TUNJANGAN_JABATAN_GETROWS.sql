@@ -5,9 +5,10 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[SP_MST_TUNJANGAN_JABATAN_GETROWS]
+create procedure [dbo].[SP_MST_TUNJANGAN_JABATAN_GETROWS]
 	(
-	  @p_keywords	nvarchar(5)
+	  @p_keywords	nvarchar(5),
+	   @p_tahun    nvarchar(4)
 	) 
 	as
 	begin
@@ -19,6 +20,7 @@ CREATE procedure [dbo].[SP_MST_TUNJANGAN_JABATAN_GETROWS]
 		from	MST_TUNJANGAN_JABATAN a
 		INNER JOIN REFF_JENIS_TUNJANGAN b on a.KODE_JENIS_TUNJANGAN = b.KODE
 		INNER JOIN MST_JABATAN C ON A.KODE_MASTER_JABATAN = C.KODE
-		where	a.TAHUN	= @p_keywords 	
-		ORDER BY [ID]
+		where	a.TAHUN	= @p_tahun and
+		        b.DESKRIPSI	 like '%' + @p_keywords + '%'		
+		ORDER BY a.ID
 	end

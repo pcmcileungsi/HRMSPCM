@@ -129,7 +129,7 @@
                         </td>
                         <td width="80%">
                             <cc1:XUITextBox ID="txtTahun" runat="server" DataType="String" DBColumnName="TAHUN" onkeypress="return isNumber(event)"
-                                BindType="Both" SPParameterName="p_TAHUN" MaxLength="4" Width="100px"></cc1:XUITextBox>
+                                BindType="Both" SPParameterName="p_TAHUN" MaxLength="4" Width="50px"></cc1:XUITextBox>
                         </td>
                     </tr> 
                      <tr>
@@ -163,7 +163,7 @@
             DragHandleID="pnlPopupGetTunjanganJabHeader" />
         <div class="container">
             <asp:Panel ID="pnlPopupGetTunjanganJabHeader" runat="server" CssClass="header">
-                <asp:Label ID="Label15" runat="server" CssClass="msg" Text="Majelis" />
+                <asp:Label ID="Label15" runat="server" CssClass="msg" Text="Tunjangan" />
                 <asp:LinkButton ID="LinkButton15" runat="server" CssClass="close" OnClientClick="$find('pnlPopUpGetTunjanganJab').hide(); return false;" CausesValidation="false" />
             </asp:Panel>
             <asp:UpdatePanel ID="upnDetailGetTunjanganJab" runat="server" UpdateMode="Conditional">
