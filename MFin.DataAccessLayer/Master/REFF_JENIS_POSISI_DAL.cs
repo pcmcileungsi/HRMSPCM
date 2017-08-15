@@ -6,15 +6,15 @@ using MFin.DataAccessLayer.Utility;
 
 namespace MFin.DataAccessLayer.Master
 {
-    public class MST_GAPOK_DAL
+    public class reff_jenis_posisiDAL
     {
         public void Insert(Hashtable parameters, ref int iNextID)
         {
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
             dbw.ConnectionString = Shared.ConnectionString;
-            if (!dbw.ExecuteSP("SP_MST_GAPOK_INSERT", parameters, ref iNextID))
+            if (!dbw.ExecuteSP("sp_reff_jenis_posisi_insert", parameters, ref iNextID))
             {
-                throw new Exception("Fail to execute SP_MST_GAPOK_INSERT", new Exception(dbw.DBErrorMessage));
+                throw new Exception("Fail to execute sp_reff_jenis_posisi_insert", new Exception(dbw.DBErrorMessage));
             }
         }
 
@@ -22,9 +22,9 @@ namespace MFin.DataAccessLayer.Master
         {
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
             dbw.ConnectionString = Shared.ConnectionString;
-            if (!dbw.ExecuteSP("SP_MST_GAPOK_UPDATE", parameters))
+            if (!dbw.ExecuteSP("sp_reff_jenis_posisi_update", parameters))
             {
-                throw new Exception("Fail to execute SP_MST_GAPOK_UPDATE", new Exception(dbw.DBErrorMessage));
+                throw new Exception("Fail to execute sp_reff_jenis_posisi_update", new Exception(dbw.DBErrorMessage));
             }
         }
 
@@ -32,9 +32,9 @@ namespace MFin.DataAccessLayer.Master
         {
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
             dbw.ConnectionString = Shared.ConnectionString;
-            if (!dbw.ExecuteSP("SP_MST_GAPOK_DELETE", parameters))
+            if (!dbw.ExecuteSP("sp_reff_jenis_posisi_delete", parameters))
             {
-                throw new Exception("Fail to execute SP_MST_GAPOK_DELETE", new Exception(dbw.DBErrorMessage));
+                throw new Exception("Fail to execute sp_reff_jenis_posisi_delete", new Exception(dbw.DBErrorMessage));
             }
         }
 
@@ -43,14 +43,14 @@ namespace MFin.DataAccessLayer.Master
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
             DataSet ds = new DataSet();
             dbw.ConnectionString = Shared.ConnectionString;
-            if (!dbw.ExecuteSP("SP_MST_GAPOK_GETROWS", parameters, ds))
+            if (!dbw.ExecuteSP("sp_reff_jenis_posisi_getrows", parameters, ds))
             {
-                throw new Exception("Fail to execute SP_MST_GAPOK_GETROWS", new Exception(dbw.DBErrorMessage));
+                throw new Exception("Fail to execute sp_reff_jenis_posisi_getrows", new Exception(dbw.DBErrorMessage));
             }
             else
             {
                 if (ds.Tables.Count <= 0)
-                    throw new Exception("Fail to SP_MST_GAPOK_GETROWS. No row found.");
+                    throw new Exception("Fail to sp_reff_jenis_posisi_getrows. No row found.");
                 else
                     return ds.Tables[0];
             }
@@ -61,14 +61,14 @@ namespace MFin.DataAccessLayer.Master
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
             DataSet ds = new DataSet();
             dbw.ConnectionString = Shared.ConnectionString;
-            if (!dbw.ExecuteSP("SP_MST_GAPOK_GETROW", parameters, ds))
+            if (!dbw.ExecuteSP("sp_reff_jenis_posisi_getrow", parameters, ds))
             {
-                throw new Exception("Fail to execute SP_MST_GAPOK_GETROW", new Exception(dbw.DBErrorMessage));
+                throw new Exception("Fail to execute sp_reff_jenis_posisi_getrow", new Exception(dbw.DBErrorMessage));
             }
             else
             {
                 if (ds.Tables.Count <= 0)
-                    throw new Exception("Fail to SP_MST_GAPOK_GETROW. No row found.");
+                    throw new Exception("Fail to sp_reff_jenis_posisi_getrow. No row found.");
                 else
                     return ds.Tables[0];
             }

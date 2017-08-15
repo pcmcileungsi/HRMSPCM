@@ -79,14 +79,14 @@ namespace MFin.DataAccessLayer.Master
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
             DataSet ds = new DataSet();
             dbw.ConnectionString = Shared.ConnectionString;
-            if (!dbw.ExecuteSP("SP_MST_TUNJANGAN_GETROW", parameters, ds))
+            if (!dbw.ExecuteSP("SP_MST_UNIT_KERJA_GETROW", parameters, ds))
             {
-                throw new Exception("Fail to execute SP_MST_TUNJANGAN_GETROW", new Exception(dbw.DBErrorMessage));
+                throw new Exception("Fail to execute SP_MST_TUNJANGAN_GETROWS", new Exception(dbw.DBErrorMessage));
             }
             else
             {
                 if (ds.Tables.Count <= 0)
-                    throw new Exception("Fail to SP_MST_TUNJANGAN_GETROW. No row found.");
+                    throw new Exception("Fail to SP_MST_TUNJANGAN_GETROWS. No row found.");
                 else
                     return ds.Tables[0];
             }
