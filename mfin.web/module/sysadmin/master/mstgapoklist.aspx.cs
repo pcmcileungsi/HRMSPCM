@@ -56,7 +56,7 @@ public partial class module_sysadmin_master_mstgapoklist : BasePage
 
             _htParameters["p_keywords"] = "";
 
-            ddlTahun.DataSource = _dalMST_GAPOK_DAL.GetRowsTahun(_htParameters);
+            ddlTahun.DataSource = _dalMST_GAPOK_DAL.GetRows(_htParameters);
             ddlTahun.DataValueField = "TAHUN";
             ddlTahun.DataTextField = "TAHUN";
             ddlTahun.DataBind();

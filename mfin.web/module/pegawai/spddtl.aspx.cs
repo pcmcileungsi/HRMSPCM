@@ -147,8 +147,8 @@ public partial class module_form_spddtl : BasePage
             _htParameters["p_keywords"] = "";
 
             ddlPendidikan.DataSource = _dalreff_jenjang_pendidikan.GetRows(_htParameters);
-            ddlPendidikan.DataValueField = "KODE";
-            ddlPendidikan.DataTextField = "deskripsi";
+            ddlPendidikan.DataValueField = "id";
+            ddlPendidikan.DataTextField = "kode";
             ddlPendidikan.DataBind();
         }
         catch (Exception ex)
