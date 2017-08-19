@@ -167,10 +167,22 @@ public partial class module_form_spddtl : BasePage
         {
             _dalhr_pelamar = new HR_PELAMARDAL();
             _htParameters = new Hashtable();
-
             MPF23.Shared.Mapper.UIToDB.Map(pnlBody.Controls, _htParameters);
             Utility.ApplyDefaultProp(_htParameters);
-
+            
+            if (rdbtnJenKel.SelectedValue == "0")
+            {
+                _htParameters["p_JENIS_KELAMIN"] = true;
+            }
+            else _htParameters["p_JENIS_KELAMIN"] = false;
+            _htParameters["p_STATUS_KAWIN"] = rdbtnStatusNikah.SelectedValue;
+            _htParameters["p_JENIS_SIM"] = ddlJenisSIM.SelectedValue;
+            _htParameters["p_KENDARAAN"] = ddlKendaraan.SelectedValue;
+            _htParameters["p_PENDIDIKAN_TERAKHIR"] = ddlPendidikan.SelectedValue;
+            _htParameters["p_KODE_AGAMA"] = DdlAgama.SelectedValue;
+            _htParameters["p_STATUS_PEGAWAI"] = false;
+            _htParameters["p_SIAP_LEMBUR"] = false;
+            _htParameters["p_SIAP_LUAR_KOTA"] = false;
             if (Request.Params["action"] == "add")
             {
                 _dalhr_pelamar.Insert(_htParameters, ref iNextID);
@@ -198,4 +210,8 @@ public partial class module_form_spddtl : BasePage
         Response.Redirect("pelamarlist.aspx");
     }
 
+    protected void btnSave_Pendidikan_Click(object sender, EventArgs e)
+    {
+        Utility.ShowMessageBox(this, Utility.SAVE_DATA_SUCCESS_MESSAGE, null, "spddtl.aspx?page=2&action=edt&id=1");
+    }
 }
