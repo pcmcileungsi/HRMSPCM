@@ -1,8 +1,16 @@
+IF  EXISTS (SELECT * FROM sys.objects 
+WHERE object_id = OBJECT_ID(N'[dbo].[MST_GAPOK]') AND type in (N'U'))
+BEGIN
+		DROP TABLE [dbo].[MST_GAPOK]
+END
+
 CREATE TABLE [dbo].[MST_GAPOK](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[KODE] [nvarchar](10) NOT NULL,	
 	[KODE_JENJANG_PENDIDIKAN] [nvarchar](5) NULL,
 	[KODE_JENIS_GOLONGAN] [nvarchar](5) NULL,
+	[KODE_MASA_KERJA] [nvarchar](5) NULL,
+	[KODE_STATUS_PEGAWAI] [nvarchar](5) NULL,
 	[NOMINAL] [numeric](18,2) NULL,
 	[TAHUN] [nvarchar](4) NULL,
 	[STATUS] [nvarchar](1) NULL,
