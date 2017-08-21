@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="BaseDAL.cs" />
     <Compile Include="GenericDAL.cs" />
+    <Compile Include="Master\HR_KONTRAK_DAL.cs" />
     <Compile Include="Master\REFF_JENIS_POSISI_DAL.cs" />
     <Compile Include="Master\HR_PEGAWAI_DAL.cs" />
     <Compile Include="Master\HR_PELAMAR_DAL.cs" />

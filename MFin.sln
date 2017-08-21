@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MFin.DataAccessLayer", "MFin.DataAccessLayer\MFin.DataAccessLayer.csproj", "{A0B04423-C19D-467B-8EB4-2628BC05B9B4}"
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "mfin.web", "mfin.web\", "{A8DADCDA-AE76-4548-B739-6E10E15952ED}"
@@ -23,6 +23,11 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "mfin.web", "mfin.web\", "{A
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "23166"
 		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CEDCE515-34FC-4552-8A47-E37E94B7820E}"
+	ProjectSection(SolutionItems) = preProject
+		Performance1.psess = Performance1.psess
 	EndProjectSection
 EndProject
 Global

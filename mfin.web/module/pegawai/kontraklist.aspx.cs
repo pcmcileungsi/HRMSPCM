@@ -8,110 +8,87 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
-
+using System.IO;
 using MFin.DataAccessLayer.Master;
 
-public partial class module_sysadmin_master_mstgapoklist : BasePage
+public partial class module_pegawai_kontraklist : BasePage
 {
-    private static string _RoleCode = "B100085";
+    private static string _RoleCode = "B100121";    
+
     protected void Page_Load(object sender, EventArgs e)
     {
         LoadInit();
 
         if (!Page.IsPostBack)
         {
-            CheckRole(_RoleCode);
-            BindTahun();
-            BindGrid();
+            CheckRole(_RoleCode);           
+            BindGrid();           
         }
     }
 
     #region Toolbar
     protected void btnAdd_Click(object sender, EventArgs e)
     {
-        Response.Redirect("mstgapokdtl.aspx?action=add");
+        Response.Redirect("kontrakdtl.aspx?action=add");
     }
-
     protected void btnSearch_Click(object sender, EventArgs e)
     {
         BindGrid();
-    }
-
-    protected void ddlTahun_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        BindGrid();
-    }
+    }   
     #endregion
-
-    private void BindTahun()
-    {
-        MST_GAPOK_DAL _dalMST_GAPOK_DAL = null;
-        Hashtable _htParameters = null;
-
-        try
-        {
-            _dalMST_GAPOK_DAL = new MST_GAPOK_DAL();
-            _htParameters = new Hashtable();
-
-            _htParameters["p_keywords"] = "";
-
-            ddlTahun.DataSource = _dalMST_GAPOK_DAL.GetRowsTahun(_htParameters);
-            ddlTahun.DataValueField = "TAHUN";
-            ddlTahun.DataTextField = "TAHUN";
-            ddlTahun.DataBind();
-        }
-        catch (Exception ex)
-        {
-            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null);
-        }
-    }
 
     private void BindGrid()
     {
-        MST_GAPOK_DAL _dalMST_GAPOK_DAL = null;
+        HR_KONTRAK_DAL _dalHR_KONTRAK_DAL = null;
         Hashtable _htParameters = null;
 
         try
         {
-            _dalMST_GAPOK_DAL = new MST_GAPOK_DAL();
+            _dalHR_KONTRAK_DAL = new HR_KONTRAK_DAL();
             _htParameters = new Hashtable();
 
             _htParameters["p_keywords"] = txtSearch.Text;
-            _htParameters["p_tahun"] = ddlTahun.SelectedValue;
-
-            gvwList.DataSource = _dalMST_GAPOK_DAL.GetRows(_htParameters);
+           
+            gvwList.DataSource = _dalHR_KONTRAK_DAL.GetRows(_htParameters);
             gvwList.DataBind();
         }
         catch (Exception ex)
         {
             Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null, null);
         }
-    }
+    }    
 
     #region GridView
 
     protected void gvwList_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        int rowIndex = Convert.ToInt32(e.CommandArgument) - 1;
+        string p_ID = gvwList.DataKeys[rowIndex].Values[1].ToString();
+
         switch (e.CommandName)
         {
             case "Edit":
-                Response.Redirect("mstgapokdtl.aspx?action=edt&id=" + e.CommandArgument);
+                Response.Redirect("kontrakdtl.aspx?action=edt&id=" + p_ID);
                 break;
             case "Delete":
-                MST_GAPOK_DAL _dalMST_GAPOK_DAL = null;
+                HR_KONTRAK_DAL _dalHR_KONTRAK_DAL = null;
                 Hashtable _htParameters = null;
-
+                
                 try
-                {
-                    _dalMST_GAPOK_DAL = new MST_GAPOK_DAL();
+                {                    
+                    string filename = gvwList.DataKeys[rowIndex].Values[2].ToString();
+                    string savefile = Path.Combine(Server.MapPath("~/FileAttachments/"), filename);
+
+                    _dalHR_KONTRAK_DAL = new HR_KONTRAK_DAL();
                     _htParameters = new Hashtable();
+                    _htParameters["p_ID"] = p_ID;
+                    _dalHR_KONTRAK_DAL.Delete(_htParameters);
+                    
+                    if (System.IO.File.Exists(savefile))
+                        System.IO.File.Delete(savefile);
 
-                    _htParameters["p_ID"] = e.CommandArgument.ToString();
-
-                    _dalMST_GAPOK_DAL.Delete(_htParameters);
                     this.BindGrid();
-                    Response.Redirect("mstgapoklist.aspx");
-
+                    Response.Redirect("kontraklist.aspx");
                 }
                 catch (Exception ex)
                 {
@@ -120,7 +97,7 @@ public partial class module_sysadmin_master_mstgapoklist : BasePage
                 break;
         }
     }
-
+   
     protected void gvwList_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         gvwList.PageIndex = e.NewPageIndex;
@@ -147,5 +124,5 @@ public partial class module_sysadmin_master_mstgapoklist : BasePage
         }
     }
     #endregion
-    
+   
 }
