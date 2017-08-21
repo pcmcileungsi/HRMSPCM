@@ -141,7 +141,11 @@ public partial class module_pegawai_kontrakdtl : BasePage
             _dalHR_KONTRAK_DAL = new HR_KONTRAK_DAL();
             _htParameters = new Hashtable();
             _htParameters["p_DOKUMEN_PATH"] = filepath;
-            _htParameters["p_STATUS_PEGAWAI"] = cbStatus.Checked;
+
+            if (cbStatus.Checked)
+                _htParameters["p_STATUS_PEGAWAI"] = "1";
+            else
+                _htParameters["p_STATUS_PEGAWAI"] = "0";
 
             MPF23.Shared.Mapper.UIToDB.Map(pnlBody.Controls, _htParameters);
             Utility.ApplyDefaultProp(_htParameters);

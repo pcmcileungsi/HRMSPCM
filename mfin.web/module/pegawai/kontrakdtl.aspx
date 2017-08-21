@@ -59,7 +59,7 @@
                         </td>
                         <td width="80%">
                             <cc1:XUITextBox ID="txtDesc" runat="server" DataType="String" DBColumnName="DESKRIPSI"
-                                BindType="Both" SPParameterName="p_DESKRIPSI" MaxLength="100" Width="50px"></cc1:XUITextBox>                           
+                                BindType="Both" SPParameterName="p_DESKRIPSI" MaxLength="100" Width="250px"></cc1:XUITextBox>                           
                         </td>
                     </tr>
                     <tr>
