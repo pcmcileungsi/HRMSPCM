@@ -107,6 +107,52 @@
                             </asp:UpdatePanel>
                         </td>
                     </tr>
+					<tr>
+                        <td width="20%">
+                            <span>Masa Kerja</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">                           
+                            <asp:UpdatePanel ID="updMasaKerjaInfo" runat="server">
+                                <ContentTemplate>
+                                    <cc1:XUITextBox ID="txtMasakerja" runat="server" DataType="String" DBColumnName="KODE_MASA_KERJA"
+                                        BindType="Both" SPParameterName="p_KODE_MASA_KERJA" MaxLength="5" Width="48px" Enabled="false">
+                                    </cc1:XUITextBox>
+                                    <asp:ImageButton ID="imgBtnLookUpMasaKerja" runat="server" ImageUrl="~/img/im4_toolbar_search.png"
+                                        ImageAlign="AbsMiddle" CausesValidation="false" OnClick="BtnLookUpMasaKerja_Click" />
+                                    <cc1:XUITextBox ID="txtMasaKerja_Name" runat="server" DataType="String" DBColumnName="DESKRIPSI_MASAKERJA"
+                                        BindType="DBToUIOnly" MaxLength="100" Width="100px" ReadOnly="true"></cc1:XUITextBox>
+									<asp:RequiredFieldValidator ID="ReqMasaKerja_Name" runat="server" ControlToValidate="txtMasaKerja_Name"
+                                         ErrorMessage="* Harus Diisi" />
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </td>
+                    </tr>
+					<tr>
+                        <td width="20%">
+                            <span>Status Pegawai</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">                           
+                            <asp:UpdatePanel ID="updStatusPegInfo" runat="server">
+                                <ContentTemplate>
+                                    <cc1:XUITextBox ID="txtStatusPeg" runat="server" DataType="String" DBColumnName="KODE_STATUS_PEGAWAI"
+                                        BindType="Both" SPParameterName="p_KODE_STATUS_PEGAWAI" MaxLength="5" Width="48px" Enabled="false">
+                                    </cc1:XUITextBox>
+                                    <asp:ImageButton ID="imgBtnLookUpStatusPeg" runat="server" ImageUrl="~/img/im4_toolbar_search.png"
+                                        ImageAlign="AbsMiddle" CausesValidation="false" OnClick="BtnLookUpStatusPeg_Click" />
+                                    <cc1:XUITextBox ID="txtStatusPeg_Name" runat="server" DataType="String" DBColumnName="DESKRIPSI_STATUSPEGAWAI"
+                                        BindType="DBToUIOnly" MaxLength="100" Width="100px" ReadOnly="true"></cc1:XUITextBox>
+									<asp:RequiredFieldValidator ID="ReqStatusPeg_Name" runat="server" ControlToValidate="txtStatusPeg_Name"
+                                         ErrorMessage="* Harus Diisi" />
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </td>
+                    </tr>
                     <tr>
                         <td width="20%">
                             <span>Gapok</span>
@@ -260,6 +306,114 @@
         </div>
     </asp:Panel>
     <%-- End Lookup Golongan--%>
+	
+	<%-- Lookup MasaKerja--%>
+    <asp:Panel ID="pnlPopUpGetMasaKerja" runat="server" Width="600px" Style="display: block;">
+        <asp:Button Style="display: none" ID="btnShowPopupGetMasaKerja" runat="server"></asp:Button>
+        <cc2:ModalPopupExtender ID="mdlPopupGetMasaKerja" runat="server" BehaviorID="mdlPopupGetMasaKerja"
+            PopupControlID="pnlPopUpGetMasaKerja" TargetControlID="btnShowPopupGetMasaKerja"
+            BackgroundCssClass="modalBackground">
+        </cc2:ModalPopupExtender>
+        <cc2:DragPanelExtender ID="DragPanelExtender2" runat="server" TargetControlID="pnlPopUpGetMasaKerja"
+            DragHandleID="pnlPopupGetMasaKerjaHeader" />
+        <div class="container">
+            <asp:Panel ID="pnlPopupGetMasaKerjaHeader" runat="server" CssClass="header">
+                <asp:Label ID="Label2" runat="server" CssClass="msg" Text="Masa Kerja" />
+                <asp:LinkButton ID="LinkButton2" runat="server" CssClass="close" OnClientClick="$find('pnlPopUpGetMasaKerja').hide(); return false;" CausesValidation="false" />
+            </asp:Panel>
+            <asp:UpdatePanel ID="upnDetailGetMasaKerja" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="header" align="right">
+                        <asp:Panel ID="pnlSearchMasaKerja" runat="server" DefaultButton="btnSearchMasaKerja">
+                            <asp:TextBox ID="txtSearchMasaKerja" runat="server"></asp:TextBox>
+                            <asp:Button ID="btnSearchMasaKerja" OnClick="btnSearchMasaKerja_Click" runat="server"
+                                Text="Search" CssClass="search" CausesValidation="false"></asp:Button>
+                        </asp:Panel>
+                    </div>
+                    <div class="body">
+                        <asp:GridView ID="gvwListMasaKerja" runat="server" OnSelectedIndexChanged="gvwListMasaKerja_SelectedIndexChanged"
+                            DataKeyNames="KODE,DESKRIPSI" AutoGenerateColumns="False" EmptyDataText="There is no data."
+                            OnRowCreated="gvwListMasaKerja_RowCreated" GridLines="None" AllowPaging="true"
+                            PageSize="10" OnPageIndexChanging="gvwListMasaKerja_PageIndexChanging" CssClass="mGrid"
+                            PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+                            <Columns>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
+                                        <span>No</span>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <%# Container.DataItemIndex + 1 %>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:BoundField DataField="KODE" HeaderText="Kode" SortExpression="Kode" />
+                                <asp:BoundField DataField="DESKRIPSI" HeaderText="Golongan" SortExpression="DESKRIPSI" />                                                            
+                                <asp:CommandField ShowSelectButton="True" SelectText="Choose" ControlStyle-ForeColor="RED" ControlStyle-BorderColor="RED"></asp:CommandField>
+                            </Columns>
+                        </asp:GridView>
+                    </div>
+                    <div class="footer">
+                        <asp:Button ID="btnCloseMasaKerja" OnClientClick="$find('mdlPopupGetMasaKerja').hide(); return false;"
+                            CssClass="void" runat="server" Text="Close" CausesValidation="false"></asp:Button>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+    </asp:Panel>
+    <%-- End Lookup MasaKerja--%>
+	
+	<%-- Lookup StatusPegawai--%>
+    <asp:Panel ID="pnlPopUpGetStatusPeg" runat="server" Width="600px" Style="display: block;">
+        <asp:Button Style="display: none" ID="btnShowPopupGetStatusPeg" runat="server"></asp:Button>
+        <cc2:ModalPopupExtender ID="mdlPopupGetStatusPeg" runat="server" BehaviorID="mdlPopupGetStatusPeg"
+            PopupControlID="pnlPopUpGetStatusPeg" TargetControlID="btnShowPopupGetStatusPeg"
+            BackgroundCssClass="modalBackground">
+        </cc2:ModalPopupExtender>
+        <cc2:DragPanelExtender ID="DragPanelExtender3" runat="server" TargetControlID="pnlPopUpGetStatusPeg"
+            DragHandleID="pnlPopupGetStatusPegHeader" />
+        <div class="container">
+            <asp:Panel ID="pnlPopupGetStatusPegHeader" runat="server" CssClass="header">
+                <asp:Label ID="Label3" runat="server" CssClass="msg" Text="Status Pegawai" />
+                <asp:LinkButton ID="LinkButton3" runat="server" CssClass="close" OnClientClick="$find('pnlPopUpGetStatusPeg').hide(); return false;" CausesValidation="false" />
+            </asp:Panel>
+            <asp:UpdatePanel ID="upnDetailGetStatusPeg" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="header" align="right">
+                        <asp:Panel ID="pnlSearchStatusPeg" runat="server" DefaultButton="btnSearchStatusPeg">
+                            <asp:TextBox ID="txtSearchStatusPeg" runat="server"></asp:TextBox>
+                            <asp:Button ID="btnSearchStatusPeg" OnClick="btnSearchStatusPeg_Click" runat="server"
+                                Text="Search" CssClass="search" CausesValidation="false"></asp:Button>
+                        </asp:Panel>
+                    </div>
+                    <div class="body">
+                        <asp:GridView ID="gvwListStatusPeg" runat="server" OnSelectedIndexChanged="gvwListStatusPeg_SelectedIndexChanged"
+                            DataKeyNames="KODE,DESKRIPSI" AutoGenerateColumns="False" EmptyDataText="There is no data."
+                            OnRowCreated="gvwListStatusPeg_RowCreated" GridLines="None" AllowPaging="true"
+                            PageSize="10" OnPageIndexChanging="gvwListStatusPeg_PageIndexChanging" CssClass="mGrid"
+                            PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+                            <Columns>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
+                                        <span>No</span>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <%# Container.DataItemIndex + 1 %>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:BoundField DataField="KODE" HeaderText="Kode" SortExpression="Kode" />
+                                <asp:BoundField DataField="DESKRIPSI" HeaderText="Golongan" SortExpression="DESKRIPSI" />                                                            
+                                <asp:CommandField ShowSelectButton="True" SelectText="Choose" ControlStyle-ForeColor="RED" ControlStyle-BorderColor="RED"></asp:CommandField>
+                            </Columns>
+                        </asp:GridView>
+                    </div>
+                    <div class="footer">
+                        <asp:Button ID="btnCloseStatusPeg" OnClientClick="$find('mdlPopupGetStatusPeg').hide(); return false;"
+                            CssClass="void" runat="server" Text="Close" CausesValidation="false"></asp:Button>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+    </asp:Panel>
+    <%-- End Lookup StatusPegawai--%>
 
 </asp:Content>
 

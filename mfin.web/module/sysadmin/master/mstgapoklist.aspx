@@ -58,13 +58,19 @@
                                     <ItemStyle Width="10%" HorizontalAlign="Center" />
                                 </asp:BoundField>
                                  <asp:BoundField DataField="DESKRIPSI_PENDIDIKAN" HeaderText="PENDIDIKAN">
-                                    <ItemStyle Width="30%" HorizontalAlign="Center" />
+                                    <ItemStyle Width="10%" HorizontalAlign="Center" />
                                 </asp:BoundField>
                                  <asp:BoundField DataField="DESKRIPSI_GOLONGAN" HeaderText="GOLONGAN">
-                                    <ItemStyle Width="30%" HorizontalAlign="Center" />
+                                    <ItemStyle Width="20%" HorizontalAlign="Center" />
+                                </asp:BoundField> 
+								<asp:BoundField DataField="DESKRIPSI_MASAKERJA" HeaderText="MASA KERJA">
+                                    <ItemStyle Width="20%" HorizontalAlign="Center" />
+                                </asp:BoundField> 
+								<asp:BoundField DataField="DESKRIPSI_STATUSPEGAWAI" HeaderText="STATUS PEGAWAI">
+                                    <ItemStyle Width="20%" HorizontalAlign="Center" />
                                 </asp:BoundField> 
                                 <asp:BoundField DataField="NOMINAL" HeaderText="GAPOK" DataFormatString="{0:#,###}">
-                                    <ItemStyle Width="30%" HorizontalAlign="Right" />
+                                    <ItemStyle Width="20%" HorizontalAlign="Right" />
                                 </asp:BoundField>                                
                                 <asp:TemplateField>
                                     <ItemTemplate>

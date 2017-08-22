@@ -11,6 +11,8 @@ GO
 		,@p_KODE			nvarchar(10)
 		,@p_KODE_JENJANG_PENDIDIKAN			nvarchar(5)
 		,@p_KODE_JENIS_GOLONGAN		nvarchar(5)
+		,@p_KODE_MASA_KERJA		nvarchar(5)	
+	    ,@p_KODE_STATUS_PEGAWAI		nvarchar(5)
 		,@p_NOMINAL		[numeric](18, 2)
 		,@p_TAHUN			nvarchar(4)
 		,@p_STATUS			nvarchar(1)	
@@ -26,6 +28,8 @@ GO
 		set		KODE			= @p_KODE,
 				KODE_JENJANG_PENDIDIKAN			= @p_KODE_JENJANG_PENDIDIKAN,
 				KODE_JENIS_GOLONGAN		    = @p_KODE_JENIS_GOLONGAN,
+				KODE_MASA_KERJA			= @p_KODE_MASA_KERJA,
+				KODE_STATUS_PEGAWAI		    = @p_KODE_STATUS_PEGAWAI,
 				NOMINAL			= @p_NOMINAL,
 				TAHUN			= @p_TAHUN,
 				STATUS			= @p_STATUS,				

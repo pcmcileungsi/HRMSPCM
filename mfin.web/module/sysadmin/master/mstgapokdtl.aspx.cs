@@ -210,4 +210,126 @@ public partial class module_sysadmin_master_mstgapokdtl : BasePage
     }
     //------------------------- end Golongan ---------------------------------------------------------
     #endregion
+	
+	  #region PopUpMasaKerja
+    //-------------------------- -------------------------------------------
+    private void BindGridPopUpMasaKerja()
+    {
+        REFF_MASAKERJA_DAL _dalREFF_MASAKERJA_DALL = null;
+        Hashtable _htParameters = null;
+
+        try
+        {
+            _dalREFF_MASAKERJA_DALL = new REFF_MASAKERJA_DAL();
+            _htParameters = new Hashtable();
+
+            _htParameters["p_keywords"] = txtSearchMasaKerja.Text;
+
+            gvwListMasaKerja.DataSource = _dalREFF_MASAKERJA_DALL.GetRows(_htParameters);
+            gvwListMasaKerja.DataBind();
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null, null);
+        }
+    }
+
+    protected void btnSearchMasaKerja_Click(object sender, EventArgs e)
+    {
+        BindGridPopUpMasaKerja();
+    }
+    protected void BtnLookUpMasaKerja_Click(object sender, EventArgs e)
+    {
+        BindGridPopUpMasaKerja();
+        upnDetailGetMasaKerja.Update();
+        mdlPopupGetMasaKerja.Show();
+    }
+    protected void gvwListMasaKerja_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        txtMasakerja.Text = gvwListMasaKerja.SelectedDataKey[0].ToString();
+        txtMasaKerja_Name.Text = gvwListMasaKerja.SelectedDataKey[1].ToString();
+
+        upnDetailGetMasaKerja.Update();
+        mdlPopupGetMasaKerja.Hide();
+    }
+    protected void gvwListMasaKerja_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            e.Row.Attributes.Add("OnMouseOver", "this.style.backgroundColor='#B0C4DE';this.style.cursor='hand'");
+
+            if (e.Row.RowState == DataControlRowState.Alternate)
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#FFFFFF';");
+            else
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#F7F6F3';");
+        }
+    }
+    protected void gvwListMasaKerja_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvwListMasaKerja.PageIndex = e.NewPageIndex;
+        BindGridPopUpMasaKerja();
+    }
+    //------------------------- end MasaKerja ---------------------------------------------------------
+    #endregion
+	
+	  #region PopUpStatusPegawai
+    //-------------------------- -------------------------------------------
+    private void BindGridPopUpStatusPeg()
+    {
+        REFF_STATUS_PEGAWAI_DAL _dalREFF_STATUS_PEGAWAI_DAL = null;
+        Hashtable _htParameters = null;
+
+        try
+        {
+            _dalREFF_STATUS_PEGAWAI_DAL = new REFF_STATUS_PEGAWAI_DAL();
+            _htParameters = new Hashtable();
+
+            _htParameters["p_keywords"] = txtSearchStatusPeg.Text;
+
+            gvwListStatusPeg.DataSource = _dalREFF_STATUS_PEGAWAI_DAL.GetRows(_htParameters);
+            gvwListStatusPeg.DataBind();
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null, null);
+        }
+    }
+
+    protected void btnSearchStatusPeg_Click(object sender, EventArgs e)
+    {
+        BindGridPopUpStatusPeg();
+    }
+    protected void BtnLookUpStatusPeg_Click(object sender, EventArgs e)
+    {
+        BindGridPopUpStatusPeg();
+        upnDetailGetStatusPeg.Update();
+        mdlPopupGetStatusPeg.Show();
+    }
+    protected void gvwListStatusPeg_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        txtStatusPeg.Text = gvwListStatusPeg.SelectedDataKey[0].ToString();
+        txtStatusPeg_Name.Text = gvwListStatusPeg.SelectedDataKey[1].ToString();
+
+        upnDetailGetStatusPeg.Update();
+        mdlPopupGetStatusPeg.Hide();
+    }
+    protected void gvwListStatusPeg_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            e.Row.Attributes.Add("OnMouseOver", "this.style.backgroundColor='#B0C4DE';this.style.cursor='hand'");
+
+            if (e.Row.RowState == DataControlRowState.Alternate)
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#FFFFFF';");
+            else
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#F7F6F3';");
+        }
+    }
+    protected void gvwListStatusPeg_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvwListStatusPeg.PageIndex = e.NewPageIndex;
+        BindGridPopUpStatusPeg();
+    }
+    //------------------------- end StatusPegawai ---------------------------------------------------------
+    #endregion
 }
