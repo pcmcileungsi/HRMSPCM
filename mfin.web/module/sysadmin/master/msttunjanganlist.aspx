@@ -61,7 +61,7 @@
                                 <asp:BoundField DataField="DESKRIPSI" HeaderText="TUNJANGAN">
                                     <ItemStyle Width="30%" HorizontalAlign="Left" />
                                 </asp:BoundField>   
-                                 <asp:BoundField DataField="NOMINAL" HeaderText="NOMINAL" DataFormatString="{0:#,###}">
+                                 <asp:BoundField DataField="NOMINAL" HeaderText="NOMINAL" DataFormatString="{0:#,###.00}">
                                     <ItemStyle Width="30%" HorizontalAlign="Right" />
                                 </asp:BoundField>	
                                 <asp:BoundField DataField="STATUS" HeaderText="STATUS">

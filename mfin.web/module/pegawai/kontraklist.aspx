@@ -45,6 +45,9 @@
                                 <asp:BoundField DataField="KODE" HeaderText="KODE">
                                     <ItemStyle Width="10%" HorizontalAlign="Center" />
                                 </asp:BoundField>
+								 <asp:BoundField DataField="NAMA_PEGAWAI" HeaderText="NAMA PEGAWAI">
+                                    <ItemStyle Width="20%" HorizontalAlign="Left" />
+                                </asp:BoundField> 
                                 <asp:BoundField DataField="TANGGAL_MULAI_KONTRAK" HeaderText="TANGGAL MULAI" DataFormatString="{0:dd-MM-yyyy}">
                                     <ItemStyle Width="10%" HorizontalAlign="Left" />
                                 </asp:BoundField> 

@@ -18,6 +18,7 @@ GO
 		,@p_STATUS_PEGAWAI			varchar(1)
 		,@p_TANGGAL_MULAI_KONTRAK  datetime
 		,@p_TANGGAL_AKHIR_KONTRAK datetime
+		,@p_KODE_PEGAWAI		varchar(20)
 		,@p_cre_date			datetime
 		,@p_cre_by				nvarchar(15)
 		,@p_cre_ip_address		nvarchar(15)
@@ -37,6 +38,7 @@ GO
 				STATUS_PEGAWAI	      = case when @p_STATUS_PEGAWAI = '1' then 1 else 0 end,
 				TANGGAL_MULAI_KONTRAK = @p_TANGGAL_MULAI_KONTRAK,
 				TANGGAL_AKHIR_KONTRAK = @p_TANGGAL_AKHIR_KONTRAK,
+				KODE_PEGAWAI          = @p_KODE_PEGAWAI,
 				mod_date			  = @p_mod_date,
 				mod_by				  = @p_mod_by,
 				mod_ip_address		  = @p_mod_ip_address

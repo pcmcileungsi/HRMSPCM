@@ -5,13 +5,19 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[SP_MST_TUNJANGAN_GETROW]
+create procedure [dbo].[SP_MST_TUNJANGAN_GETROW]
 	(
 	  @p_ID		int
 	) 
 	as
 	begin
-		select	a.*,B.DESKRIPSI
+		select	a.ID,
+		        a.KODE,
+		        a.KODE_JENIS_TUNJANGAN,
+		        CAST(a.NOMINAL AS VARCHAR(20)) AS NOMINAL,
+		        a.TAHUN,
+		        a.STATUS,	
+		        B.DESKRIPSI
 		from	MST_TUNJANGAN a		
 		inner join REFF_JENIS_TUNJANGAN b on a.KODE_JENIS_TUNJANGAN = b.KODE
 		where	a.ID	= @p_ID

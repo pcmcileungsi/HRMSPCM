@@ -18,7 +18,7 @@
         <table id="tblHeader" cellpadding="3px" cellspacing="0px" class="detail-header-table">
             <tr>
                 <td colspan="2" style="border-bottom: solid 1px #dedede">
-                    <span class="search-header">Data Master Majelis</span>
+                    <span class="search-header">Data Master Cuti</span>
                 </td>
             </tr>
             <tr>

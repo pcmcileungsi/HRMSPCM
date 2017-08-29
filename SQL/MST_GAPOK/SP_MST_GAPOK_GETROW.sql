@@ -11,7 +11,15 @@ create procedure [dbo].[SP_MST_GAPOK_GETROW]
 	) 
 	as
 	begin
-		select	a.*,		        
+		select	a.ID,
+		        a.KODE,
+		        a.KODE_JENJANG_PENDIDIKAN,
+		        a.KODE_JENIS_GOLONGAN,
+		        a.KODE_MASA_KERJA,
+		        a.KODE_STATUS_PEGAWAI,
+		        CAST(a.NOMINAL AS VARCHAR(20)) AS NOMINAL,
+		        a.TAHUN,
+		        a.STATUS,		        	        
 		        b.DESKRIPSI as DESKRIPSI_PENDIDIKAN,
 		        c.DESKRIPSI as DESKRIPSI_GOLONGAN,
 				d.DESKRIPSI as DESKRIPSI_MASAKERJA,

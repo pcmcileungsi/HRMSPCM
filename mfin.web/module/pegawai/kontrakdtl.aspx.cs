@@ -27,9 +27,12 @@ public partial class module_pegawai_kontrakdtl : BasePage
             BindUnitKerja();
             BindReffPosisi();
             BindReffJabatan();
-            
+
             if (Request.Params["action"].Equals("edt"))
+            {
                 LoadData();
+                txtKode.ReadOnly = true;
+            }
         }
     }
 
@@ -176,14 +179,82 @@ public partial class module_pegawai_kontrakdtl : BasePage
 
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        HttpPostedFile file = Request.Files["ctl00$cphbd$upfile"];
-        if (file != null && file.ContentLength > 0)
+        try
         {
-            filepath = Server.MapPath("~/FileAttachments/");
-            file.SaveAs(filepath + txtDocName.Text);
-        }
+            HttpPostedFile file = Request.Files["ctl00$cphbd$upfile"];
+            if (file != null && file.ContentLength > 0)
+            {
+                filepath = Server.MapPath("~/FileAttachments/");
+                file.SaveAs(filepath + txtDocName.Text);
+            }
 
-        SaveData();       
+            SaveData();
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, Utility.SAVE_DATA_FAIL_MESSAGE, ex, null);
+        }
     }     
-    #endregion     
+    #endregion    
+    
+      #region PopUpPegawai
+    //-------------------------- -------------------------------------------
+    private void BindGridPopUpPeg()
+    {
+        REFF_STATUS_PEGAWAI_DAL _dalREFF_STATUS_PEGAWAI_DAL = null;
+        Hashtable _htParameters = null;
+
+        try
+        {
+            _dalREFF_STATUS_PEGAWAI_DAL = new REFF_STATUS_PEGAWAI_DAL();
+            _htParameters = new Hashtable();
+
+            _htParameters["p_keywords"] = txtSearchPeg.Text;
+
+            gvwListPeg.DataSource = _dalREFF_STATUS_PEGAWAI_DAL.GetRows(_htParameters);
+            gvwListPeg.DataBind();
+        }
+        catch (Exception ex)
+        {
+            Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null, null);
+        }
+    }
+
+    protected void btnSearchPeg_Click(object sender, EventArgs e)
+    {
+        BindGridPopUpPeg();
+    }
+    protected void BtnLookUpPeg_Click(object sender, EventArgs e)
+    {
+        BindGridPopUpPeg();
+        upnDetailGetPeg.Update();
+        mdlPopupGetPeg.Show();
+    }
+    protected void gvwListPeg_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        txtPeg.Text = gvwListPeg.SelectedDataKey[0].ToString();
+        txtPeg_Name.Text = gvwListPeg.SelectedDataKey[1].ToString();
+
+        upnDetailGetPeg.Update();
+        mdlPopupGetPeg.Hide();
+    }
+    protected void gvwListPeg_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            e.Row.Attributes.Add("OnMouseOver", "this.style.backgroundColor='#B0C4DE';this.style.cursor='hand'");
+
+            if (e.Row.RowState == DataControlRowState.Alternate)
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#FFFFFF';");
+            else
+                e.Row.Attributes.Add("OnMouseOut", "this.style.backgroundColor='#F7F6F3';");
+        }
+    }
+    protected void gvwListPeg_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        gvwListPeg.PageIndex = e.NewPageIndex;
+        BindGridPopUpPeg();
+    }
+    //------------------------- end StatusPegawai ---------------------------------------------------------
+    #endregion	
 }

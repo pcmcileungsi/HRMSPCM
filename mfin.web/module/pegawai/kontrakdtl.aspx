@@ -5,6 +5,21 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="cphhd" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphbd" Runat="Server">
+	  <script type="text/javascript" language="javascript">
+        $(document).ready(function () {            
+            jsPopUpDate('ctl00_cphbd_txtTglAwalKontrak');
+            jsPopUpDate('ctl00_cphbd_txtTglAkhirKontrak');
+            
+        });
+        function UploadFile() {
+            var nama = document.getElementById('<%=upfile.ClientID %>');
+            document.getElementById('<%=txtDocName.ClientID %>').value = nama.files.item(0).name;
+       }
+        function onBrowse() {
+            document.getElementById('<%=upfile.ClientID %>').click();
+        }       
+      </script>  
+	  
      <div>
         <table id="tblHeader" cellpadding="3px" cellspacing="0px" class="detail-header-table">
             <tr>
@@ -94,6 +109,29 @@
                                 ErrorMessage="* Harus Diisi" />
                         </td>
                     </tr>
+					<tr>
+                        <td width="20%">
+                            <span>Pegawai</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">                           
+                            <asp:UpdatePanel ID="updPegInfo" runat="server">
+                                <ContentTemplate>
+                                    <cc1:XUITextBox ID="txtPeg" runat="server" DataType="String" DBColumnName="KODE_PEGAWAI"
+                                        BindType="Both" SPParameterName="p_KODE_PEGAWAI" MaxLength="20" Width="48px" Enabled="false">
+                                    </cc1:XUITextBox>
+                                    <asp:ImageButton ID="imgBtnLookUpPeg" runat="server" ImageUrl="~/img/im4_toolbar_search.png"
+                                        ImageAlign="AbsMiddle" CausesValidation="false" OnClick="BtnLookUpPeg_Click" />
+                                    <cc1:XUITextBox ID="txtPeg_Name" runat="server" DataType="String" DBColumnName="NAMA_PEGAWAI"
+                                        BindType="DBToUIOnly" MaxLength="100" Width="200px" ReadOnly="true"></cc1:XUITextBox>
+									<asp:RequiredFieldValidator ID="ReqPeg_Name" runat="server" ControlToValidate="txtPeg_Name"
+                                         ErrorMessage="* Harus Diisi" />
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </td>
+                    </tr>
                     <tr>
                         <td width="20%">
                             <span>Unit Kerja</span>
@@ -166,21 +204,60 @@
         </Triggers>
         </asp:UpdatePanel>
     </div> 
-    
-    <script type="text/javascript" language="javascript">
-        $(document).ready(function () {            
-            jsPopUpDate('ctl00_cphbd_txtTglAwalKontrak');
-            jsPopUpDate('ctl00_cphbd_txtTglAkhirKontrak');
-            
-        });
-        function UploadFile() {
-            var nama = document.getElementById('<%=upfile.ClientID %>');
-            document.getElementById('<%=txtDocName.ClientID %>').value = nama.files.item(0).name;
-       }
-        function onBrowse() {
-            document.getElementById('<%=upfile.ClientID %>').click();
-        }       
-      </script>  
+	
+	<%-- Lookup Pegawai--%>
+    <asp:Panel ID="pnlPopUpGetPeg" runat="server" Width="600px" Style="display: block;">
+        <asp:Button Style="display: none" ID="btnShowPopupGetPeg" runat="server"></asp:Button>
+        <cc2:ModalPopupExtender ID="mdlPopupGetPeg" runat="server" BehaviorID="mdlPopupGetPeg"
+            PopupControlID="pnlPopUpGetPeg" TargetControlID="btnShowPopupGetPeg"
+            BackgroundCssClass="modalBackground">
+        </cc2:ModalPopupExtender>
+        <cc2:DragPanelExtender ID="DragPanelExtender3" runat="server" TargetControlID="pnlPopUpGetPeg"
+            DragHandleID="pnlPopupGetPegHeader" />
+        <div class="container">
+            <asp:Panel ID="pnlPopupGetPegHeader" runat="server" CssClass="header">
+                <asp:Label ID="Label3" runat="server" CssClass="msg" Text="Pegawai" />
+                <asp:LinkButton ID="LinkButton3" runat="server" CssClass="close" OnClientClick="$find('pnlPopUpGetPeg').hide(); return false;" CausesValidation="false" />
+            </asp:Panel>
+            <asp:UpdatePanel ID="upnDetailGetPeg" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="header" align="right">
+                        <asp:Panel ID="pnlSearchPeg" runat="server" DefaultButton="btnSearchPeg">
+                            <asp:TextBox ID="txtSearchPeg" runat="server"></asp:TextBox>
+                            <asp:Button ID="btnSearchPeg" OnClick="btnSearchPeg_Click" runat="server"
+                                Text="Search" CssClass="search" CausesValidation="false"></asp:Button>
+                        </asp:Panel>
+                    </div>
+                    <div class="body">
+                        <asp:GridView ID="gvwListPeg" runat="server" OnSelectedIndexChanged="gvwListPeg_SelectedIndexChanged"
+                            DataKeyNames="NIK,NAMA" AutoGenerateColumns="False" EmptyDataText="There is no data."
+                            OnRowCreated="gvwListPeg_RowCreated" GridLines="None" AllowPaging="true"
+                            PageSize="10" OnPageIndexChanging="gvwListPeg_PageIndexChanging" CssClass="mGrid"
+                            PagerStyle-CssClass="pgr" AlternatingRowStyle-CssClass="alt">
+                            <Columns>
+                                <asp:TemplateField>
+                                    <HeaderTemplate>
+                                        <span>No</span>
+                                    </HeaderTemplate>
+                                    <ItemTemplate>
+                                        <%# Container.DataItemIndex + 1 %>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:BoundField DataField="NIK" HeaderText="Nik" SortExpression="Nik" />
+                                <asp:BoundField DataField="NAMA" HeaderText="Nama" SortExpression="Nama" />                                                            
+                                <asp:CommandField ShowSelectButton="True" SelectText="Choose" ControlStyle-ForeColor="RED" ControlStyle-BorderColor="RED"></asp:CommandField>
+                            </Columns>
+                        </asp:GridView>
+                    </div>
+                    <div class="footer">
+                        <asp:Button ID="btnCloseStatusPeg" OnClientClick="$find('mdlPopupGetPeg').hide(); return false;"
+                            CssClass="void" runat="server" Text="Close" CausesValidation="false"></asp:Button>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+    </asp:Panel>
+    <%-- End Lookup Pegawai--%> 
 
 </asp:Content>
 

@@ -14,6 +14,118 @@
              }
              return false;
          }
+         function chop(value) {
+             return value.substr(1);
+         }
+
+         function hapus(id, value) {
+             if (value == "0") {
+                 id.value = "";
+                 return 0;
+             }
+         }
+
+         function muncul(id, value) {
+             if (value == "") {
+                 id.value = "0";
+                 return 0;
+             }
+         }
+
+         function detectComma(lvalue, lfield) {
+             if (lvalue.length > 1) {
+                 var temp = removeComma(lvalue);
+                 if (temp.substr(0, 1) == "0" || temp.substr(0, 1) == ",") {
+                     var temp2 = chop(temp);
+                     detectComma(temp2, lfield);
+                 }
+                 else {
+                     lfield.value = putComma(temp);
+                 }
+             }
+             else {
+                 lfield.value = putComma(lvalue);
+             }
+         }
+
+         function putComma(in_fld) {
+             var t = 0;
+             var o_fld = "";
+             var w_fld = "";
+
+             min_sign = minus_sign(in_fld)
+             period_fld = removeperiod(in_fld)
+             in_fld = removeComma2(in_fld)
+
+             t = in_fld.length;
+             for (t; t > 3; (t = t - 3)) {
+                 w_fld = "," + in_fld.substring(t - 3, t);
+                 o_fld = w_fld + o_fld;
+             }
+             w_fld = in_fld.substring(0, t);
+             o_fld = min_sign + w_fld + o_fld + period_fld;
+
+             in_fld = o_fld;
+             return (o_fld);
+         }
+
+         function minus_sign(in_fld) {
+             var w_fld = "";
+             var o_fld = "";
+
+             w_fld = in_fld.substring(0, 1);
+             if (w_fld == "-") {
+                 o_fld = "-"
+             }
+             return (o_fld);
+         }
+
+         function removeperiod(in_fld) {
+             var t = 0;
+             t = in_fld.length;
+             var o_fld = "";
+             var w_fld = "";
+             var trig = 0;
+             for (var i = 0; i < t; i++) {
+                 w_fld = in_fld.substring(i, i + 1);
+                 if ((w_fld >= "0" && w_fld <= "9" && trig == 1) || (w_fld == "." && trig == 0)) {
+                     o_fld = o_fld + w_fld;
+                     if (w_fld == ".") trig = 1;
+                 }
+             }
+             return (o_fld);
+         }
+
+         function removeComma2(in_fld) {
+             var t = 0;
+             t = in_fld.length;
+             var o_fld = "";
+             var w_fld = "";
+             var trig = 0;
+             for (var i = 0; i < t; i++) {
+                 w_fld = in_fld.substring(i, i + 1);
+                 if ((w_fld >= "0" && w_fld <= "9" && trig == 0) || (w_fld == "." && trig == 0)) {
+                     if (w_fld == ".") {
+                         trig = 1;
+                     } else o_fld = o_fld + w_fld;
+                 }
+             }
+             return (o_fld);
+         }
+         function removeComma(in_fld) {
+             var t = 0;
+             t = in_fld.length;
+             var o_fld = "";
+             var w_fld = "";
+
+             for (var i = 0; i < t; i++) {
+                 w_fld = in_fld.substring(i, i + 1);
+                 if ((w_fld >= "0" && w_fld <= "9") || (w_fld == ".")) {
+                     o_fld = o_fld + w_fld;
+                 }
+             }
+             return (o_fld);
+         }
       </script>
 
      <div>
@@ -92,8 +204,10 @@
                             <span>:</span>
                         </td>
                         <td width="80%">
-                            <cc1:XUITextBox ID="txtCNominal" runat="server" DataType="String" DBColumnName="NOMINAL" onkeypress="return isNumber(event)"
-                                BindType="Both" SPParameterName="p_NOMINAL" MaxLength="20" Width="120px"></cc1:XUITextBox>                            
+                            <cc1:XUITextBox ID="txtCNominal" runat="server" DataType="String" DBColumnName="NOMINAL" style="text-align:right"
+                                BindType="Both" SPParameterName="p_NOMINAL" MaxLength="20" Width="120px"
+                                onkeypress="javascript:hapus(this,this.value);" onblur="if (this.value){this.onchange();} javascript:muncul(this,this.value);"
+                                 onkeyup="javascript:detectComma(this.value,this);"></cc1:XUITextBox>                            
                         </td>
                     </tr>                    
                     <tr>

@@ -69,7 +69,7 @@
 								<asp:BoundField DataField="DESKRIPSI_STATUSPEGAWAI" HeaderText="STATUS PEGAWAI">
                                     <ItemStyle Width="20%" HorizontalAlign="Center" />
                                 </asp:BoundField> 
-                                <asp:BoundField DataField="NOMINAL" HeaderText="GAPOK" DataFormatString="{0:#,###}">
+                                <asp:BoundField DataField="NOMINAL" HeaderText="GAPOK" DataFormatString="{0:#,###.00}">
                                     <ItemStyle Width="20%" HorizontalAlign="Right" />
                                 </asp:BoundField>                                
                                 <asp:TemplateField>

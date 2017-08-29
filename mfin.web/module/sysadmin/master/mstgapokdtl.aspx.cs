@@ -22,7 +22,10 @@ public partial class module_sysadmin_master_mstgapokdtl : BasePage
         {
             CheckRole(_RoleCode);
             if (Request.Params["action"].Equals("edt"))
+            {
                 LoadData();
+                txtKode.ReadOnly = true;
+            }
         }
     }
 
@@ -38,6 +41,8 @@ public partial class module_sysadmin_master_mstgapokdtl : BasePage
 
             _htParameters["p_ID"] = Request.Params["id"];
             DataTable _dt = _dalMST_GAPOK_DAL.GetRow(_htParameters);
+            _dt.Rows[0]["NOMINAL"] = string.Format("{0:0,0.00}", Convert.ToDecimal(_dt.Rows[0]["NOMINAL"]));           
+
             MPF23.Shared.Mapper.DBToUI.Map(pnlBody.Controls, _dt.Rows[0]);
         }
         catch (Exception ex)

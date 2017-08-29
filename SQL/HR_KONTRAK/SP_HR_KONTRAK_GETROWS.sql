@@ -11,9 +11,10 @@ create procedure [dbo].[SP_HR_KONTRAK_GETROWS]
 	) 
 	as
 	begin
-		select	ROW_NUMBER() OVER(ORDER BY (SELECT 0), b.nama,a.ID) AS NO,
+		select	ROW_NUMBER() OVER(ORDER BY (SELECT 0), f.nama,a.ID) AS NO,
 		        a.ID,
 				a.KODE,
+				f.NAMA as NAMA_PEGAWAI,
 				a.TANGGAL_MULAI_KONTRAK,
 			    a.TANGGAL_AKHIR_KONTRAK,
 			    b.nama as UNIT_KERJA,
@@ -25,5 +26,6 @@ create procedure [dbo].[SP_HR_KONTRAK_GETROWS]
 		inner join reff_posisi c on c.kode = a.kode_posisi
 		inner join mst_jabatan d on d.kode = a.kode_mst_jabatan
 		inner join reff_jenis_jabatan e on e.kode = d.kode_jabatan
-		where	b.NAMA	 like '%' + @p_keywords + '%'		
+		inner join HR_PEGAWAI f on f.nik = a.KODE_PEGAWAI
+		where	f.NAMA	 like '%' + @p_keywords + '%'		
 	end

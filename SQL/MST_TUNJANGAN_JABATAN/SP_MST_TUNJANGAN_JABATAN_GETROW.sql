@@ -5,7 +5,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[SP_MST_TUNJANGAN_JABATAN_GETROW]
+create procedure [dbo].[SP_MST_TUNJANGAN_JABATAN_GETROW]
 	(
 	  @p_ID		int
 	) 
@@ -17,7 +17,7 @@ CREATE procedure [dbo].[SP_MST_TUNJANGAN_JABATAN_GETROW]
 			    a.KODE_MASTER_JABATAN,			
 				b.DESKRIPSI AS DESKRIPSI_TUNJANGAN,
 				D.DESKRIPSI AS DESKRIPSI_JABATAN,
-                a.NOMINAL,
+                CAST(a.NOMINAL AS VARCHAR(20)) AS NOMINAL,
                 a.TAHUN,
                 a.STATUS               			
 		from	MST_TUNJANGAN_JABATAN a

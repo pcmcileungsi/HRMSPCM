@@ -18,6 +18,7 @@ create procedure [dbo].[SP_HR_KONTRAK_INSERT]
 	,@p_STATUS_PEGAWAI			varchar(1)
 	,@p_TANGGAL_MULAI_KONTRAK  datetime
 	,@p_TANGGAL_AKHIR_KONTRAK datetime
+	,@p_KODE_PEGAWAI		varchar(20)
 	,@p_cre_date			datetime
 	,@p_cre_by				nvarchar(15)
 	,@p_cre_ip_address		nvarchar(15)
@@ -39,6 +40,7 @@ begin
        ,[STATUS_PEGAWAI]
        ,[TANGGAL_MULAI_KONTRAK]
        ,[TANGGAL_AKHIR_KONTRAK]
+	   ,[KODE_PEGAWAI]
        ,[CRE_DATE]
        ,[CRE_BY]
        ,[CRE_IP_ADDRESS]
@@ -58,6 +60,7 @@ begin
 	    case when @p_STATUS_PEGAWAI = '1' then 1 else 0 end,
 		@p_TANGGAL_MULAI_KONTRAK,
 		@p_TANGGAL_AKHIR_KONTRAK,
+		@p_KODE_PEGAWAI,
 		@p_cre_date,
 		@p_cre_by,
 		@p_cre_ip_address,

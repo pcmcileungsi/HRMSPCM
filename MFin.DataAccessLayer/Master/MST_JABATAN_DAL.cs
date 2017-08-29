@@ -28,6 +28,16 @@ namespace MFin.DataAccessLayer.Master
             }
         }
 
+        public void UpdateKenaikan(Hashtable parameters)
+        {
+            DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
+            dbw.ConnectionString = Shared.ConnectionString;
+            if (!dbw.ExecuteSP("SP_KENAIKAN_GAJI_UPDATE", parameters))
+            {
+                throw new Exception("Fail to execute SP_KENAIKAN_GAJI_UPDATE", new Exception(dbw.DBErrorMessage));
+            }
+        }
+
         public void Delete(Hashtable parameters)
         {
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
