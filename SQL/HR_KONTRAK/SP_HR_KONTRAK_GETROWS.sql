@@ -14,6 +14,7 @@ create procedure [dbo].[SP_HR_KONTRAK_GETROWS]
 		select	ROW_NUMBER() OVER(ORDER BY (SELECT 0), f.nama,a.ID) AS NO,
 		        a.ID,
 				a.KODE,
+				a.kode_mst_jabatan,
 				f.NAMA as NAMA_PEGAWAI,
 				a.TANGGAL_MULAI_KONTRAK,
 			    a.TANGGAL_AKHIR_KONTRAK,

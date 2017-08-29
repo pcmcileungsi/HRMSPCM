@@ -15,10 +15,10 @@ GO
 		,@p_KODE_UNIT_KERJA		nvarchar(5)
 		,@p_KODE_POSISI			nvarchar(5)
 		,@p_KODE_MST_JABATAN		nvarchar(10)
+		,@p_KODE_PEGAWAI		varchar(20)
 		,@p_STATUS_PEGAWAI			varchar(1)
 		,@p_TANGGAL_MULAI_KONTRAK  datetime
-		,@p_TANGGAL_AKHIR_KONTRAK datetime
-		,@p_KODE_PEGAWAI		varchar(20)
+		,@p_TANGGAL_AKHIR_KONTRAK datetime		
 		,@p_cre_date			datetime
 		,@p_cre_by				nvarchar(15)
 		,@p_cre_ip_address		nvarchar(15)
@@ -35,10 +35,10 @@ GO
 				KODE_UNIT_KERJA		  = @p_KODE_UNIT_KERJA,
 				KODE_POSISI			  = @p_KODE_POSISI,
 				KODE_MST_JABATAN      = @p_KODE_MST_JABATAN,
+				KODE_PEGAWAI          = @p_KODE_PEGAWAI,
 				STATUS_PEGAWAI	      = case when @p_STATUS_PEGAWAI = '1' then 1 else 0 end,
 				TANGGAL_MULAI_KONTRAK = @p_TANGGAL_MULAI_KONTRAK,
-				TANGGAL_AKHIR_KONTRAK = @p_TANGGAL_AKHIR_KONTRAK,
-				KODE_PEGAWAI          = @p_KODE_PEGAWAI,
+				TANGGAL_AKHIR_KONTRAK = @p_TANGGAL_AKHIR_KONTRAK,				
 				mod_date			  = @p_mod_date,
 				mod_by				  = @p_mod_by,
 				mod_ip_address		  = @p_mod_ip_address

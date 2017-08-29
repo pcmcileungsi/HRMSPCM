@@ -122,7 +122,7 @@ public partial class module_pegawai_kontrakdtl : BasePage
 
             _htParameters["p_keywords"] = "";
 
-            ddlJabatan.DataSource = _dalreff_jenis_jabatanDAL.GetRows(_htParameters);
+            ddlJabatan.DataSource = _dalreff_jenis_jabatanDAL.GetRowsJabatan(_htParameters);
             ddlJabatan.DataValueField = "KODE";
             ddlJabatan.DataTextField = "DESKRIPSI";
             ddlJabatan.DataBind();
@@ -201,17 +201,17 @@ public partial class module_pegawai_kontrakdtl : BasePage
     //-------------------------- -------------------------------------------
     private void BindGridPopUpPeg()
     {
-        REFF_STATUS_PEGAWAI_DAL _dalREFF_STATUS_PEGAWAI_DAL = null;
+        HR_PEGAWAI_DAL _dalHR_PEGAWAI_DAL = null;
         Hashtable _htParameters = null;
 
         try
         {
-            _dalREFF_STATUS_PEGAWAI_DAL = new REFF_STATUS_PEGAWAI_DAL();
+            _dalHR_PEGAWAI_DAL = new HR_PEGAWAI_DAL();
             _htParameters = new Hashtable();
 
             _htParameters["p_keywords"] = txtSearchPeg.Text;
 
-            gvwListPeg.DataSource = _dalREFF_STATUS_PEGAWAI_DAL.GetRows(_htParameters);
+            gvwListPeg.DataSource = _dalHR_PEGAWAI_DAL.GetRows(_htParameters);
             gvwListPeg.DataBind();
         }
         catch (Exception ex)

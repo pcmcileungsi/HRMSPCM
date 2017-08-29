@@ -56,6 +56,24 @@ namespace MFin.DataAccessLayer.Master
             }
         }
 
+        public DataTable GetRowsJabatan(Hashtable parameters)
+        {
+            DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
+            DataSet ds = new DataSet();
+            dbw.ConnectionString = Shared.ConnectionString;
+            if (!dbw.ExecuteSP("sp_reff_jenis_jabatan_getrows_jabatan", parameters, ds))
+            {
+                throw new Exception("Fail to execute sp_reff_jenis_jabatan_getrows_jabatan", new Exception(dbw.DBErrorMessage));
+            }
+            else
+            {
+                if (ds.Tables.Count <= 0)
+                    throw new Exception("Fail to sp_reff_jenis_jabatan_getrows_jabatan. No row found.");
+                else
+                    return ds.Tables[0];
+            }
+        }
+
         public DataTable GetRow(Hashtable parameters)
         {
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
