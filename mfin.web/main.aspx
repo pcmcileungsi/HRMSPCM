@@ -8,10 +8,19 @@
     <link href="css/mfin.css" rel="stylesheet" type="text/css" />
     <link href="css/ui-darkness/jquery-ui-1.8.10.custom.css" rel="stylesheet" type="text/css" />
 
-    <script src="js/jquery-1.4.4.min.js" type="text/javascript"></script>
 
+    <script src="js/jquery-1.4.4.min.js" type="text/javascript"></script>
     <script src="js/jquery-ui-1.8.10.custom.min.js" type="text/javascript"></script>
 
+   <%-- <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
+    <script src='<%=ResolveClientUrl("~/js/jquery.datetimepicker.js")%>' type="text/javascript"></script>
+    <script src='<%=ResolveClientUrl("~/js/jquery.datetimepicker.min.js")%>' type="text/javascript"></script>
+    <script src='<%=ResolveClientUrl("~/js/jquery.js")%>' type="text/javascript"></script>
+    <script src='<%=ResolveClientUrl("~/js/build/jquery.datetimepicker.full.js")%>' type="text/javascript"></script>
+    <script src='<%=ResolveClientUrl("~/js/build/jquery.datetimepicker.full.min.js")%>' type="text/javascript"></script>
+    <script src='<%=ResolveClientUrl("~/js/build/jquery.datetimepicker.min.js")%>' type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="js/build/jquery.datetimepicker.min.css"/>--%>
+      
     <script type="text/javascript">
         $(function () {
 

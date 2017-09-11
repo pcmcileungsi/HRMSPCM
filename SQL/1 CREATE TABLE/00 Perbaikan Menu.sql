@@ -35,6 +35,9 @@ EXEC SP_Tambah_Menu_Modul_Anas 'Master Jabatan','module/sysadmin/master/mstjabat
 EXEC SP_Tambah_Menu_Modul_Anas 'Master Tunjangan','module/sysadmin/master/msttunjanganlist.aspx',15, 1
 EXEC SP_Tambah_Menu_Modul_Anas 'Master Tunjangan Jabatan','module/sysadmin/master/msttunjanganjablist.aspx',15, 1
 EXEC SP_Tambah_Menu_Modul_Anas 'Master Cuti','module/sysadmin/master/mstcutilist.aspx',15, 1
+EXEC SP_Tambah_Menu_Modul_Anas 'Master Shift','module/sysadmin/master/mstshiftlist.aspx',15, 1
+EXEC SP_Tambah_Menu_Modul_Anas 'Master Posisi','module/sysadmin/master/mstposisilist.aspx',14, 1
+--update MASTER_MENU set parent_menu_id = 14 where menu_id = 38
 
 --PARENT MENU
 EXEC SP_Tambah_Menu_Modul_Parent_Anas 'Master Pegawai', 1
@@ -53,6 +56,8 @@ EXEC SP_Tambah_Menu_Modul_Anas 'Tunjangan','module/transaksi/tunjanganlist.aspx'
 EXEC SP_Tambah_Menu_Modul_Anas 'Pinjaman','module/transaksi/pinjamanlist.aspx',29, 1
 EXEC SP_Tambah_Menu_Modul_Anas 'Potongan','module/transaksi/potonganlist.aspx',29, 1
 EXEC SP_Tambah_Menu_Modul_Anas 'Penggajian','module/transaksi/penggajianlist.aspx',29, 1
+EXEC SP_Tambah_Menu_Modul_Anas 'Shift','module/transaksi/shiftlist.aspx',29, 1
+--update MASTER_MENU set parent_menu_id = 28 where menu_id = 39
 
 --PARENT MENU
 EXEC SP_Tambah_Menu_Modul_Parent_Anas 'Persetujuan', 1

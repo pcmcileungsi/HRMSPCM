@@ -179,6 +179,16 @@ function jsPopUpDate(id) {
     });
 }
 
+function jsPopUpTime(id) {
+    var sID = "#" + id;
+    $(sID).datetimepicker({
+        datepicker: false,
+        format: 'H:i',
+        step: 5
+    });
+}
+
+
 //function checkall(id, id2) {
 //    var allCheckBoxSelector = "#" + id ;
 //    var checkBoxSelector = "#" + id2 ;

@@ -5,13 +5,23 @@
 <head runat="server">
     <title>H R M S | PCM Cileungsi.</title>
     <link href="css/mfin.css" rel="stylesheet" type="text/css" />
-    <link href="css/ui-darkness/jquery-ui-1.8.10.custom.css" rel="stylesheet" type="text/css" />
-
-    <script src='<%=ResolveClientUrl("~/js/jquery-1.4.4.min.js")%>' type="text/javascript"></script>
-
-    <script src='<%=ResolveClientUrl("~/js/jquery-ui-1.8.10.custom.min.js")%>' type="text/javascript"></script>
-    <link id="Link3" runat="server" rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <link href="css/ui-darkness/jquery-ui-1.8.10.custom.css" rel="stylesheet" type="text/css" />  
+     <link id="Link3" runat="server" rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
     <link id="Link4" runat="server" rel="icon" href="favicon.ico" type="image/ico"/>
+ 
+    <script src='<%=ResolveClientUrl("~/js/jquery-1.4.4.min.js")%>' type="text/javascript"></script>
+    <script src='<%=ResolveClientUrl("~/js/jquery-ui-1.8.10.custom.min.js")%>' type="text/javascript"></script>
+
+<%--   <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
+    <script src='<%=ResolveClientUrl("~/js/jquery.datetimepicker.js")%>' type="text/javascript"></script>
+    <script src='<%=ResolveClientUrl("~/js/jquery.datetimepicker.min.js")%>' type="text/javascript"></script>
+    <script src='<%=ResolveClientUrl("~/js/jquery.js")%>' type="text/javascript"></script>
+    <script src='<%=ResolveClientUrl("~/js/build/jquery.datetimepicker.full.js")%>' type="text/javascript"></script>
+    <script src='<%=ResolveClientUrl("~/js/build/jquery.datetimepicker.full.min.js")%>' type="text/javascript"></script>
+    <script src='<%=ResolveClientUrl("~/js/build/jquery.datetimepicker.min.js")%>' type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="js/build/jquery.datetimepicker.min.css"/>--%>
+
+          
 </head>
 <body style="background-image:url(img/hrms.png);background-repeat:no-repeat;background-size:100%">
     <form id="form1" runat="server">

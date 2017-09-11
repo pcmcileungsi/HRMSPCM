@@ -59,6 +59,8 @@
   <ItemGroup>
     <Compile Include="BaseDAL.cs" />
     <Compile Include="GenericDAL.cs" />
+    <Compile Include="Master\MST_POSISI_DAL.cs" />
+    <Compile Include="Master\MST_SHIFT_DAL.cs" />
     <Compile Include="Master\REFF_STATUS_PEGAWAI_DAL.cs" />
     <Compile Include="Master\REFF_MASAKERJA_DAL.cs" />
     <Compile Include="Master\HR_KONTRAK_DAL.cs" />
