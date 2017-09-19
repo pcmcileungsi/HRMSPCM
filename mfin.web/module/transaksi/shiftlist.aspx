@@ -73,29 +73,23 @@
                     </asp:DropDownList>                 
                 </td>
             </tr>
-            <tr>
-                <td width="20%">
-                </td>
-                 <td>
-                            <span>:</span>
-                        </td>
-                <td colspan="2">
-                    <asp:Button ID="btnSearch" runat="server" CssClass="search" CausesValidation="false" Text="Search" OnClick="btnSearch_Click" />
-                </td>
-            </tr>
+           
         </table>
     </div>
 
-     <table style="width: 10%">
+     <table style="width: 25%">
          <tr>
-		  <td align="center">
-                  <asp:Button ID="btnAdd" CssClass="add" Text="Add" runat="server" OnClick="btnAdd_Click"></asp:Button>   
+		  <td align="center" >
+                  <asp:Button ID="btnAdd" CssClass="add" Text="Add" runat="server" OnClick="btnAdd_Click" Visible="false"></asp:Button>   
              </td>
-             <td align="center">
+             <td align="center" width="50px">
                   <asp:Button runat="server" ID="btnsimpan" Width="50px" Text="Edit" OnClick="btnsimpan_Click" />
              </td>
-             <td>
+             <td align="center">
                  <asp:Button runat="server" ID="btnCancel" Text="Cancel" OnClick="btnCancel_Click"  />
+             </td>
+             <td align="right">
+                  <asp:Button ID="btnSearch" runat="server" CssClass="search" CausesValidation="false" Text="Search" OnClick="btnSearch_Click" />
              </td>
          </tr>
      </table>   

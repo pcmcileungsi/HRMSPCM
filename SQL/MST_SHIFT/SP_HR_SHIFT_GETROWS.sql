@@ -6,7 +6,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-create procedure [dbo].[SP_HR_SHIFT_GETROWS] --'2010','02'
+create procedure [dbo].[SP_HR_SHIFT_GETROWS] --'2017','01','1','1'
 	(
 	  @p_Year	           varchar(4),
 	  @p_Month	           varchar(2),
@@ -34,21 +34,32 @@ create procedure [dbo].[SP_HR_SHIFT_GETROWS] --'2010','02'
 	) AS TGLs
 		
 	if @ColumnName is null
-	    set @ColumnName = '[01],[02],[03]'   
+	    set @ColumnName = '[01]'   
  
 	--Prepare the PIVOT query using the dynamic 
 	SET @DynamicPivotQuery = 
 	  N'	
         select * from (
 		  select  a.NIK,
-		          b.NAMA,
-		          cast(a.KODE_REFF_SHIFT as decimal) KODE_REFF_SHIFT, 		       	      		       
-		          RIGHT(cast(a.TANGGAL_SHIFT as varchar(10)),2) AS TGL            			            	
-          from HR_SHIFT a 
-          inner join hr_pegawai b on a.nik = b.nik
-          where  substring(cast(a.TANGGAL_SHIFT as varchar(10)),1,7) = ''' + @p_Year + '-' + @p_Month + ''' 
-                 and a.KODE_UNIT_KERJA = ''' + @p_KODE_UNIT_KERJA	+ '''
-                 and a.STATUS_SHIFT = ''' + @p_STATUS_SHIFT	+ '''                  
+		          a.NAMA,
+		          cast(b.KODE_REFF_SHIFT as decimal) KODE_REFF_SHIFT, 		       	      		       
+		          RIGHT(cast(b.TANGGAL_SHIFT as varchar(10)),2) AS TGL            			            	
+          from hr_pegawai a 
+          inner join mst_unit_kerja c on c.kode = a.kode_unit_kerja
+          left join HR_SHIFT b on a.nik = b.nik
+          where  (
+                   substring(cast(b.TANGGAL_SHIFT as varchar(10)),1,7) = ''' + @p_Year + '-' + @p_Month + ''' 
+                   or 
+                   substring(cast(b.TANGGAL_SHIFT as varchar(10)),1,7) is null
+                 )
+                 and 
+                 (
+                    b.STATUS_SHIFT = ''' + @p_STATUS_SHIFT	+ ''' 					
+                    or 
+                    b.STATUS_SHIFT is null
+                 )
+                 and
+                    a.KODE_UNIT_KERJA = ''' + @p_KODE_UNIT_KERJA	+ '''                 
 		)T1     
 		PIVOT 
 		(
@@ -58,6 +69,6 @@ create procedure [dbo].[SP_HR_SHIFT_GETROWS] --'2010','02'
 	--Execute the Dynamic Pivot Query
 	EXEC sp_executesql @DynamicPivotQuery
 	
-	
+
 	
 	end

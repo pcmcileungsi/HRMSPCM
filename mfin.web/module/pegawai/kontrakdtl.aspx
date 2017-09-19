@@ -183,6 +183,30 @@
                             </cc1:XUICheckBox>                           
                         </td>
                     </tr>
+					 <tr>
+                        <td width="20%">
+                            <span>Shift</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">
+                              <cc1:XUICheckBox ID="cbShift" runat="server" DataType="String">
+                            </cc1:XUICheckBox>     
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                            <span>Cuti</span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                        </td>
+                        <td width="80%">
+                              <cc1:XUICheckBox ID="cbCuti" runat="server" DataType="String">
+                            </cc1:XUICheckBox>   
+                        </td>
+                    </tr>     
                      <tr>
                         <td width="20%">
                             <span>Dokumen</span>

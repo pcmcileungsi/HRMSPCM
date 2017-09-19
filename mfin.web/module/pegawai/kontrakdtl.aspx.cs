@@ -54,6 +54,14 @@ public partial class module_pegawai_kontrakdtl : BasePage
             {
                 cbStatus.Checked = true;
             }
+            if (_dt.Rows[0]["is_shift"].ToString() == "1")
+            {
+                cbShift.Checked = true;
+            }
+            if (_dt.Rows[0]["is_cuti"].ToString() == "1")
+            {
+                cbCuti.Checked = true;
+            }
 
             MPF23.Shared.Mapper.DBToUI.Map(pnlBody.Controls, _dt.Rows[0]);
         }
@@ -149,6 +157,16 @@ public partial class module_pegawai_kontrakdtl : BasePage
                 _htParameters["p_STATUS_PEGAWAI"] = "1";
             else
                 _htParameters["p_STATUS_PEGAWAI"] = "0";
+			
+			if (cbShift.Checked)
+                _htParameters["p_IS_SHIFT"] = "1";
+            else
+                _htParameters["p_IS_SHIFT"] = "0";
+			
+			if (cbCuti.Checked)
+                _htParameters["p_IS_CUTI"] = "1";
+            else
+                _htParameters["p_IS_CUTI"] = "0";
 
             MPF23.Shared.Mapper.UIToDB.Map(pnlBody.Controls, _htParameters);
             Utility.ApplyDefaultProp(_htParameters);

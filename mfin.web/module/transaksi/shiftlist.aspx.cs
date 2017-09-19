@@ -131,7 +131,70 @@ public partial class module_transaksi_shiftlist : BasePage
 			{
 				Utility.ShowMessageBox(this, Utility.LOAD_DATA_FAIL_MESSAGE, ex, null);
 			}
-		  }  
+		  }
+
+        protected void bindGrid2(DataTable dt)
+        {
+            dtx = dt;
+            string[] selectedColumns = new[] { "NIK", "NAMA" };
+            dtx = new DataView(dtx).ToTable(false, selectedColumns);
+
+            GridView.Columns.Clear();                    
+
+            int j = 0;
+            int year = Convert.ToInt32(ddlYear.SelectedValue.ToString());
+            int month = Convert.ToInt32(ddlMonth.SelectedValue.ToString());
+            DateTime current = new DateTime(year, month, 1);
+            string monthstr = current.ToString("MM", CultureInfo.InvariantCulture);
+            DateTime next = current.AddMonths(1);
+            int days = (next - current).Days;
+            for (int i = 1; i <= days; i++)
+            {
+                if (i < 10)
+                {
+                   dtx.Columns.Add("0" + i);
+                }
+                else
+                {
+                    dtx.Columns.Add(i.ToString());
+                }
+            }
+          
+            foreach (DataColumn col in dtx.Columns)
+            {
+                BoundField field = new BoundField();
+                field.HeaderText = col.ColumnName;
+                field.DataField = col.ColumnName;              
+
+                GridView.Columns.Add(field);               
+            }
+
+            for (int l = 0; l < dtx.Rows.Count; l++)
+            {
+                for (int k = 2; k <= dtx.Columns.Count - 1; k++)
+                {
+                    dtx.Rows[l][k] = "";
+                }
+            }        
+                       
+            GridView.DataSource = dtx;
+            GridView.DataBind();
+        }
+        void BindData(DataTable dt)
+        {
+            dtx = dt;
+            GridView.Columns.Clear();
+            for (int i = 0; i <= dtx.Columns.Count - 1; i++)
+            {
+                TemplateField ItemTmpField = new TemplateField();
+                ItemTmpField.HeaderText = dtx.Columns[i].ColumnName;
+                ItemTmpField.ItemTemplate = new DynamicallyTemplatedGridViewHandler(ListItemType.Item, dtx.Columns[i].ColumnName, "Label");
+                GridView.Columns.Add(ItemTmpField);
+            }
+
+            GridView.DataSource = dtx;
+            GridView.DataBind();
+        }     
 
 		protected void bindGrid()
         {					
@@ -215,6 +278,7 @@ public partial class module_transaksi_shiftlist : BasePage
 
         private void BindGridSearch()
         {
+            DataTable dt = new DataTable();
             MST_SHIFT_DAL _dalMST_SHIFT = null;
             Hashtable _htParameters = null;
 
@@ -228,18 +292,20 @@ public partial class module_transaksi_shiftlist : BasePage
                 _htParameters["p_KODE_UNIT_KERJA"] = ddlUnitKerja.SelectedValue.ToString();
                 _htParameters["p_STATUS_SHIFT"] = ddlStatus.SelectedValue.ToString();
 
-                dtx = _dalMST_SHIFT.GetRows_HR_SHIFT(_htParameters);
+                dt = _dalMST_SHIFT.GetRows_HR_SHIFT(_htParameters);
 				
-				if (dtx.Columns.Count < 10)
+				if (dt.Columns.Count < 10)
 				{
-					bindGrid();
+					//bindGrid();
+                    bindGrid2(dt);
                     isRows = "0"; //insert                    
 				}
 				else
 				{
-					BindData();
+					//BindData();
+                    BindData(dt);
                     isRows = "1"; //update                    
-				}				
+				}              
             }
             catch (Exception ex)
             {
@@ -265,7 +331,7 @@ public partial class module_transaksi_shiftlist : BasePage
                     {
                         TemplateField ItemTmpField = new TemplateField();
                         ItemTmpField.HeaderText = dtx.Columns[i].ColumnName;
-                        ItemTmpField.ItemTemplate = new DynamicallyTemplatedGridViewHandler(ListItemType.EditItem, dtx.Columns[i].ColumnName, "DropDownPeg");
+                        ItemTmpField.ItemTemplate = new DynamicallyTemplatedGridViewHandler(ListItemType.EditItem, dtx.Columns[i].ColumnName, "Textbox"); //DropDownPeg
                         GridView.Columns.Add(ItemTmpField);
                     }
 					//template insert --> tgl
@@ -289,7 +355,7 @@ public partial class module_transaksi_shiftlist : BasePage
 		   bindGrid();
 		   BindGridAdd();
 		   
-		   btnAdd.Visible = false; 
+		   //btnAdd.Visible = false; 
            btnCancel.Visible = true;
            btnsimpan.Visible = true;
 		   btnsimpan.Text = "Save";		   
@@ -302,10 +368,13 @@ public partial class module_transaksi_shiftlist : BasePage
             isEditMode = false;
             isAdddMode = false;
 
-            btnAdd.Visible = true;
-            btnCancel.Visible = false;
-            btnsimpan.Visible = true;
-            btnsimpan.Text = "Edit";            
+            if (dtx.Rows.Count > 0)
+            {
+                //btnAdd.Visible = true;
+                btnCancel.Visible = false;
+                btnsimpan.Visible = true;
+                btnsimpan.Text = "Edit";
+            }
         } 
 		
 		protected void btnCancel_Click(object sender, EventArgs e)
@@ -328,13 +397,14 @@ public partial class module_transaksi_shiftlist : BasePage
                 dtx = _dalMST_SHIFT.GetRows_HR_SHIFT(_htParameters);
 				
 				isAdddMode = false;
-				btnAdd.Visible = true; 
+				//btnAdd.Visible = true; 
 			}
 			else
 			{
 				isEditMode = !isEditMode;                
 			}
-			BindData();
+			//BindData();
+            BindData(dtx);
             btnCancel.Visible = false;          
 			btnsimpan.Text = "Edit";
         }
@@ -366,7 +436,7 @@ public partial class module_transaksi_shiftlist : BasePage
                     {
                         TemplateField ItemTmpField = new TemplateField();
                         ItemTmpField.HeaderText = dtx.Columns[i].ColumnName;
-                        ItemTmpField.ItemTemplate = new DynamicallyTemplatedGridViewHandler(ListItemType.EditItem, dtx.Columns[i].ColumnName, "DropDownPeg");
+                        ItemTmpField.ItemTemplate = new DynamicallyTemplatedGridViewHandler(ListItemType.EditItem, dtx.Columns[i].ColumnName, "Textbox"); //DropDownPeg
                         GridView.Columns.Add(ItemTmpField);
                     }
                 }
@@ -443,21 +513,22 @@ public partial class module_transaksi_shiftlist : BasePage
                             _htParameters["p_STATUS_SHIFT"] = ddlStatus.SelectedValue;
                             Utility.ApplyDefaultProp(_htParameters);
 
-                            if (isRows == "0")
-							{
-								//insert  
-                                _dalMST_SHIFT.InsertHR_Shift(_htParameters);
-							}
-							else if (isRows == "1")
-							{
-								//update                                
-								_dalMST_SHIFT.UpdateHR_Shift(_htParameters);
-							} 
-							else
-							{
-								//update-insert                                
-								_dalMST_SHIFT.UpdateInsertHR_Shift(_htParameters);
-							}
+                            //if (isRows == "0")
+                            //{
+                            //    //insert  
+                            //    _dalMST_SHIFT.InsertHR_Shift(_htParameters);
+                            //}
+                            //else if (isRows == "1")
+                            //{
+                            //    //update                                
+                            //    _dalMST_SHIFT.UpdateHR_Shift(_htParameters);
+                            //} 
+                            //else
+                            //{
+                            //    //update-insert                                
+                            //    _dalMST_SHIFT.UpdateInsertHR_Shift(_htParameters);
+                            //}                                                     
+                             _dalMST_SHIFT.UpdateInsertHR_Shift(_htParameters);
 							
 						}
 					}               
@@ -467,7 +538,7 @@ public partial class module_transaksi_shiftlist : BasePage
                 BindGridSearch();
                 btnsimpan.Visible = false;
 				
-				btnAdd.Visible = true;				
+				//btnAdd.Visible = true;				
 				isAdddMode = false;
 				
                 //List<string> colors = new List<string>(); 

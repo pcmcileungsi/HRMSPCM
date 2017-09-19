@@ -5,7 +5,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE procedure [dbo].[SP_MST_SHIFT_GETROWS_KODE]
+create procedure [dbo].[SP_MST_SHIFT_GETROWS_KODE]
 	(
 	  @p_keywords	nvarchar(5)
 	) 
@@ -13,5 +13,5 @@ CREATE procedure [dbo].[SP_MST_SHIFT_GETROWS_KODE]
 	begin
 		select DISTINCT KODE           			
 		from	REFF_JENIS_SHIFT	
-        ORDER BY KODE DESC		
+        ORDER BY KODE 		
 	end
