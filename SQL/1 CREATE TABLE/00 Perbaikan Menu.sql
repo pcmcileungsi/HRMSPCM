@@ -46,6 +46,8 @@ EXEC SP_Tambah_Menu_Modul_Anas 'Pelamar','module/pegawai/pelamarlist.aspx',24, 1
 EXEC SP_Tambah_Menu_Modul_Anas 'Kontrak','module/pegawai/kontraklist.aspx',24, 1
 EXEC SP_Tambah_Menu_Modul_Anas 'Pegawai','module/pegawai/pegawailist.aspx',24, 1
 EXEC SP_Tambah_Menu_Modul_Anas 'Kuota Cuti','module/pegawai/kuotacutilist.aspx',24, 1
+EXEC SP_Tambah_Menu_Modul_Anas 'Absensi','module/pegawai/absensilist.aspx',24, 1
+--update MASTER_MENU set parent_menu_id = 23 where menu_id = 41
 
 --PARENT MENU
 EXEC SP_Tambah_Menu_Modul_Parent_Anas 'Transaksi', 1
