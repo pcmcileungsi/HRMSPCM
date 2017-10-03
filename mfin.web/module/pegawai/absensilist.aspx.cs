@@ -36,11 +36,7 @@ public partial class module_pegawai_absensilist : BasePage
         {
             CheckRole(_RoleCode);
 
-            BindGrid();
-
-            if (Request.Params["action"].Equals("edt"))
-            {
-            }
+            BindGrid();            
         }
     }
 

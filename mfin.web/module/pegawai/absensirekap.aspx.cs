@@ -17,6 +17,54 @@ using MFin.DataAccessLayer.Master;
 
 public partial class module_pegawai_absensirekap : BasePage
 {
+        string tgl1
+    {
+        get
+        {
+            return (string)ViewState["tgl1"];
+        }
+        set
+        {
+            ViewState["tgl1"] = value;
+        }
+    }
+
+        string tgl2
+    {
+        get
+        {
+            return (string)ViewState["tgl2"];
+        }
+        set
+        {
+            ViewState["tgl2"] = value;
+        }
+    }
+
+        string tanggal1
+        {
+            get
+            {
+                return (string)ViewState["tanggal1"];
+            }
+            set
+            {
+                ViewState["tanggal1"] = value;
+            }
+        }
+
+        string tanggal2
+        {
+            get
+            {
+                return (string)ViewState["tanggal2"];
+            }
+            set
+            {
+                ViewState["tanggal2"] = value;
+            }
+        }
+
         private static string _RoleCode = "B100139";		
 
         protected void Page_Load(object sender, EventArgs e)
@@ -28,8 +76,13 @@ public partial class module_pegawai_absensirekap : BasePage
                 CheckRole(_RoleCode);				
 				
 				TahunOption(ddlYear, DateTime.Now.Year.ToString());
-                BindUnitKerja();
-                BindGrid();       
+                BindUnitKerja();                
+
+                if (Session["year_absen"] != null) ddlYear.SelectedValue = Session["year_absen"].ToString();
+                if (Session["month_absen"] != null) ddlMonth.SelectedValue = Session["month_absen"].ToString();
+                if (Session["uker_absen"] != null) ddlUnitKerja.SelectedValue = Session["uker_absen"].ToString();
+
+                BindGrid();
             }
         }
 		
@@ -91,9 +144,20 @@ public partial class module_pegawai_absensirekap : BasePage
 
                 _htParameters["p_TANGGAL_ABSEN1"] = year + "-" + month + "-21";
 
+                tgl1 = year + "-" + month + "-21";
+                tanggal1 = "21" + "-" + month + "-" + year;
+
                 if (Convert.ToInt16(month) + 1 == 13) { month = "01"; year = (Convert.ToInt16(year) + 1).ToString(); } else month = (Convert.ToInt16(month) + 1).ToString();
 
                 _htParameters["p_TANGGAL_ABSEN2"] = year + "-" + month  + "-20";
+
+                tgl2 = year + "-" + month + "-20";
+
+                if (Convert.ToInt16(month) < 10)
+                    tanggal2 = "20" + "-0" + month + "-" + year;
+                else
+                    tanggal2 = "20" + "-" + month + "-" + year;
+
                 _htParameters["p_KODE_UNIT_KERJA"] = ddlUnitKerja.SelectedValue.ToString();
 
                 gvwList.DataSource = _dalHR_ABSENSI.GetRowsRekap(_htParameters);
@@ -107,6 +171,10 @@ public partial class module_pegawai_absensirekap : BasePage
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
+            Session["year_absen"] = ddlYear.SelectedValue;
+            Session["month_absen"] = ddlMonth.SelectedValue;
+            Session["uker_absen"] = ddlUnitKerja.SelectedValue;
+
             Response.Redirect("absensilist.aspx");
         }
 
@@ -123,10 +191,18 @@ public partial class module_pegawai_absensirekap : BasePage
 
         protected void gvwList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string a = gvwList.SelectedDataKey[0].ToString();
-            string b = gvwList.SelectedDataKey[1].ToString();
+            string nik = gvwList.SelectedDataKey[0].ToString();
+            string nama = gvwList.SelectedDataKey[1].ToString();
 
-            Response.Redirect("absensilist.aspx?action=edt&id=" + a);
+            Session["tgl_absen"] = tgl1 + " s/d " + tgl2;
+            Session["tgl2_absen"] = tanggal1 + " s/d " + tanggal2;
+            Session["year_absen"] = ddlYear.SelectedValue;
+            Session["month_absen"] = ddlMonth.SelectedValue;
+            Session["uker_absen"] = ddlUnitKerja.SelectedValue;
+            Session["nik_absen"] = nik;
+            Session["nama_absen"] = nama;
+
+            Response.Redirect("absensirekapdtl.aspx");
         }
 
         protected void gvwList_RowCreated(object sender, GridViewRowEventArgs e)

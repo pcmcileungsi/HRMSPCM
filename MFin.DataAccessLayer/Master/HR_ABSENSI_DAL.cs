@@ -18,13 +18,13 @@ namespace MFin.DataAccessLayer.Master
             }
         }
 
-        public void Update(Hashtable parameters)
+        public void UpdateRekap(Hashtable parameters)
         {
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
             dbw.ConnectionString = Shared.ConnectionString;
-            if (!dbw.ExecuteSP("SP_HR_ABSENSI_UPDATE", parameters))
+            if (!dbw.ExecuteSP("SP_HR_ABSENSI_REKAP_UPDATE", parameters))
             {
-                throw new Exception("Fail to execute SP_HR_ABSENSI_UPDATE", new Exception(dbw.DBErrorMessage));
+                throw new Exception("Fail to execute SP_HR_ABSENSI_REKAP_UPDATE", new Exception(dbw.DBErrorMessage));
             }
         }
 
@@ -74,6 +74,24 @@ namespace MFin.DataAccessLayer.Master
             }
         }
 
+        public DataTable GetRowShift(Hashtable parameters)
+        {
+            DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
+            DataSet ds = new DataSet();
+            dbw.ConnectionString = Shared.ConnectionString;
+            if (!dbw.ExecuteSP("SP_HR_ABSENSI_REKAP_GETROW_SHIFT", parameters, ds))
+            {
+                throw new Exception("Fail to execute SP_HR_ABSENSI_REKAP_GETROW_SHIFT", new Exception(dbw.DBErrorMessage));
+            }
+            else
+            {
+                if (ds.Tables.Count <= 0)
+                    throw new Exception("Fail to SP_HR_ABSENSI_REKAP_GETROW_SHIFT. No row found.");
+                else
+                    return ds.Tables[0];
+            }
+        }
+
         public DataTable GetRow(Hashtable parameters)
         {
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
@@ -87,6 +105,24 @@ namespace MFin.DataAccessLayer.Master
             {
                 if (ds.Tables.Count <= 0)
                     throw new Exception("Fail to SP_HR_ABSENSI_GETROW. No row found.");
+                else
+                    return ds.Tables[0];
+            }
+        }
+
+        public DataTable GetRowRekapDetail(Hashtable parameters)
+        {
+            DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
+            DataSet ds = new DataSet();
+            dbw.ConnectionString = Shared.ConnectionString;
+            if (!dbw.ExecuteSP("SP_HR_ABSENSI_REKAP_GETROW", parameters, ds))
+            {
+                throw new Exception("Fail to execute SP_HR_ABSENSI_REKAP_GETROW", new Exception(dbw.DBErrorMessage));
+            }
+            else
+            {
+                if (ds.Tables.Count <= 0)
+                    throw new Exception("Fail to SP_HR_ABSENSI_REKAP_GETROW. No row found.");
                 else
                     return ds.Tables[0];
             }
