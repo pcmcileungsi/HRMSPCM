@@ -96,14 +96,24 @@
        <tr>
             <td>
                 <asp:UpdatePanel ID="updMain" UpdateMode="Conditional" runat="server">
-                    <ContentTemplate>
-                        <asp:GridView ID="gvwList" runat="server" AutoGenerateColumns="False" DataKeyNames="id" AutoGenerateEditButton="True" ControlStyle-ForeColor="RED"
+                    <ContentTemplate>  
+                        <asp:GridView ID="gvwList" runat="server" AutoGenerateColumns="False" DataKeyNames="id"  
                              EmptyDataText="There is no data." AllowPaging="true" PageSize="10" OnPageIndexChanging="gvwList_PageIndexChanging"
-                            OnRowCreated="gvwList_RowCreated"  OnRowEditing="OnRowEditing" OnRowCancelingEdit="OnRowCancelingEdit" OnRowUpdating="OnRowUpdating"
+                            OnRowCreated="gvwList_RowCreated"  OnRowDataBound="gvwList_RowDataBound"
+							OnRowEditing="OnRowEditing" OnRowCancelingEdit="OnRowCancelingEdit" OnRowUpdating="OnRowUpdating"
                              GridLines="None" CssClass="mGrid" PagerStyle-CssClass="pgr"
                             AlternatingRowStyle-CssClass="alt" width="50%">
-                            <Columns>
-                                <asp:TemplateField>
+                            <Columns>							   
+								<asp:TemplateField ShowHeader="True" HeaderText=".................." HeaderStyle-ForeColor="#525252" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center">
+									<ItemTemplate>
+										<asp:LinkButton ID="EditButton" ForeColor="Red" runat="server" CommandName="Edit" Text="Edit" Visible="true" />
+									</ItemTemplate>
+									<EditItemTemplate>
+										<asp:LinkButton ID="UpdateButton" ForeColor="Red" runat="server" CommandName="Update" Text="Update" />                                       
+										<asp:LinkButton ID="CancelButton" ForeColor="Red" runat="server" CommandName="Cancel" Text="Cancel" />
+									</EditItemTemplate>
+								</asp:TemplateField>
+                                <asp:TemplateField ItemStyle-HorizontalAlign="Center">
                                     <HeaderTemplate>
                                         <span>No</span>
                                     </HeaderTemplate>
@@ -111,12 +121,12 @@
                                         <%# Container.DataItemIndex + 1 %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                              <asp:TemplateField HeaderText="Tanggal" ItemStyle-Width="150" ItemStyle-HorizontalAlign="Center">
+                              <asp:TemplateField HeaderText="TANGGAL" ItemStyle-Width="150" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:Label ID="lblTgl" runat="server" Text='<%# Eval("tanggal_absen") %>'></asp:Label>
                                 </ItemTemplate>                               
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="MASUK" ItemStyle-Width="150" ItemStyle-HorizontalAlign="Center">
+                             <asp:TemplateField HeaderText="MASUK" ItemStyle-Width="150" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:Label ID="lblMasuk" runat="server" Text='<%# Eval("attend_time") %>'></asp:Label>
                                 </ItemTemplate>
@@ -132,6 +142,11 @@
                                         onkeypress="return isNumber(event)">
                                      </asp:TextBox>
                                 </EditItemTemplate>
+                            </asp:TemplateField>
+                             <asp:TemplateField HeaderText="Telat" ItemStyle-Width="50" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblTelat" runat="server" Text='<%# Eval("telat") %>'></asp:Label>
+                                </ItemTemplate>                               
                             </asp:TemplateField>
                              <asp:TemplateField HeaderText="PULANG" ItemStyle-Width="150" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
@@ -150,6 +165,31 @@
                                     </asp:TextBox>
                                 </EditItemTemplate>
                             </asp:TemplateField>  
+                              <asp:TemplateField HeaderText="Pulang Cepat" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblPC" runat="server" Text='<%# Eval("PulangCepat") %>'></asp:Label>
+                                </ItemTemplate>                               
+                            </asp:TemplateField>   
+                              <asp:TemplateField HeaderText="Sakit" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblSakit" runat="server" Text='<%# Eval("Sakit") %>'></asp:Label>
+                                </ItemTemplate>                               
+                            </asp:TemplateField>
+                             <asp:TemplateField HeaderText="Cuti" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblCuti" runat="server" Text='<%# Eval("Cuti") %>'></asp:Label>
+                                </ItemTemplate>                               
+                            </asp:TemplateField> 
+                             <asp:TemplateField HeaderText="Ijin" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblIjin" runat="server" Text='<%# Eval("Ijin") %>'></asp:Label>
+                                </ItemTemplate>                               
+                            </asp:TemplateField>      
+                             <asp:TemplateField HeaderText="Alpha" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblAlpha" runat="server" Text='<%# Eval("Alpha") %>'></asp:Label>
+                                </ItemTemplate>                               
+                            </asp:TemplateField>                                       
                             </Columns>
                         </asp:GridView>
                     </ContentTemplate>                                   

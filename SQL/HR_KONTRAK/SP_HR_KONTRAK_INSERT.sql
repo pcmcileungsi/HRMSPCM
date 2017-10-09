@@ -15,7 +15,7 @@ create procedure [dbo].[SP_HR_KONTRAK_INSERT]
 	,@p_KODE_UNIT_KERJA		nvarchar(5)
 	,@p_KODE_POSISI			nvarchar(5)
 	,@p_KODE_MST_JABATAN		nvarchar(10)
-	,@p_KODE_PEGAWAI		varchar(20)
+	,@p_NIK         		varchar(10)
 	,@p_STATUS_PEGAWAI			varchar(1)
 	,@p_TANGGAL_MULAI_KONTRAK  datetime
 	,@p_TANGGAL_AKHIR_KONTRAK datetime	
@@ -37,7 +37,7 @@ begin
        ,[KODE_UNIT_KERJA]
        ,[KODE_POSISI]
        ,[KODE_MST_JABATAN]
-       ,[KODE_PEGAWAI]
+       ,[NIK]
        ,[STATUS_PEGAWAI]
        ,[TANGGAL_MULAI_KONTRAK]
        ,[TANGGAL_AKHIR_KONTRAK]	  
@@ -57,7 +57,7 @@ begin
 		@p_KODE_UNIT_KERJA,
 		@p_KODE_POSISI,
 		@p_KODE_MST_JABATAN,
-		@p_KODE_PEGAWAI,
+		@p_NIK,
 	    case when @p_STATUS_PEGAWAI = '1' then 1 else 0 end,
 		@p_TANGGAL_MULAI_KONTRAK,
 		@p_TANGGAL_AKHIR_KONTRAK,		

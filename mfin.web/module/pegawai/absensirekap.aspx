@@ -73,13 +73,13 @@
             <td>
                 <asp:UpdatePanel ID="updMain" UpdateMode="Conditional" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="gvwList" runat="server" AutoGenerateColumns="False" DataKeyNames="kode_pegawai,NAMA" 
+                        <asp:GridView ID="gvwList" runat="server" AutoGenerateColumns="False" DataKeyNames="NIK,NAMA" 
                              EmptyDataText="There is no data." OnSelectedIndexChanged="gvwList_SelectedIndexChanged"
                             AllowPaging="true" PageSize="10" OnPageIndexChanging="gvwList_PageIndexChanging"
                             OnRowCreated="gvwList_RowCreated"  GridLines="None" CssClass="mGrid" PagerStyle-CssClass="pgr"
                             AlternatingRowStyle-CssClass="alt">
                             <Columns>
-                                <asp:TemplateField>
+                                <asp:TemplateField ItemStyle-HorizontalAlign="Center">
                                     <HeaderTemplate>
                                         <span>No</span>
                                     </HeaderTemplate>
@@ -87,7 +87,7 @@
                                         <%# Container.DataItemIndex + 1 %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="kode_pegawai" HeaderText="NIK">
+                                <asp:BoundField DataField="NIK" HeaderText="NIK">
                                     <ItemStyle Width="5%" HorizontalAlign="Center" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="NAMA" HeaderText="NAMA">
@@ -101,7 +101,19 @@
                                 </asp:BoundField> 
                                  <asp:BoundField DataField="PulangCepat" HeaderText="PULANG CEPAT">
                                     <ItemStyle Width="10%" HorizontalAlign="Center" />
-                                </asp:BoundField>   						
+                                </asp:BoundField> 
+                                <asp:BoundField DataField="Sakit" HeaderText="SAKIT">
+                                    <ItemStyle Width="10%" HorizontalAlign="Center" />
+                                </asp:BoundField>   
+                                 <asp:BoundField DataField="Cuti" HeaderText="CUTI">
+                                    <ItemStyle Width="10%" HorizontalAlign="Center" />
+                                </asp:BoundField>
+                                 <asp:BoundField DataField="Ijin" HeaderText="IJIN">
+                                    <ItemStyle Width="10%" HorizontalAlign="Center" />
+                                </asp:BoundField> 
+                                 <asp:BoundField DataField="Alpha" HeaderText="ALPHA">
+                                    <ItemStyle Width="10%" HorizontalAlign="Center" />
+                                </asp:BoundField>  						
                                <asp:CommandField ShowSelectButton="True" SelectText="Detail" ItemStyle-HorizontalAlign="Center" ControlStyle-ForeColor="RED" ControlStyle-BorderColor="RED"></asp:CommandField>
                             </Columns>
                         </asp:GridView>

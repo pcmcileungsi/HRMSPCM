@@ -48,8 +48,7 @@ public partial class module_pegawai_kontrakdtl : BasePage
 
             _htParameters["p_ID"] = Request.Params["id"];
             DataTable _dt = _dalHR_KONTRAK_DAL.GetRow(_htParameters);
-
-            string x = _dt.Rows[0]["STATUS_PEGAWAI"].ToString();
+                     
             if (_dt.Rows[0]["STATUS_PEGAWAI"].ToString() == "True")
             {
                 cbStatus.Checked = true;

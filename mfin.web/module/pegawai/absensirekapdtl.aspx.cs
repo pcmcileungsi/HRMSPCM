@@ -50,9 +50,7 @@ public partial class module_pegawai_absensirekapdtl : BasePage
             if (_dt.Rows[0]["is_shift"].ToString() == "1")
             {
                 cbShift.Checked = true;
-            }
-           
-            //MPF23.Shared.Mapper.DBToUI.Map(pnlBody.Controls, _dt.Rows[0]);
+            }            
         }
         catch (Exception ex)
         {
@@ -113,7 +111,9 @@ public partial class module_pegawai_absensirekapdtl : BasePage
     {
         Response.Redirect("absensirekap.aspx");       
     }   
-    #endregion        
+    #endregion 
+
+    	
     
     protected void OnRowEditing(object sender, GridViewEditEventArgs e)
     {
@@ -139,7 +139,23 @@ public partial class module_pegawai_absensirekapdtl : BasePage
         gvwList.EditIndex = -1;
         this.BindGrid();
     }
+	protected void gvwList_RowDataBound(Object sender, GridViewRowEventArgs e)
+	{
+		if (e.Row.RowType == DataControlRowType.DataRow 
+			&& (
+				e.Row.RowState == DataControlRowState.Alternate
+				|| e.Row.RowState == DataControlRowState.Normal
+				|| e.Row.RowState == DataControlRowState.Selected
+			))
+		{
+            LinkButton EditButton = (LinkButton)e.Row.FindControl("EditButton");
 
+            if ((DataBinder.Eval(e.Row.DataItem, "Sakit").ToString()) != "0" || (DataBinder.Eval(e.Row.DataItem, "Cuti").ToString()) != "0")
+            {
+                EditButton.Visible = false;
+            }            
+		}
+	}	
     protected void gvwList_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         gvwList.PageIndex = e.NewPageIndex;

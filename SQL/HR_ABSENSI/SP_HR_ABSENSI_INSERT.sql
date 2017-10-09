@@ -1,6 +1,6 @@
 create procedure [dbo].[SP_HR_ABSENSI_INSERT]
 (
-	 @p_KODE_PEGAWAI		varchar(20)
+	 @p_NIK         		varchar(20)
 	,@p_TANGGAL_ABSEN		date
 	,@p_IN_TIME		        TIME
 	,@p_OUT_TIME		    TIME
@@ -18,7 +18,7 @@ begin
 
 	insert into HR_ABSENSI
 	(
-	    KODE_PEGAWAI
+	    NIK
        ,TANGGAL_ABSEN
        ,IN_TIME
        ,OUT_TIME
@@ -34,7 +34,7 @@ begin
 	)
 	values
 	(
-		@p_KODE_PEGAWAI,
+		@p_NIK,
 		@p_TANGGAL_ABSEN,
 		@p_IN_TIME,
 		@p_OUT_TIME,

@@ -8,6 +8,16 @@ namespace MFin.DataAccessLayer.Master
 {
     public class HR_ABSENSI_DAL
     {
+		public void InsertCek(Hashtable parameters, ref int isInsert)
+        {
+            DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
+            dbw.ConnectionString = Shared.ConnectionString;
+            if (!dbw.ExecuteSP("SP_HR_ABSENSI_INSERT_CEK", parameters, ref isInsert))
+            {
+                throw new Exception("Fail to execute SP_HR_ABSENSI_INSERT_CEK", new Exception(dbw.DBErrorMessage));
+            }
+        }
+		
         public void Insert(Hashtable parameters)
         {
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();

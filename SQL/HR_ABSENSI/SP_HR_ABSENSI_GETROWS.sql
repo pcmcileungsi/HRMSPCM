@@ -6,7 +6,7 @@ create procedure [dbo].[SP_HR_ABSENSI_GETROWS] --''
 	begin
 		select	ROW_NUMBER() OVER(ORDER BY (SELECT 0), f.nama,a.ID) AS NO,
 		        a.ID,
-		        a.KODE_PEGAWAI,			
+		        a.nik,			
 				f.NAMA as NAMA_PEGAWAI,
 				a.TANGGAL_ABSEN,
 			    convert(varchar(5),IN_TIME,21) IN_TIME,   
@@ -16,6 +16,6 @@ create procedure [dbo].[SP_HR_ABSENSI_GETROWS] --''
                 a.KODE_JENIS_SHIFT				
 		from	HR_ABSENSI a
 		left join REFF_JENIS_SHIFT b on b.KODE = a.KODE_JENIS_SHIFT		
-		left join HR_PEGAWAI f on f.nik = a.KODE_PEGAWAI
+		left join HR_PEGAWAI f on f.nik = a.nik
 		where	f.NAMA	 like '%' + @p_keywords + '%' or f.NAMA is null	
 	end

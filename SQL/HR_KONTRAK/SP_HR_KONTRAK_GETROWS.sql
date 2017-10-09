@@ -27,6 +27,6 @@ create procedure [dbo].[SP_HR_KONTRAK_GETROWS]
 		inner join reff_posisi c on c.kode = a.kode_posisi
 		inner join mst_jabatan d on d.kode = a.kode_mst_jabatan
 		inner join reff_jenis_jabatan e on e.kode = d.kode_jabatan
-		inner join HR_PEGAWAI f on f.nik = a.KODE_PEGAWAI
+		inner join HR_PEGAWAI f on f.nik = a.nik
 		where	f.NAMA	 like '%' + @p_keywords + '%'		
 	end

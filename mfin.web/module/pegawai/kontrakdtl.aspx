@@ -119,8 +119,8 @@
                         <td width="80%">                           
                             <asp:UpdatePanel ID="updPegInfo" runat="server">
                                 <ContentTemplate>
-                                    <cc1:XUITextBox ID="txtPeg" runat="server" DataType="String" DBColumnName="KODE_PEGAWAI"
-                                        BindType="Both" SPParameterName="p_KODE_PEGAWAI" MaxLength="20" Width="48px" Enabled="false">
+                                    <cc1:XUITextBox ID="txtPeg" runat="server" DataType="String" DBColumnName="NIK"
+                                        BindType="Both" SPParameterName="p_NIK" MaxLength="20" Width="48px" Enabled="false">
                                     </cc1:XUITextBox>
                                     <asp:ImageButton ID="imgBtnLookUpPeg" runat="server" ImageUrl="~/img/im4_toolbar_search.png"
                                         ImageAlign="AbsMiddle" CausesValidation="false" OnClick="BtnLookUpPeg_Click" />

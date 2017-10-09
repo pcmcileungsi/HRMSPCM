@@ -31,7 +31,7 @@ public partial class module_pegawai_absensilist : BasePage
     protected void Page_Load(object sender, EventArgs e)
     {
         LoadInit();
-        //mdlPopupLoadingword2.Show();
+       
         if (!Page.IsPostBack)
         {
             CheckRole(_RoleCode);
@@ -43,8 +43,7 @@ public partial class module_pegawai_absensilist : BasePage
 
     #region Toolbar
     protected void btnUpload_Click(object sender, EventArgs e)
-    {
-        //mdlPopupLoadingword2.Show();
+    {        
         string filepath = "";
         try
         {
@@ -70,7 +69,7 @@ public partial class module_pegawai_absensilist : BasePage
             Utility.ShowMessageBox(this, Utility.SAVE_DATA_FAIL_MESSAGE, ex, null);
             mdlPopupLoadingword2.Hide();
         }
-        //mdlPopupLoadingword2.Hide();
+        mdlPopupLoadingword2.Hide();
     }
     protected void btnSearch_Click(object sender, EventArgs e)
     {
@@ -198,6 +197,7 @@ public partial class module_pegawai_absensilist : BasePage
     {
         HR_ABSENSI_DAL _dalHR_ABSENSI = null;
         Hashtable _htParameters = null;
+		Hashtable _htParameters2 = null;
         string InOut = "";
         string InTime = "";
         string OutTime = "";
@@ -207,11 +207,13 @@ public partial class module_pegawai_absensilist : BasePage
         string Abnormal = "";
         string Abnormal0 = "";
         string Abnormal1 = "";
+		int isInsert = 0;
        
         try
         {
             _dalHR_ABSENSI = new HR_ABSENSI_DAL();
             _htParameters = new Hashtable();
+			_htParameters2 = new Hashtable();
 
             foreach (DataRow dr in dtx.Select("[Column 1] <> 'Date' and [Column 1] <> 'OutTime'"))
             //foreach (DataRow dr in dtx.Rows)
@@ -234,8 +236,13 @@ public partial class module_pegawai_absensilist : BasePage
 
                     Abnormal = Abnormal0 + ";" + Abnormal1;
                 }
-
-                _htParameters["p_KODE_PEGAWAI"] = dr["Column 2"].ToString().Trim();
+				
+				//Parameter Cek Insert
+				_htParameters2["p_NIK"] = dr["Column 2"].ToString().Trim();
+                _htParameters2["p_TANGGAL_ABSEN"] = DateTime.Now.Year.ToString() + "-" + dr["Column 1"].ToString();
+                 
+				 //Parameter Insert
+                _htParameters["p_NIK"] = dr["Column 2"].ToString().Trim();
                 _htParameters["p_TANGGAL_ABSEN"] = DateTime.Now.Year.ToString() + "-" + dr["Column 1"].ToString();
                 _htParameters["p_IN_TIME"] = InTime;
                 _htParameters["p_OUT_TIME"] = OutTime;
@@ -246,19 +253,14 @@ public partial class module_pegawai_absensilist : BasePage
                 _htParameters["p_WORK_TIME"] = Convert.ToInt16(dr["Column 9"].ToString().Replace("(Min)", ""));  
 
                 Utility.ApplyDefaultProp(_htParameters);
-                _dalHR_ABSENSI.Insert(_htParameters);
+				Utility.ApplyDefaultProp(_htParameters2);
+				
+				_dalHR_ABSENSI.InsertCek(_htParameters2, ref isInsert);                            
 
-                //Utility.ShowMessageBoxAnas(this, Utility.SAVE_DATA_SUCCESS_MESSAGE, "Sukses");
-                //Utility.ShowMessageBox(this, Utility.SAVE_DATA_SUCCESS_MESSAGE, null, "absensilist.aspx?action=edt");
-
-                //if (Request.Params["action"] == "add")
-                //{
-                //    _dalHR_ABSENSI.Insert(_htParameters); 
-                //}
-                //else
-                //{
-                //    _dalHR_ABSENSI.Update(_htParameters);
-                //}    
+                if (isInsert == 0)
+                {
+                   _dalHR_ABSENSI.Insert(_htParameters); 
+                }                
             }
             Utility.ShowMessageBoxAnas(this, Utility.SAVE_DATA_SUCCESS_MESSAGE, "Sukses");       
         }

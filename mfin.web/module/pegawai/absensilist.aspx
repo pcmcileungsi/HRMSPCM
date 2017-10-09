@@ -34,7 +34,7 @@
                                 <cc2:XUITextBox ID="txtDocName" runat="server" DataType="String" 
                                 BindType="Both"  Width="200px"></cc2:XUITextBox>                                                                                            
                                 <input id="upfile" type="file" runat="server" name="upfile" style="display: none" onchange="UploadFile()" />    
-                 <button ID="btnUpload2" type="button" runat="server" onclick="onUpload()">Upload</button>
+                 <button ID="btnUpload2" type="button" runat="server" onclick="onUpload()" OnClientClick="$('[id*=btnShowPopupLoading]').click();">Upload</button>
                 <asp:Button ID="btnUpload" runat="server" Text="Upload" style="display: none" OnClick="btnUpload_Click" />
             </td>
             <td align="right">
@@ -64,7 +64,7 @@
                                         <%# Container.DataItemIndex + 1 %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="KODE_PEGAWAI" HeaderText="KODE">
+                                <asp:BoundField DataField="NIK" HeaderText="NIK">
                                     <ItemStyle Width="10%" HorizontalAlign="Center" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="TANGGAL_ABSEN" HeaderText="TANGGAL ABSEN" DataFormatString="{0:yyyy-MM-dd}">
