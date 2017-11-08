@@ -7,9 +7,9 @@ create procedure [dbo].[SP_HR_ABSENSI_REKAP_GETROW] --'533','2017-07-21 s/d 2017
 	begin
 		select  id,
 		        convert(varchar(10),tanggal_absen,105)tanggal_absen,
-				convert(varchar(5),attend_time,21)attend_time,
+			    case when convert(varchar(5),attend_time,21) = '00:00' then '' else convert(varchar(5),attend_time,21) end  attend_time,
 				case when(datediff(minute,in_time,attend_time)-10) < 0 then 0 else(datediff(minute,in_time,attend_time)-10) end telat,
-				convert(varchar(5),leave_time,21)leave_time,
+				case when convert(varchar(5),leave_time,21) = '00:00' then '' else convert(varchar(5),leave_time,21) end leave_time,
 				case when datediff(minute,out_time,leave_time) < 0 then datediff(minute,out_time,leave_time) else 0 end PulangCepat,
 				0 Sakit,
 				0 Cuti,

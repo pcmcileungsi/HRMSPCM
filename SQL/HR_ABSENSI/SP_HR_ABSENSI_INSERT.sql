@@ -7,6 +7,8 @@ create procedure [dbo].[SP_HR_ABSENSI_INSERT]
 	,@p_ATTEND_TIME		    varchar(5)
 	,@p_LEAVE_TIME			varchar(5)	
 	,@p_KODE_JENIS_SHIFT	nvarchar(5)	
+	,@p_ABNORMAL            varchar(50)
+	,@p_WORK_TIME           INTEGER
 	,@p_cre_date			datetime
 	,@p_cre_by				nvarchar(15)
 	,@p_cre_ip_address		nvarchar(15)
@@ -24,7 +26,9 @@ begin
        ,OUT_TIME
        ,ATTEND_TIME
        ,LEAVE_TIME
-       ,KODE_JENIS_SHIFT          
+       ,KODE_JENIS_SHIFT
+       ,ABNORMAL
+       ,WORK_TIME          
        ,[CRE_DATE]
        ,[CRE_BY]
        ,[CRE_IP_ADDRESS]
@@ -40,7 +44,9 @@ begin
 		@p_OUT_TIME,
 		case when @p_ATTEND_TIME = '' then NULL else @p_ATTEND_TIME end,
 		case when @p_LEAVE_TIME = '' then NULL else @p_LEAVE_TIME end,
-		@p_KODE_JENIS_SHIFT,		   	
+		@p_KODE_JENIS_SHIFT,
+		@p_ABNORMAL,
+		@p_WORK_TIME,		   	
 		@p_cre_date,
 		@p_cre_by,
 		@p_cre_ip_address,

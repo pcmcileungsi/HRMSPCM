@@ -6,7 +6,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-create procedure [dbo].[SP_HR_SHIFT_GETROWS] --'2017','01','1','1'
+create procedure [dbo].[SP_HR_SHIFT_GETROWS] --'2017','01','SMKN1','1'
 	(
 	  @p_Year	           varchar(4),
 	  @p_Month	           varchar(2),

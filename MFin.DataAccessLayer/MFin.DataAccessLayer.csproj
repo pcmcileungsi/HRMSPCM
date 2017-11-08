@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="BaseDAL.cs" />
     <Compile Include="GenericDAL.cs" />
+    <Compile Include="Master\MST_CALENDAR_DAL.cs" />
     <Compile Include="Master\HR_ABSENSI_DAL.cs" />
     <Compile Include="Master\MST_POSISI_DAL.cs" />
     <Compile Include="Master\MST_SHIFT_DAL.cs" />

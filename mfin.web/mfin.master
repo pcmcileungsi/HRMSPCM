@@ -60,7 +60,7 @@
 </head>
 <body style="min-height:650px;">
     <form id="form1" runat="server" style="min-height:650px;">
-    <asp:ScriptManager ID="sm" runat="server" AsyncPostBackTimeout="3600">
+    <asp:ScriptManager ID="sm" runat="server" AsyncPostBackTimeout="3600" EnablePageMethods="true">
     </asp:ScriptManager>
     <div style="min-height:650px;" >
         <asp:ContentPlaceHolder ID="cphbd" runat="server">

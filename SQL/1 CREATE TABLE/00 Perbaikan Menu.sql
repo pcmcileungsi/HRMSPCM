@@ -37,6 +37,7 @@ EXEC SP_Tambah_Menu_Modul_Anas 'Master Tunjangan Jabatan','module/sysadmin/maste
 EXEC SP_Tambah_Menu_Modul_Anas 'Master Cuti','module/sysadmin/master/mstcutilist.aspx',15, 1
 EXEC SP_Tambah_Menu_Modul_Anas 'Master Shift','module/sysadmin/master/mstshiftlist.aspx',15, 1
 EXEC SP_Tambah_Menu_Modul_Anas 'Master Posisi','module/sysadmin/master/mstposisilist.aspx',14, 1
+EXEC SP_Tambah_Menu_Modul_Anas 'Master Kalender','module/sysadmin/master/mstcalendarlist.aspx',14, 1
 --update MASTER_MENU set parent_menu_id = 14 where menu_id = 38
 
 --PARENT MENU
