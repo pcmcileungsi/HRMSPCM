@@ -131,8 +131,11 @@ public partial class module_pegawai_absensirekap : BasePage
 
         private void BindGrid()
         {
+            DataTable dt = new DataTable();
+
             HR_ABSENSI_DAL _dalHR_ABSENSI = null;
             Hashtable _htParameters = null;
+            Hashtable _htParameters2 = null;
 
             string year = ddlYear.SelectedValue;
             string month = ddlMonth.SelectedValue;
@@ -141,6 +144,7 @@ public partial class module_pegawai_absensirekap : BasePage
             {
                 _dalHR_ABSENSI = new HR_ABSENSI_DAL();
                 _htParameters = new Hashtable();
+                _htParameters2 = new Hashtable();
 
                 _htParameters["p_TANGGAL_ABSEN1"] = year + "-" + month + "-21";
 
@@ -160,8 +164,27 @@ public partial class module_pegawai_absensirekap : BasePage
 
                 _htParameters["p_KODE_UNIT_KERJA"] = ddlUnitKerja.SelectedValue.ToString();
 
-                gvwList.DataSource = _dalHR_ABSENSI.GetRowsRekap(_htParameters);
+                gvwList.DataSource = dt = _dalHR_ABSENSI.GetRowsRekap(_htParameters);
                 gvwList.DataBind();
+                                
+                foreach (DataRow dr in dt.Rows)
+                {
+                    _htParameters2["p_NIK"] = dr["NIK"].ToString();
+                    _htParameters2["p_NAMA"] = dr["NAMA"].ToString();
+                    _htParameters2["p_TANGGAL_AWAL"] = tgl1;
+                    _htParameters2["p_TANGGAL_AKHIR"] = tgl2;
+                    _htParameters2["p_TELAT"] = dr["TELAT"].ToString();
+                    _htParameters2["p_PULANGCEPAT"] = dr["PULANGCEPAT"].ToString();
+                    _htParameters2["p_HADIR"] = dr["HADIR"].ToString();
+                    _htParameters2["p_SAKIT"] = dr["SAKIT"].ToString();
+                    _htParameters2["p_CUTI"] = dr["CUTI"].ToString();
+                    _htParameters2["p_IJIN"] = dr["IJIN"].ToString();
+                    _htParameters2["p_ALPHA"] = dr["ALPHA"].ToString();
+                    Utility.ApplyDefaultProp(_htParameters2);
+
+                    _dalHR_ABSENSI.DeleteInsert(_htParameters2);
+                }
+
             }
             catch (Exception ex)
             {

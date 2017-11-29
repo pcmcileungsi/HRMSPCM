@@ -250,7 +250,8 @@ public partial class module_pegawai_absensilist : BasePage
                 _htParameters["p_LEAVE_TIME"] = LeaveTime;
                 _htParameters["p_KODE_JENIS_SHIFT"] = dr["Column 5"].ToString().Substring(dr["Column 5"].ToString().Length - 1, 1);
                 _htParameters["p_ABNORMAL"] = Abnormal.Trim();  
-                _htParameters["p_WORK_TIME"] = Convert.ToInt16(dr["Column 9"].ToString().Replace("(Min)", ""));  
+                _htParameters["p_WORK_TIME"] = Convert.ToInt16(dr["Column 9"].ToString().Replace("(Min)", ""));
+                _htParameters["p_Keterangan"] = "";
 
                 Utility.ApplyDefaultProp(_htParameters);
 				Utility.ApplyDefaultProp(_htParameters2);

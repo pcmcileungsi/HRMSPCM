@@ -92,7 +92,7 @@
             </Triggers>--%>
         </asp:UpdatePanel>
 
-         <table id="Table1" cellpadding="3px" cellspacing="0px" class="search-list-table">  
+         <table id="tabel1" cellpadding="3px" cellspacing="0px" class="search-list-table">  
        <tr>
             <td>
                 <asp:UpdatePanel ID="updMain" UpdateMode="Conditional" runat="server">
@@ -102,7 +102,7 @@
                             OnRowCreated="gvwList_RowCreated"  OnRowDataBound="gvwList_RowDataBound"
 							OnRowEditing="OnRowEditing" OnRowCancelingEdit="OnRowCancelingEdit" OnRowUpdating="OnRowUpdating"
                              GridLines="None" CssClass="mGrid" PagerStyle-CssClass="pgr"
-                            AlternatingRowStyle-CssClass="alt" width="50%">
+                            AlternatingRowStyle-CssClass="alt" width="100%">
                             <Columns>							   
 								<asp:TemplateField ShowHeader="True" HeaderText=".................." HeaderStyle-ForeColor="#525252" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center">
 									<ItemTemplate>
@@ -123,7 +123,8 @@
                                 </asp:TemplateField>
                               <asp:TemplateField HeaderText="TANGGAL" ItemStyle-Width="150" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblTgl" runat="server" Text='<%# Eval("tanggal_absen") %>'></asp:Label>
+                                    <asp:Label ID="lblTgl" runat="server" Text='<%# Eval("tanggal_absen","{0:dd-MM-yyyy}") %>'></asp:Label>
+                                    <asp:Label ID="lblTglAbsen" runat="server" Visible="false" Text='<%# Eval("tanggal_absen","{0:yyyy-MM-dd}") %>'></asp:Label>
                                 </ItemTemplate>                               
                             </asp:TemplateField>
                              <asp:TemplateField HeaderText="MASUK" ItemStyle-Width="150" ItemStyle-HorizontalAlign="Center">
@@ -170,26 +171,35 @@
                                     <asp:Label ID="lblPC" runat="server" Text='<%# Eval("PulangCepat") %>'></asp:Label>
                                 </ItemTemplate>                               
                             </asp:TemplateField>   
-                              <asp:TemplateField HeaderText="Sakit" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center">
+                              <asp:TemplateField HeaderText="Sakit" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center" Visible="false">
                                 <ItemTemplate>
                                     <asp:Label ID="lblSakit" runat="server" Text='<%# Eval("Sakit") %>'></asp:Label>
                                 </ItemTemplate>                               
                             </asp:TemplateField>
-                             <asp:TemplateField HeaderText="Cuti" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center">
+                             <asp:TemplateField HeaderText="Cuti" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center" Visible="false">
                                 <ItemTemplate>
                                     <asp:Label ID="lblCuti" runat="server" Text='<%# Eval("Cuti") %>'></asp:Label>
                                 </ItemTemplate>                               
                             </asp:TemplateField> 
-                             <asp:TemplateField HeaderText="Ijin" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center">
+                             <asp:TemplateField HeaderText="Ijin" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center" Visible="false">
                                 <ItemTemplate>
                                     <asp:Label ID="lblIjin" runat="server" Text='<%# Eval("Ijin") %>'></asp:Label>
                                 </ItemTemplate>                               
                             </asp:TemplateField>      
-                             <asp:TemplateField HeaderText="Alpha" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center">
+                             <asp:TemplateField HeaderText="Alpha" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center" Visible="false">
                                 <ItemTemplate>
                                     <asp:Label ID="lblAlpha" runat="server" Text='<%# Eval("Alpha") %>'></asp:Label>
                                 </ItemTemplate>                               
-                            </asp:TemplateField>                                       
+                            </asp:TemplateField> 
+                              <asp:TemplateField HeaderText="Keterangan" ItemStyle-Width="100" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblKeterangan" runat="server" Text='<%# Eval("Keterangan") %>'></asp:Label>
+                                </ItemTemplate>  
+                                 <EditItemTemplate>
+                                    <asp:DropDownList ID="ddlKeterangan" runat="server" OnSelectedIndexChanged="ddlKeterangan_OnSelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                      <asp:Label ID="lblKeterangan" Visible="false" runat="server" Text='<%# Eval("Keterangan") %>'></asp:Label>
+                                </EditItemTemplate>                               
+                            </asp:TemplateField>                                            
                             </Columns>
                         </asp:GridView>
                     </ContentTemplate>                                   

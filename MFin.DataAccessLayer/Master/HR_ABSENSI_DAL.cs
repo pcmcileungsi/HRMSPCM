@@ -38,13 +38,33 @@ namespace MFin.DataAccessLayer.Master
             }
         }
 
-        public void Delete(Hashtable parameters)
+        public void DeleteAbsensi(Hashtable parameters)
         {
             DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
             dbw.ConnectionString = Shared.ConnectionString;
             if (!dbw.ExecuteSP("SP_HR_ABSENSI_DELETE", parameters))
             {
                 throw new Exception("Fail to execute SP_HR_ABSENSI_DELETE", new Exception(dbw.DBErrorMessage));
+            }
+        }
+
+        public void DeleteInsertAbsen(Hashtable parameters)
+        {
+            DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
+            dbw.ConnectionString = Shared.ConnectionString;
+            if (!dbw.ExecuteSP("SP_HR_ABSENSI_DELETE_INSERT", parameters))
+            {
+                throw new Exception("Fail to execute SP_HR_ABSENSI_DELETE_INSERT", new Exception(dbw.DBErrorMessage));
+            }
+        }
+
+        public void DeleteInsert(Hashtable parameters)
+        {
+            DBWrapper dbw = DBWrapper.GetSqlClientWrapper();
+            dbw.ConnectionString = Shared.ConnectionString;
+            if (!dbw.ExecuteSP("SP_HR_ABSENSI_REKAP_DELETE_INSERT", parameters))
+            {
+                throw new Exception("Fail to execute SP_HR_ABSENSI_REKAP_DELETE_INSERT", new Exception(dbw.DBErrorMessage));
             }
         }
 

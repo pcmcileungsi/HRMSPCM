@@ -1,4 +1,4 @@
-create procedure [dbo].[SP_HR_ABSENSI_INSERT]
+alter procedure [dbo].[SP_HR_ABSENSI_INSERT]--'820','2017-07-24','','','','','1','',0,'2017-11-16','SYSTEM','123','2017-11-16','SYSTEM','123','Sakit'
 (
 	 @p_NIK         		varchar(20)
 	,@p_TANGGAL_ABSEN		date
@@ -15,6 +15,7 @@ create procedure [dbo].[SP_HR_ABSENSI_INSERT]
 	,@p_mod_date			datetime
 	,@p_mod_by				nvarchar(15)
 	,@p_mod_ip_address		nvarchar(15)
+	,@p_Keterangan		    varchar(10)
 ) as
 begin
 
@@ -35,6 +36,7 @@ begin
        ,[MOD_DATE]
        ,[MOD_BY]
        ,[MOD_IP_ADDRESS]
+       ,Keterangan
 	)
 	values
 	(
@@ -52,7 +54,8 @@ begin
 		@p_cre_ip_address,
 		@p_mod_date,
 		@p_mod_by,
-		@p_mod_ip_address
+		@p_mod_ip_address,
+		@p_Keterangan
 	)
 	
 end
